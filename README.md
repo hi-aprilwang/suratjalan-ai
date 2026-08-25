@@ -1,4 +1,4 @@
-# 📦 SuratJalan.AI (ResiVision)
+# SuratJalan.AI (ResiVision)
 ### *AI-Powered Proof-of-Delivery Audit & Instant Invoice Reconciliation Engine for Indonesian Supply Chains*
 
 [![COMPFEST 18 AIC](https://img.shields.io/badge/COMPFEST_18-AI_Innovation_Challenge-1E3A8A?style=for-the-badge&logo=googlecloud&logoColor=white)](https://compfest.id)
@@ -12,23 +12,23 @@
 
 ---
 
-## 📑 Table of Contents
-1. [🌟 Executive Summary & The Indonesian Crisis](#-executive-summary--the-indonesian-crisis)
-2. [⚡ Quick Start for Judges / Cara Menjalankan Proyek (0-Config)](#-quick-start-for-judges--cara-menjalankan-proyek-0-config)
-3. [👥 User Personas & End-to-End Workflow](#-user-personas--end-to-end-workflow)
-4. [✨ Key Architectural Innovations & Features](#-key-architectural-innovations--features)
-5. [🏗️ System Architecture & Data Flow](#️-system-architecture--data-flow)
-6. [🧪 Pre-Loaded Indonesian Enterprise Presets](#-pre-loaded-indonesian-enterprise-presets)
-7. [🏢 Enterprise ERP Integration Gateway](#-enterprise-erp-integration-gateway)
-8. [💰 Unit Economics & Financial ROI Analysis (+3.5% Bonus)](#-unit-economics--financial-roi-analysis-35-bonus)
-9. [🛡️ Responsible AI, Privacy & Governance (+3.5% Bonus)](#️-responsible-ai-privacy--governance-35-bonus)
-10. [📂 Repository Directory Structure](#-repository-directory-structure)
-11. [📜 Git Conventional Commits & Quality Assurance](#-git-conventional-commits--quality-assurance)
-12. [👥 Team & Competition Details](#-team--competition-details)
+## Table of Contents
+1. [Executive Summary and The Indonesian Crisis](#executive-summary-and-the-indonesian-crisis)
+2. [Quick Start for Judges / Cara Menjalankan Proyek (0-Config)](#quick-start-for-judges--cara-menjalankan-proyek-0-config)
+3. [User Personas and End-to-End Workflow](#user-personas-and-end-to-end-workflow)
+4. [Key Architectural Innovations and Features](#key-architectural-innovations-and-features)
+5. [System Architecture and Data Flow](#system-architecture-and-data-flow)
+6. [Pre-Loaded Indonesian Enterprise Presets](#pre-loaded-indonesian-enterprise-presets)
+7. [Enterprise ERP Integration Gateway](#enterprise-erp-integration-gateway)
+8. [Unit Economics and Financial ROI Analysis (+3.5% Bonus)](#unit-economics-and-financial-roi-analysis-35-bonus)
+9. [Responsible AI, Privacy and Governance (+3.5% Bonus)](#responsible-ai-privacy-and-governance-35-bonus)
+10. [Repository Directory Structure](#repository-directory-structure)
+11. [Git Conventional Commits and Quality Assurance](#git-conventional-commits-and-quality-assurance)
+12. [Team and Competition Details](#team-and-competition-details)
 
 ---
 
-## 🌟 Executive Summary & The Indonesian Crisis
+## Executive Summary and The Indonesian Crisis
 
 In Indonesia’s multi-trillion rupiah logistics and FMCG distribution ecosystem, **over 90% of business-to-business (B2B) trade still relies on physical, 3-ply carbon paper *Surat Jalan* (Proof of Delivery / POD)**.
 
@@ -42,9 +42,9 @@ When delivery trucks arrive at distribution centers (*Indomaret DC, Alfamart DC,
 ```
 
 ### The Pain Points:
-- ⏳ **14 to 30-Day Billing Delays**: Accounting departments manually match physical carbon copies against digital Purchase Orders before invoices can be posted.
-- 💸 **Discrepancy Disputes & Revenue Leakage**: Unclear handwriting (*"8 dus basah"*, *"6 botol pecah"*), faded carbon print, and missing warehouse stamps cause supplier-distributor disputes worth billions of Rupiah.
-- 🏢 **MSME Transporter Cash-Flow Freeze**: Millions of 3PL freight carriers and local distributors suffer severe cash-flow chokepoints while waiting for paper verification.
+- **14 to 30-Day Billing Delays**: Accounting departments manually match physical carbon copies against digital Purchase Orders before invoices can be posted.
+- **Discrepancy Disputes and Revenue Leakage**: Unclear handwriting (*"8 dus basah"*, *"6 botol pecah"*), faded carbon print, and missing warehouse stamps cause supplier-distributor disputes worth billions of Rupiah.
+- **MSME Transporter Cash-Flow Freeze**: Millions of 3PL freight carriers and local distributors suffer severe cash-flow chokepoints while waiting for paper verification.
 
 ### The SuratJalan.AI Solution:
 **SuratJalan.AI (ResiVision)** is a multimodal vision-language document intelligence platform engineered specifically for Indonesian supply chain realities:
@@ -54,13 +54,13 @@ When delivery trucks arrive at distribution centers (*Indomaret DC, Alfamart DC,
 
 ---
 
-## ⚡ Quick Start for Judges / Cara Menjalankan Proyek (0-Config)
+## Quick Start for Judges / Cara Menjalankan Proyek (0-Config)
 
 > [!IMPORTANT]
 > **COMPFEST 18 AIC Jury Evaluation Notice**:  
 > This repository is engineered for **100% 0-Config Local Reproducibility**. It includes a self-contained offline deterministic fallback engine that runs immediately with **zero external API keys, zero cloud setup, and zero environment friction**.
 
-### 🐳 Option A: 1-Command Startup via Docker Compose (Recommended for Judges)
+### Option A: 1-Command Startup via Docker Compose (Recommended for Judges)
 
 Clone the repository and launch the multi-stage production containers with a single command:
 
@@ -73,17 +73,17 @@ cd suratjalan-ai
 docker compose up --build
 ```
 
-#### 🧭 Judge Evaluation Navigation Hub:
+#### Judge Evaluation Navigation Hub:
 | Service | URL | Purpose & Feature Test |
 | :--- | :--- | :--- |
-| 🎨 **Frontend Workstation** | [http://localhost:3000](http://localhost:3000) | Full interactive audit dashboard with dual canvas view, laser scan beam, & live ERP sync. |
-| ℹ️ **How It Works Page** | [http://localhost:3000/how-it-works](http://localhost:3000/how-it-works) | Visual step-by-step workflow & Indonesian logistics problem explanation. |
-| 📖 **Interactive Swagger Docs** | [http://localhost:8000/docs](http://localhost:8000/docs) | Live FastAPI OpenAPI documentation & schema test console. |
-| 🩺 **Backend Healthcheck** | [http://localhost:8000/api/health](http://localhost:8000/api/health) | Container health & AI engine status probe. |
+| **Frontend Workstation** | [http://localhost:3000](http://localhost:3000) | Full interactive audit dashboard with dual canvas view, laser scan beam, & live ERP sync. |
+| **How It Works Page** | [http://localhost:3000/how-it-works](http://localhost:3000/how-it-works) | Visual step-by-step workflow & Indonesian logistics problem explanation. |
+| **Interactive Swagger Docs** | [http://localhost:8000/docs](http://localhost:8000/docs) | Live FastAPI OpenAPI documentation & schema test console. |
+| **Backend Healthcheck** | [http://localhost:8000/api/health](http://localhost:8000/api/health) | Container health & AI engine status probe. |
 
 ---
 
-### 💻 Option B: Manual Local Setup (Without Docker)
+### Option B: Manual Local Setup (Without Docker)
 
 <details>
 <summary><b>Click to expand manual setup instructions (Python + Node.js)</b></summary>
@@ -117,14 +117,14 @@ Open [http://localhost:3000](http://localhost:3000) on your browser.
 
 ---
 
-### 🎮 Evaluation Cheat-Sheet for Juries:
+### Evaluation Cheat-Sheet for Juries:
 1. **Interactive Presets**: Use buttons or keyboard shortcuts <kbd>1</kbd> to <kbd>6</kbd> to instantly switch between authentic Indonesian enterprise scenarios (Clean delivery, damaged wet boxes, missing store stamp, cold-chain temp abuse, cement rain damage, and pharma expiry rejection).
 2. **Visual Spatial Grounding**: Hover over any row in the **Discrepancy Matrix** table to watch the canvas dynamically highlight the corresponding bounding box coordinates on the physical document scan.
 3. **Enterprise ERP Sync**: Click **"Sinkronisasi ERP / Export JSON"** to inspect and download RFC/BAPI-compliant payloads generated for SAP S/4HANA, Odoo, and Jurnal.id.
 
 ---
 
-## 👥 User Personas & End-to-End Workflow
+## User Personas and End-to-End Workflow
 
 ```mermaid
 journey
@@ -154,18 +154,18 @@ journey
 
 ---
 
-## ✨ Key Architectural Innovations & Features
+## Key Architectural Innovations and Features
 
-### 1. 🧠 Multimodal Vision-Language Model (Gemini 2.0 Flash)
+### 1. Multimodal Vision-Language Model (Gemini 2.0 Flash)
 - Direct image tokenization without fragmented, error-prone OCR bounding steps.
 - Domain-specific Indonesian logistics few-shot prompting with strict **Pydantic v2 JSON Schema enforcement**.
 - Robust extraction across folded paper, coffee stains, low-light warehouse docks, skewed camera angles, and faded carbon copies.
 
-### 2. 📍 Spatial Coordinate Grounding (`[ymin, xmin, ymax, xmax]`)
+### 2. Spatial Coordinate Grounding (`[ymin, xmin, ymax, xmax]`)
 - Every extracted entity (vendor headers, line items, stamps, signatures, and handwritten return notes) is mapped to normalized coordinates $[0, 1000]$.
 - **Bi-Directional Canvas Hover Sync**: Hovering over any item in the discrepancy table dynamically highlights its corresponding bounding box on the original document.
 
-### 3. ⚖️ Deterministic Mathematical Reconciliation Engine
+### 3. Deterministic Mathematical Reconciliation Engine
 - Line-item variance calculation:
   $$\Delta \text{Qty}_i = \text{Qty Received}_i - \text{Qty Ordered}_i$$
 - Line-item claim valuation in Indonesian Rupiah:
@@ -173,22 +173,22 @@ journey
 - Total Financial Claim:
   $$\text{Total Claim IDR} = \sum_{i=1}^{N} \text{Claim Amount}_i$$
 
-### 4. 🛡️ Three-Tier Automated Audit Verdict Logic
-- 🟢 **`APPROVED_FOR_INVOICING`**: 100% quantity match, valid receiver rubber stamp, and verified checker signature.
-- 🟡 **`DISCREPANCY_FLAGGED`**: Quantity shortage or damaged returns detected with checker strikethroughs; automated debit memo generated.
-- 🔴 **`CRITICAL_REJECTED`**: Missing warehouse receiver stamp, unverified checker signature, or severe quality/temperature breaches (CDOB / Cold Chain).
+### 4. Three-Tier Automated Audit Verdict Logic
+- **`APPROVED_FOR_INVOICING`**: 100% quantity match, valid receiver rubber stamp, and verified checker signature.
+- **`DISCREPANCY_FLAGGED`**: Quantity shortage or damaged returns detected with checker strikethroughs; automated debit memo generated.
+- **`CRITICAL_REJECTED`**: Missing warehouse receiver stamp, unverified checker signature, or severe quality/temperature breaches (CDOB / Cold Chain).
 
-### 5. ⚡ Zero-Config Offline Deterministic Fallback Engine
+### 5. Zero-Config Offline Deterministic Fallback Engine
 - The application includes a self-contained, high-fidelity deterministic fallback engine that runs **100% offline without requiring external API keys or cloud credentials**.
 - Provides instant, reliable judging reproducibility across all 6 pre-loaded Indonesian enterprise scenarios.
 
 ---
 
-## 🏗️ System Architecture & Data Flow
+## System Architecture and Data Flow
 
 ```mermaid
 graph TD
-    subgraph Client["🎨 Frontend Workstation (Next.js 16 + React 19 + TypeScript + Tailwind CSS v4)"]
+    subgraph Client["Frontend Workstation (Next.js 16 + React 19 + TypeScript + Tailwind CSS v4)"]
         UI["Interactive Audit Dashboard"]
         PRESET["Preset & Custom File Ingestion"]
         CANVAS["Interactive Canvas Bounding-Box Engine"]
@@ -196,18 +196,18 @@ graph TD
         MODAL["Enterprise ERP Export Gateway"]
     end
 
-    subgraph Backend["⚡ Backend API Service (FastAPI + Python 3.11 + Pydantic v2)"]
+    subgraph Backend["Backend API Service (FastAPI + Python 3.11 + Pydantic v2)"]
         ROUTER["API Router (/api/audit, /api/presets, /api/export)"]
         PREPROC["Image Normalization & Validation (Pillow)"]
         PARSER["JSON Schema Validation & Claim Reconciliation Math"]
     end
 
-    subgraph AIEngine["🧠 AI & Fallback Intelligence Layer"]
+    subgraph AIEngine["AI & Fallback Intelligence Layer"]
         VLM["Google Gemini 2.0 Flash VLM (Live Cloud Engine)"]
         FALLBACK["Deterministic Indonesian Supply Chain Engine (0-Config Offline)"]
     end
 
-    subgraph ERP["🏢 Enterprise ERP Systems"]
+    subgraph ERP["Enterprise ERP Systems"]
         SAP["SAP S/4HANA (BAPI_GOODSMVT_CREATE)"]
         ODOO["Odoo ERP (stock.picking / stock.move)"]
         JURNAL["Jurnal.id (Debit Memo / Faktur Pajak API)"]
@@ -224,22 +224,22 @@ graph TD
 
 ---
 
-## 🧪 Pre-Loaded Indonesian Enterprise Presets
+## Pre-Loaded Indonesian Enterprise Presets
 
 SuratJalan.AI includes **6 authentic enterprise test presets** covering Indonesia's core economic supply chain sectors:
 
 | Preset | Enterprise Principal & Route | Key Scenario & Physical Evidence | Calculated Claim (IDR) | Audit Verdict |
 | :--- | :--- | :--- | :---: | :---: |
-| **Preset 1** | **PT INDOFOOD CBP SUKSES MAKMUR TBK**<br>$\rightarrow$ Alfamart DC Cikokol | **Clean Delivery (100% Match)**<br>All 165 cartons accounted for (Indomie, Pop Mie, Chitato). Blue DC rubber stamp and checker signature verified. | **Rp 0** | 🟢 **APPROVED**<br>*(Clear for Invoicing)* |
-| **Preset 2** | **PT MAYORA INDAH TBK**<br>$\rightarrow$ Indomaret DC Ancol | **Partial Return (Damaged Wet Cartons)**<br>Beng Beng delivery with 8 wet cartons returned. Handwritten strikethrough `"52"`, note *"RETUR 8 DUS BASAH"*, partial DC stamp. | **Rp 1.440.000** | 🟡 **FLAGGED**<br>*(Discrepancy Debit)* |
-| **Preset 3** | **PT SAYAP MAS UTAMA (WINGS GROUP)**<br>$\rightarrow$ Hypermart Karawaci | **Critical Damage & Missing Stamp Alert**<br>Leaking SoKlin (6 Dus) & crushed Ale-Ale (10 Dus) + **MISSING STORE STAMP**. Security violation alert triggered. | **Rp 2.780.000** | 🔴 **REJECTED**<br>*(Blocked for Audit)* |
-| **Preset 4** | **PT FRISIAN FLAG INDONESIA**<br>$\rightarrow$ Transmart DC Lebak Bulus | **Cold Chain / Dairy Temp Abuse (+14°C)**<br>Reefer truck breach (+14°C vs standard +4°C). 15 Karton UHT milk acidified and rejected. Checker temperature note grounded. | **Rp 3.300.000** | 🟡 **FLAGGED**<br>*(Cold Chain Claim)* |
-| **Preset 5** | **PT SEMEN INDONESIA (PERSERO) TBK**<br>$\rightarrow$ Mitra10 DC Bintaro | **Heavy Industry / Rain Damaged Cement**<br>Tronton truck delivery with 20 rain-soaked hardened cement sacks deducted via checker note. | **Rp 1.360.000** | 🟡 **FLAGGED**<br>*(Damage Debit)* |
-| **Preset 6** | **PT KALBE FARMA TBK**<br>$\rightarrow$ Kimia Farma DC Pulo Gadung | **Pharma CDOB Expiry Rejection**<br>Kimia Farma DC rejection of Woods Syrup batch with <3 months shelf-life. Red triangular **REJEK QC** stamp detected. | **Rp 27.000.000** | 🔴 **REJECTED**<br>*(Batch Quarantined)* |
+| **Preset 1** | **PT INDOFOOD CBP SUKSES MAKMUR TBK**<br>$\rightarrow$ Alfamart DC Cikokol | **Clean Delivery (100% Match)**<br>All 165 cartons accounted for (Indomie, Pop Mie, Chitato). Blue DC rubber stamp and checker signature verified. | **Rp 0** | **APPROVED**<br>*(Clear for Invoicing)* |
+| **Preset 2** | **PT MAYORA INDAH TBK**<br>$\rightarrow$ Indomaret DC Ancol | **Partial Return (Damaged Wet Cartons)**<br>Beng Beng delivery with 8 wet cartons returned. Handwritten strikethrough `"52"`, note *"RETUR 8 DUS BASAH"*, partial DC stamp. | **Rp 1.440.000** | **FLAGGED**<br>*(Discrepancy Debit)* |
+| **Preset 3** | **PT SAYAP MAS UTAMA (WINGS GROUP)**<br>$\rightarrow$ Hypermart Karawaci | **Critical Damage & Missing Stamp Alert**<br>Leaking SoKlin (6 Dus) & crushed Ale-Ale (10 Dus) + **MISSING STORE STAMP**. Security violation alert triggered. | **Rp 2.780.000** | **REJECTED**<br>*(Blocked for Audit)* |
+| **Preset 4** | **PT FRISIAN FLAG INDONESIA**<br>$\rightarrow$ Transmart DC Lebak Bulus | **Cold Chain / Dairy Temp Abuse (+14°C)**<br>Reefer truck breach (+14°C vs standard +4°C). 15 Karton UHT milk acidified and rejected. Checker temperature note grounded. | **Rp 3.300.000** | **FLAGGED**<br>*(Cold Chain Claim)* |
+| **Preset 5** | **PT SEMEN INDONESIA (PERSERO) TBK**<br>$\rightarrow$ Mitra10 DC Bintaro | **Heavy Industry / Rain Damaged Cement**<br>Tronton truck delivery with 20 rain-soaked hardened cement sacks deducted via checker note. | **Rp 1.360.000** | **FLAGGED**<br>*(Damage Debit)* |
+| **Preset 6** | **PT KALBE FARMA TBK**<br>$\rightarrow$ Kimia Farma DC Pulo Gadung | **Pharma CDOB Expiry Rejection**<br>Kimia Farma DC rejection of Woods Syrup batch with <3 months shelf-life. Red triangular **REJEK QC** stamp detected. | **Rp 27.000.000** | **REJECTED**<br>*(Batch Quarantined)* |
 
 ---
 
-## 🏢 Enterprise ERP Integration Gateway
+## Enterprise ERP Integration Gateway
 
 SuratJalan.AI bridges the gap between messy paper documents and mission-critical enterprise systems:
 
@@ -265,7 +265,7 @@ SuratJalan.AI bridges the gap between messy paper documents and mission-critical
 
 ---
 
-## 💰 Unit Economics & Financial ROI Analysis (+3.5% Bonus)
+## Unit Economics and Financial ROI Analysis (+3.5% Bonus)
 
 | Metric | Manual Human Audit | SuratJalan.AI (Gemini Flash) | Impact & ROI Gain |
 | :--- | :---: | :---: | :---: |
@@ -282,7 +282,7 @@ SuratJalan.AI bridges the gap between messy paper documents and mission-critical
 
 ---
 
-## 🛡️ Responsible AI, Privacy & Governance (+3.5% Bonus)
+## Responsible AI, Privacy and Governance (+3.5% Bonus)
 
 1. **Explainability via Spatial Grounding**:
    - Zero "black-box" decisions. Every extracted entity, stamp, and claim is grounded with explicit pixel coordinates `[ymin, xmin, ymax, xmax]` for full visual verification.
@@ -295,7 +295,7 @@ SuratJalan.AI bridges the gap between messy paper documents and mission-critical
 
 ---
 
-## 📂 Repository Directory Structure
+## Repository Directory Structure
 
 ```
 suratjalan-ai/
@@ -328,10 +328,12 @@ suratjalan-ai/
 │   └── .dockerignore               # Excluded build artifacts
 ├── docs/                           # COMPFEST 18 AIC Submission Documentation
 │   ├── PRD_Product_Requirements_Document.md # Comprehensive PRD
-│   ├── Proposal_Draft.md           # Indonesian competition proposal
+│   ├── PROPOSAL_LENGKAP_COMPFEST_18.md      # Full Indonesian competition proposal
+│   ├── Proposal_Draft.md           # Mirrored proposal source
 │   ├── System_Architecture_and_Design.md    # Technical deep-dive & sequence flows
 │   └── submission/
-│       └── DELIVERABLES_CHECKLIST.md # Official submission verification checklist
+│       ├── DELIVERABLES_CHECKLIST.md # Official submission verification checklist
+│       └── VIDEO_PITCH_SCRIPT.md     # Video production blueprint & pitch script
 ├── samples/                        # Pre-rendered Indonesian Surat Jalan sample scans
 │   ├── preset_1_indofood_clean.png
 │   ├── preset_2_mayora_discrepancy.png
@@ -341,13 +343,15 @@ suratjalan-ai/
 │   └── preset_6_kalbefarma_expired.png
 ├── synthetic_generator/            # Synthetic Surat Jalan generation pipeline
 │   └── generate_samples.py         # Pillow-based canvas drawing & stamp synthesis
+├── scripts/                        # Automated document generation scripts
+│   └── generate_pdfs.py            # Headless Chrome PDF compiler
 ├── docker-compose.yml              # 1-Command local orchestration
 └── README.md                       # Comprehensive repository documentation
 ```
 
 ---
 
-## 📜 Git Conventional Commits & Quality Assurance
+## Git Conventional Commits and Quality Assurance
 
 All project commits adhere strictly to [Conventional Commits](https://www.conventionalcommits.org):
 - `feat:` for new capabilities and interface features
@@ -358,7 +362,7 @@ All project commits adhere strictly to [Conventional Commits](https://www.conven
 
 ---
 
-## 👥 Team & Competition Details
+## Team and Competition Details
 
 - **Competition**: COMPFEST 18 AI Innovation Challenge (AIC) — Fasilkom Universitas Indonesia
 - **Theme**: *AI for the Backbone of the Economy*
@@ -366,7 +370,7 @@ All project commits adhere strictly to [Conventional Commits](https://www.conven
 - **Institution**: **Universitas Bina Nusantara (BINUS University)**
 - **Repository**: [https://github.com/hi-aprilwang/suratjalan-ai](https://github.com/hi-aprilwang/suratjalan-ai)
 
-### 🧑‍💻 Team Members:
+### Team Members:
 | Member Name | Role / Focus | NIM | Email | University |
 | :--- | :---: | :---: | :--- | :--- |
 | **Restu Radhyazka Prasetio (Azka)** | Team Lead / AI Systems | `3002802400` | `rrazka28@gmail.com` | Bina Nusantara University |
@@ -378,6 +382,5 @@ All project commits adhere strictly to [Conventional Commits](https://www.conven
 ---
 
 <div align="center">
-  <sub>Built with ❤️ by BINUS University for Indonesian Supply Chains • COMPFEST 18 AI Innovation Challenge</sub>
+  <sub>Built by BINUS University for Indonesian Supply Chains • COMPFEST 18 AI Innovation Challenge</sub>
 </div>
-

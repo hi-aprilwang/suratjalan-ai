@@ -1,13 +1,14 @@
-# 📋 SuratJalan.AI — COMPFEST 18 AIC Submission & Deliverables Checklist
+# SuratJalan.AI — COMPFEST 18 AIC Submission & Deliverables Checklist
 
 > **Competition**: COMPFEST 18 AI Innovation Challenge (AIC) — Fasilkom Universitas Indonesia  
 > **Theme**: *AI for the Backbone of the Economy*  
 > **Pillar**: *Smart Logistics (Gudang, Distribusi & Pergerakan Barang)*  
-> **Innovation Title**: **SuratJalan.AI (ResiVision)** — *AI-Powered Proof-of-Delivery Audit & Instant Invoice Reconciliation Engine for Indonesian Supply Chains*
+> **Innovation Title**: **SuratJalan.AI (ResiVision)** — *AI-Powered Proof-of-Delivery Audit & Instant Invoice Reconciliation Engine for Indonesian Supply Chains*  
+> **Institution**: **Universitas Bina Nusantara (BINUS University)**  
 
 ---
 
-## 📊 Summary of Required Deliverables & Scoring Weights
+## Ringkasan Luaran dan Bobot Penilaian
 
 | Deliverable Item | Scoring Weight | Target Format | Public / Access |
 | :--- | :---: | :--- | :--- |
@@ -19,7 +20,7 @@
 
 ---
 
-## 📦 1. Public GitHub Repository Checklist (Weight: 25% + 15%)
+## 1. Public GitHub Repository Checklist (Weight: 25% + 15%)
 
 - [x] **Standalone Public Repository**:
   - Repo URL: `https://github.com/hi-aprilwang/suratjalan-ai`
@@ -49,7 +50,7 @@
 
 ---
 
-## 📄 2. Proposal Document Checklist (Weight: 45% Combined)
+## 2. Proposal Document Checklist (Weight: 45% Combined)
 
 - [x] **Document Format & Restrictions**:
   - [x] Format: Single PDF file (`docs/submission/PROPOSAL_INOVASI.pdf` & `docs/PROPOSAL_LENGKAP_COMPFEST_18.md`)
@@ -80,10 +81,9 @@
   - [x] Human-in-the-loop (HITL) audit verification for high-risk claims
   - [x] Model bias mitigation across diverse handwriting and physical stamp ink conditions
 
-
 ---
 
-## 🎥 3. Video Proof of Work (PoW) Checklist (Unlisted YouTube)
+## 3. Video Proof of Work (PoW) Checklist (Unlisted YouTube)
 
 - [ ] **Format & Specifications**:
   - [ ] Maximum Duration: **7 minutes**
@@ -105,7 +105,7 @@
 
 ---
 
-## 🎬 4. Video Promosi Inovasi Checklist (Public YouTube, Max 5 Mins)
+## 4. Video Promosi Inovasi Checklist (Public YouTube, Max 5 Mins)
 
 - [ ] **Format & Specifications**:
   - [ ] Maximum Duration: **5 minutes**
@@ -126,7 +126,7 @@
 
 ---
 
-## 🏆 5. Bonus Points Checklist (+5.0% Total)
+## 5. Bonus Points Checklist (+5.0% Total)
 
 - [x] **Realistic Unit Economics & ROI Impact (+3.5%)**:
   - Documented in Proposal & `README.md` comparing manual audit vs AI audit.
@@ -137,7 +137,7 @@
 
 ---
 
-## 🚀 6. Final Pre-Submission Validation
+## 6. Final Pre-Submission Validation
 
 - [ ] Verify GitHub repository is set to **Public** and accessible without login.
 - [ ] Test YouTube video links in an incognito / private browser window:

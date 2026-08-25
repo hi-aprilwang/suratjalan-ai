@@ -18,7 +18,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
   @page {{
     size: A4;
-    margin: 16mm 14mm 16mm 14mm;
+    margin: 18mm 16mm 18mm 16mm;
   }}
 
   *, *::before, *::after {{
@@ -29,94 +29,105 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     color: #1e293b;
     background-color: #ffffff;
-    font-size: 9pt;
+    font-size: 8.8pt;
     line-height: 1.55;
     margin: 0;
     padding: 0;
+    orphans: 3;
+    widows: 3;
   }}
 
   h1, h2, h3, h4, h5, h6 {{
     color: #0f172a;
     font-weight: 700;
-    margin-top: 1.3em;
-    margin-bottom: 0.4em;
+    margin-top: 1.2em;
+    margin-bottom: 0.35em;
     page-break-after: avoid;
     break-after: avoid;
   }}
 
   h1 {{
-    font-size: 17pt;
+    font-size: 16pt;
     font-weight: 800;
     line-height: 1.25;
-    border-bottom: 2.5px solid #1e40af;
+    border-bottom: 2px solid #1e3a8a;
     padding-bottom: 6px;
     margin-top: 0;
     color: #1e3a8a;
+    letter-spacing: -0.01em;
   }}
 
   h2 {{
-    font-size: 12.5pt;
+    font-size: 12pt;
     font-weight: 700;
-    border-bottom: 1.5px solid #cbd5e1;
+    border-bottom: 1px solid #cbd5e1;
     padding-bottom: 4px;
-    margin-top: 1.4em;
+    margin-top: 1.3em;
     color: #1e40af;
   }}
 
   h3 {{
-    font-size: 10.5pt;
+    font-size: 10pt;
     font-weight: 700;
     color: #334155;
-    margin-top: 1.1em;
+    margin-top: 1em;
   }}
 
   h4 {{
-    font-size: 9.5pt;
+    font-size: 9pt;
     font-weight: 600;
     color: #475569;
   }}
 
   p {{
     margin-top: 0;
-    margin-bottom: 0.7em;
+    margin-bottom: 0.65em;
     text-align: justify;
   }}
 
   a {{
-    color: #2563eb;
+    color: #1d4ed8;
     text-decoration: none;
     font-weight: 500;
   }}
 
   blockquote {{
-    margin: 0.8em 0;
+    margin: 0.7em 0;
     padding: 8px 14px;
     background: #f8fafc;
-    border-left: 4px solid #3b82f6;
+    border-left: 3.5px solid #2563eb;
     border-radius: 0 6px 6px 0;
     color: #334155;
     font-size: 8.5pt;
+    page-break-inside: avoid;
+    break-inside: avoid;
   }}
 
   blockquote p:last-child {{
     margin-bottom: 0;
   }}
 
+  /* Page Break Utilities */
+  .page-break {{
+    page-break-before: always;
+    break-before: always;
+  }}
+
   /* Tables */
   table {{
     width: 100%;
     border-collapse: collapse;
-    margin: 1em 0;
+    margin: 0.9em 0;
     font-size: 8pt;
     page-break-inside: avoid;
     break-inside: avoid;
     background: #ffffff;
-    border-radius: 6px;
+    border-radius: 4px;
     overflow: hidden;
   }}
 
   th, td {{
-    padding: 6px 8px;
+    padding: 5.5px 8px;
     text-align: left;
     border: 1px solid #cbd5e1;
     vertical-align: middle;
@@ -127,7 +138,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     color: #0f172a;
     font-weight: 700;
     font-size: 8pt;
-    border-bottom: 2px solid #94a3b8;
+    border-bottom: 1.5px solid #94a3b8;
   }}
 
   tr:nth-child(even) {{
@@ -137,23 +148,23 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   /* Code Blocks & Inlines */
   code {{
     font-family: 'JetBrains Mono', Consolas, Monaco, monospace;
-    font-size: 8pt;
+    font-size: 7.8pt;
     background-color: #f1f5f9;
     color: #0f172a;
     padding: 1px 4px;
-    border-radius: 4px;
+    border-radius: 3px;
     border: 1px solid #e2e8f0;
   }}
 
   pre {{
     background-color: #0f172a;
     color: #f8fafc;
-    padding: 10px 12px;
+    padding: 9px 12px;
     border-radius: 6px;
     overflow-x: auto;
-    font-size: 7.5pt;
-    line-height: 1.4;
-    margin: 0.8em 0;
+    font-size: 7.2pt;
+    line-height: 1.38;
+    margin: 0.7em 0;
     page-break-inside: avoid;
     break-inside: avoid;
   }}
@@ -163,21 +174,21 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     color: inherit;
     padding: 0;
     border: none;
-    font-size: 7.5pt;
+    font-size: 7.2pt;
   }}
 
   /* Box Diagram for System Architecture */
   .diagram-box {{
     background: #f8fafc;
-    border: 1.5px solid #94a3b8;
-    border-radius: 8px;
-    padding: 12px;
-    margin: 1em 0;
+    border: 1.2px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 10px;
+    margin: 0.8em 0;
     page-break-inside: avoid;
     break-inside: avoid;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 7.5pt;
-    line-height: 1.4;
+    font-size: 7.2pt;
+    line-height: 1.35;
     color: #0f172a;
   }}
 
@@ -185,24 +196,25 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   .math-block {{
     background: #f8fafc;
     border: 1px solid #e2e8f0;
-    border-left: 3px solid #2563eb;
-    padding: 6px 12px;
-    margin: 0.6em 0;
+    border-left: 3px solid #1e40af;
+    padding: 5px 10px;
+    margin: 0.5em 0;
     border-radius: 4px;
     font-family: 'Plus Jakarta Sans', serif;
     font-style: italic;
-    font-size: 8.5pt;
+    font-size: 8.3pt;
     page-break-inside: avoid;
+    break-inside: avoid;
   }}
 
   /* Badges & Keyboards */
   kbd {{
     font-family: 'JetBrains Mono', monospace;
-    font-size: 7.5pt;
-    padding: 1px 5px;
+    font-size: 7.2pt;
+    padding: 1px 4px;
     border: 1px solid #94a3b8;
     border-bottom-width: 2px;
-    border-radius: 4px;
+    border-radius: 3px;
     background: #ffffff;
     color: #1e293b;
     font-weight: 600;
@@ -210,68 +222,98 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
   /* Alerts styling */
   .alert {{
-    padding: 8px 12px;
-    border-radius: 6px;
-    margin: 0.8em 0;
-    font-size: 8.5pt;
+    padding: 7px 11px;
+    border-radius: 5px;
+    margin: 0.7em 0;
+    font-size: 8.2pt;
     page-break-inside: avoid;
     break-inside: avoid;
   }}
   .alert-important {{
     background-color: #eff6ff;
     border: 1px solid #bfdbfe;
-    border-left: 4px solid #3b82f6;
+    border-left: 3.5px solid #2563eb;
     color: #1e40af;
   }}
   .alert-caution {{
     background-color: #fff1f2;
     border: 1px solid #fecdd3;
-    border-left: 4px solid #e11d48;
+    border-left: 3.5px solid #e11d48;
     color: #9f1239;
   }}
   .alert-tip {{
     background-color: #f0fdf4;
     border: 1px solid #bbf7d0;
-    border-left: 4px solid #16a34a;
+    border-left: 3.5px solid #16a34a;
     color: #166534;
   }}
 
-  /* Lists */
+  /* Lists & TOC */
   ul, ol {{
-    padding-left: 18px;
+    padding-left: 16px;
     margin-top: 0.2em;
-    margin-bottom: 0.6em;
+    margin-bottom: 0.5em;
   }}
 
   li {{
-    margin-bottom: 0.25em;
+    margin-bottom: 0.2em;
+  }}
+
+  /* Pretty TOC styling */
+  .toc-container {{
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 10px 16px;
+    margin: 0.8em 0 1.2em 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }}
+  .toc-container ul {{
+    list-style-type: none;
+    padding-left: 0;
+  }}
+  .toc-container ul li {{
+    padding: 2px 0;
+    font-weight: 600;
+    color: #1e3a8a;
+  }}
+  .toc-container ul li ul {{
+    list-style-type: disc;
+    padding-left: 18px;
+    margin-top: 2px;
+    margin-bottom: 4px;
+  }}
+  .toc-container ul li ul li {{
+    font-weight: 400;
+    color: #334155;
   }}
 
   hr {{
     border: none;
     border-top: 1px solid #e2e8f0;
-    margin: 1.2em 0;
+    margin: 1em 0;
   }}
 
   .doc-header {{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1.5px solid #cbd5e1;
-    padding-bottom: 6px;
-    margin-bottom: 14px;
-    font-size: 7.5pt;
+    border-bottom: 1.2px solid #cbd5e1;
+    padding-bottom: 5px;
+    margin-bottom: 12px;
+    font-size: 7.2pt;
     font-weight: 600;
     color: #475569;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
   }}
 
   .doc-footer {{
-    margin-top: 24px;
-    padding-top: 8px;
-    border-top: 1px solid #cbd5e1;
-    font-size: 7pt;
+    margin-top: 20px;
+    padding-top: 6px;
+    border-top: 1.2px solid #cbd5e1;
+    font-size: 6.8pt;
     color: #64748b;
     text-align: center;
     font-weight: 500;
@@ -285,13 +327,26 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   </div>
   {content}
   <div class="doc-footer">
-    SuratJalan.AI • Smart Logistics & B2B Proof-of-Delivery Audit • Fasilkom Universitas Indonesia
+    SuratJalan.AI • Smart Logistics & B2B Proof-of-Delivery Audit • Bina Nusantara University
   </div>
 </body>
 </html>
 """
 
+def clean_emojis(text):
+    # Regex to remove emojis
+    emoji_pattern = re.compile(
+        "[\U00010000-\U0010ffff\u2600-\u26ff\u2700-\u27bf\u2300-\u23ff\u2b50\u2b06\u2934\u25b6\u25c0\u2b05\u2190-\u21ff]+",
+        flags=re.UNICODE
+    )
+    return emoji_pattern.sub('', text)
+
 def render_math_and_clean(text):
+    text = clean_emojis(text)
+
+    # Clean any timestamps or time strings
+    text = re.sub(r'2026-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[+\-]\d{2}:\d{2}', '', text)
+
     # Convert GitHub Alert boxes
     text = re.sub(
         r'>\s*\[!IMPORTANT\]\s*\n(>.*(?:\n>.*)*)',
@@ -325,7 +380,17 @@ def render_math_and_clean(text):
 
     text = re.sub(r'(?<!\$)\$(?!\$)(.*?)(?<!\$)\$(?!\$)', inline_math_repl, text)
 
-    # Convert Mermaid code blocks to styled ASCII / visual representation
+    # Add chapter page breaks before major BAB headings
+    text = re.sub(r'\n(## (?:BAB [I|V|X]+|DAFTAR PUSTAKA|RINGKASAN EKSEKUTIF))', r'\n<div class="page-break"></div>\n\1', text)
+
+    # Wrap Table of Contents in a pretty container
+    def toc_repl(m):
+        toc_body = markdown.markdown(m.group(1).strip())
+        return f'## DAFTAR ISI PROPOSAL\n<div class="toc-container">{toc_body}</div>\n'
+
+    text = re.sub(r'## DAFTAR ISI PROPOSAL\s*([\s\S]*?)(?=\n---\n|\n## )', toc_repl, text)
+
+    # Convert Mermaid code blocks to styled visual boxes
     def mermaid_repl(m):
         raw = m.group(1).strip()
         return f'<div class="diagram-box"><strong>Arsitektur Diagram:</strong><br><pre style="background:transparent;color:#0f172a;padding:0;margin:4px 0;">{raw}</pre></div>'
@@ -406,8 +471,7 @@ def convert_md_to_pdf(md_path, pdf_path, title="SuratJalan.AI Document"):
         "--headless",
         "--disable-gpu",
         "--no-sandbox",
-        "--run-all-compositor-stages-before-draw",
-        "--print-to-pdf-no-header",
+        "--no-pdf-header-footer",
         f"--print-to-pdf={pdf_path}",
         tmp_html_path
     ]
