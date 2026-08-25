@@ -3,7 +3,6 @@
 import React from 'react';
 import { Search, Terminal, ArrowUpRight, Activity } from 'lucide-react';
 import { Button } from './ui/button';
-import { Badge } from './ui/badge';
 import { ThemeToggle } from './ThemeToggle';
 
 interface NavbarProps {
@@ -34,9 +33,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span className="font-bold text-base tracking-tight text-zinc-900 dark:text-zinc-100">
               SURATJALAN<span className="text-blue-600 dark:text-blue-400">.AI</span>
             </span>
-            <Badge variant="outline" className="text-sm border-zinc-300 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 font-medium">
-              AIC-v1.0
-            </Badge>
           </div>
         </div>
 
