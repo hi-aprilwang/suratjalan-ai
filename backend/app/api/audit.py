@@ -4,7 +4,15 @@ from fastapi import APIRouter, UploadFile, File, Form, HTTPException
 from fastapi.responses import JSONResponse
 from app.models.schema import AuditReport, PresetItem, ExportRequest
 from app.services.gemini_vlm import analyze_document_image
-from app.services.mock_engine import get_preset_1_report, get_preset_2_report, get_preset_3_report
+from app.services.mock_engine import (
+    get_preset_1_report,
+    get_preset_2_report,
+    get_preset_3_report,
+    get_preset_4_report,
+    get_preset_5_report,
+    get_preset_6_report,
+    audit_mock_image
+)
 
 router = APIRouter(prefix="", tags=["Audit"])
 
@@ -43,6 +51,30 @@ async def get_presets():
             expected_status="CRITICAL_REJECTED",
             image_url="/samples/preset_3_wings_damage_alert.png",
             description="Delivery to Hypermart with leaking SoKlin & crushed Ale-Ale cartons, plus MISSING receiver store stamp."
+        ),
+        PresetItem(
+            id="preset_4",
+            title="Preset 4: Cold Chain / Dairy Temperature Breach",
+            company="PT FRISIAN FLAG INDONESIA",
+            expected_status="DISCREPANCY_FLAGGED",
+            image_url="/samples/preset_4_frisianflag_coldchain.png",
+            description="Reefer truck delivery to Transmart DC with +14°C temperature abuse. 15 Cartons of UHT milk rejected & returned (Claim: IDR 3,300,000)."
+        ),
+        PresetItem(
+            id="preset_5",
+            title="Preset 5: Heavy Industry / Rain Leak Damaged Cement",
+            company="PT SEMEN INDONESIA (PERSERO) TBK",
+            expected_status="DISCREPANCY_FLAGGED",
+            image_url="/samples/preset_5_semenindonesia_damaged.png",
+            description="Tronton delivery to Mitra10 with 20 rain-soaked hardened cement sacks. Deducted via checker strikethrough (Claim: IDR 1,360,000)."
+        ),
+        PresetItem(
+            id="preset_6",
+            title="Preset 6: Pharma CDOB Expiry Rejection",
+            company="PT KALBE FARMA TBK",
+            expected_status="CRITICAL_REJECTED",
+            image_url="/samples/preset_6_kalbefarma_expired.png",
+            description="Kimia Farma DC rejection of Woods Syrup batch with <3 months shelf-life. Red triangular REJEK QC stamp (Claim: IDR 27,000,000)."
         )
     ]
 
@@ -56,12 +88,7 @@ async def audit_document(
         filename = file.filename or "uploaded_document.png"
         return await analyze_document_image(content, filename)
     elif preset_id:
-        if preset_id == "preset_2":
-            return get_preset_2_report()
-        elif preset_id == "preset_3":
-            return get_preset_3_report()
-        else:
-            return get_preset_1_report()
+        return audit_mock_image(preset_id)
     else:
         raise HTTPException(status_code=400, detail="Either 'file' or 'preset_id' must be provided.")
 
@@ -98,46 +125,44 @@ async def export_to_erp(request: ExportRequest):
     elif target == "ODOO_ERP":
         erp_payload = {
             "model": "stock.picking.audit",
-            "delivery_ref": rep.metadata.document_number,
-            "origin": rep.metadata.po_number,
-            "state": "done" if rep.overall_status == "APPROVED_FOR_INVOICING" else "exception",
-            "discrepancy_amount": rep.total_claim_amount_idr,
-            "lines": [
-                {
-                    "product_name": it.item_name,
-                    "qty_demand": it.ordered_qty,
-                    "qty_done": it.received_qty,
-                    "discrepancy": it.variance,
-                    "uom": it.unit,
-                    "notes": it.handwritten_note
-                }
-                for it in rep.items
-            ]
+            "method": "action_reconcile_pod",
+            "args": [{
+                "name": rep.metadata.document_number,
+                "origin": rep.metadata.po_number,
+                "partner_id": rep.metadata.sender_company,
+                "state": "done" if rep.overall_status == "APPROVED_FOR_INVOICING" else "assigned_with_discrepancy",
+                "deduction_amount": rep.total_claim_amount_idr,
+                "move_lines": [
+                    {
+                        "product_name": it.item_name,
+                        "product_uom_qty": it.ordered_qty,
+                        "qty_done": it.received_qty,
+                        "discrepancy_note": it.handwritten_note
+                    }
+                    for it in rep.items
+                ]
+            }]
         }
-    else: # JURNAL_ID / ACCURATE
+    elif target == "JURNAL_ID":
         erp_payload = {
-            "transaction_no": rep.metadata.document_number,
-            "reference_no": rep.metadata.po_number,
-            "status": "APPROVED" if rep.overall_status == "APPROVED_FOR_INVOICING" else "HOLD",
-            "debit_memo_amount": rep.total_claim_amount_idr,
-            "details": [
-                {
-                    "item": it.item_name,
-                    "ordered": it.ordered_qty,
-                    "received": it.received_qty,
-                    "unit": it.unit,
-                    "claim": it.claim_amount_idr,
-                    "note": it.handwritten_note
-                }
-                for it in rep.items
+            "transaction_type": "Debit Note / Potongan Pembelian",
+            "reference_no": f"DN-{rep.metadata.document_number}",
+            "source_po": rep.metadata.po_number,
+            "vendor_name": rep.metadata.sender_company,
+            "transaction_date": rep.metadata.date,
+            "total_deduction_idr": rep.total_claim_amount_idr,
+            "notes": f"Potongan klaim Surat Jalan: {rep.verification.audit_notes[0] if rep.verification.audit_notes else 'Discrepancy'}",
+            "accounts_impacted": [
+                {"account_code": "5-50100", "account_name": "Biaya Kerusakan Barang Logistik", "debit": rep.total_claim_amount_idr},
+                {"account_code": "2-20100", "account_name": "Hutang Usaha (Trade Payables)", "credit": rep.total_claim_amount_idr}
             ]
         }
+    else:
+        erp_payload = {"raw_report": rep.model_dump()}
 
     return {
-        "success": True,
-        "audit_id": rep.audit_id,
+        "status": "success",
         "target_system": target,
-        "synced_at": rep.timestamp,
-        "erp_payload": erp_payload,
-        "message": f"Successfully mapped and synchronized audit record to {target} gateway."
+        "message": f"Successfully simulated dispatch to {target} integration gateway.",
+        "payload": erp_payload
     }

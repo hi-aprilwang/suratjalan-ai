@@ -77,13 +77,16 @@ export default function AuditWorkstationPage() {
     await executeAudit({ presetId });
   }, [presets, executeAudit]);
 
-  // Keyboard shortcut listener for Presets 1, 2, 3
+  // Keyboard shortcut listener for Presets 1 to 6
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
       if (e.key === '1') handleSelectPreset('preset_1');
       if (e.key === '2') handleSelectPreset('preset_2');
       if (e.key === '3') handleSelectPreset('preset_3');
+      if (e.key === '4') handleSelectPreset('preset_4');
+      if (e.key === '5') handleSelectPreset('preset_5');
+      if (e.key === '6') handleSelectPreset('preset_6');
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);

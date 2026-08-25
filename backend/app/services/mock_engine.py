@@ -98,25 +98,27 @@ def get_preset_1_report() -> AuditReport:
                 variance=0,
                 status="MATCH",
                 handwritten_note="Kondisi Baik",
-                unit_price_estimate_idr=240000,
+                unit_price_estimate_idr=160000,
                 claim_amount_idr=0,
                 bounding_box=BoundingBox(ymin=349, xmin=50, ymax=379, xmax=950, label="Item 5: Bumbu Racik", category="item_row")
             )
         ],
         bounding_boxes=[
             BoundingBox(ymin=38, xmin=50, ymax=100, xmax=950, label="Header & Metadata", category="header"),
-            BoundingBox(ymin=200, xmin=50, ymax=380, xmax=950, label="Reconciliation Items Table", category="item_row"),
-            BoundingBox(ymin=620, xmin=750, ymax=740, xmax=930, label="Verified DC Receiving Stamp", category="stamp"),
-            BoundingBox(ymin=630, xmin=100, ymax=720, xmax=250, label="Driver Signature (Budi)", category="signature"),
-            BoundingBox(ymin=630, xmin=440, ymax=720, xmax=590, label="DC Receiver Signature (Agus)", category="signature")
+            BoundingBox(ymin=115, xmin=50, ymax=185, xmax=480, label="Recipient (Alfamart DC)", category="recipient"),
+            BoundingBox(ymin=115, xmin=500, ymax=185, xmax=950, label="Transporter & Vehicle", category="transporter"),
+            BoundingBox(ymin=200, xmin=50, ymax=380, xmax=950, label="Line-Item Table", category="table"),
+            BoundingBox(ymin=470, xmin=750, ymax=600, xmax=910, label="Verified DC Stamp (Cikokol)", category="stamp"),
+            BoundingBox(ymin=490, xmin=100, ymax=580, xmax=250, label="Driver Signature", category="signature"),
+            BoundingBox(ymin=490, xmin=420, ymax=580, xmax=570, label="Receiver Signature", category="signature")
         ],
-        raw_remarks="Barang diterima lengkap dalam keadaan bersih dan tersegel.",
+        raw_remarks="Barang diterima lengkap 165 karton tanpa cacat di DC Cikokol.",
         execution_time_ms=480,
         ai_model_used="Gemini 2.0 Flash (Multimodal VLM)"
     )
 
 def get_preset_2_report() -> AuditReport:
-    # Mayora Partial Return / Discrepancy
+    # Mayora Partial Return (8 Wet Cartons)
     return AuditReport(
         audit_id=f"AUD-{uuid.uuid4().hex[:8].upper()}",
         timestamp=datetime.now().isoformat(),
@@ -133,20 +135,20 @@ def get_preset_2_report() -> AuditReport:
             sender_company="PT MAYORA INDAH TBK",
             receiver_company="PT INDOMARCO PRISMATAMA (INDOMARET DC ANCOL)",
             truck_plate="B 9081 PQR",
-            driver_name="Hendra Gunawan"
+            driver_name="Hendra Gunawan (PT Mayora Logistics)"
         ),
         verification=VerificationCheck(
             stamp_detected=True,
-            stamp_text="INDOMARCO PRISMATAMA - DC ANCOL - TERIMA SEBAGIAN / RETUR",
+            stamp_text="INDOMARET DISTRIBUTION CENTER - DITERIMA BERSYARAT - DC ANCOL",
             stamp_valid=True,
             receiver_signature_detected=True,
             driver_signature_detected=True,
             all_checks_passed=False,
             audit_notes=[
-                "Discrepancy detected on Beng Beng Regular: Ordered 60 Dus, Received 52 Dus (Shortage of 8 Dus).",
-                "Handwritten strikethrough and annotation 'RETUR 8 DUS (KARDUS BASAH)' extracted with high confidence.",
-                "Partial receiving stamp 'TERIMA SEBAGIAN / RETUR' confirmed on document.",
-                "Invoice debit claim recommendation generated: IDR 1,440,000 deduction."
+                "Discrepancy detected: Beng Beng regular delivery variance (-8 Dus).",
+                "Handwritten strikethrough '60' replaced with '52'.",
+                "Checker note identified: 'RETUR 8 DUS (KARDUS BASAH)'.",
+                "Automated Debit Memo generated for IDR 1,440,000 deduction."
             ]
         ),
         items=[
@@ -159,7 +161,7 @@ def get_preset_2_report() -> AuditReport:
                 variance=0,
                 status="MATCH",
                 handwritten_note="Lengkap",
-                unit_price_estimate_idr=155000,
+                unit_price_estimate_idr=210000,
                 claim_amount_idr=0,
                 bounding_box=BoundingBox(ymin=225, xmin=50, ymax=255, xmax=950, label="Item 1: Roma Kelapa", category="item_row")
             ),
@@ -170,11 +172,11 @@ def get_preset_2_report() -> AuditReport:
                 received_qty=52,
                 unit="DUS",
                 variance=-8,
-                status="DISCREPANCY",
-                handwritten_note="RETUR 8 DUS (KARDUS BASAH) - Sopir bawa kembali",
+                status="RETURNED",
+                handwritten_note="RETUR 8 DUS (KARDUS BASAH)",
                 unit_price_estimate_idr=180000,
                 claim_amount_idr=1440000,
-                bounding_box=BoundingBox(ymin=256, xmin=50, ymax=295, xmax=950, label="Discrepancy Alert: Beng Beng -8 Dus", category="handwritten_retur")
+                bounding_box=BoundingBox(ymin=256, xmin=50, ymax=295, xmax=950, label="⚠️ Handwritten Retur 8 Dus (Beng Beng)", category="handwritten_retur")
             ),
             ExtractedItem(
                 item_number="3",
@@ -185,7 +187,7 @@ def get_preset_2_report() -> AuditReport:
                 variance=0,
                 status="MATCH",
                 handwritten_note="Lengkap",
-                unit_price_estimate_idr=165000,
+                unit_price_estimate_idr=240000,
                 claim_amount_idr=0,
                 bounding_box=BoundingBox(ymin=296, xmin=50, ymax=326, xmax=950, label="Item 3: Torabika Cappuccino", category="item_row")
             ),
@@ -228,11 +230,11 @@ def get_preset_3_report() -> AuditReport:
         discrepancy_count=2,
         total_claim_amount_idr=2780000.0,
         metadata=AuditMetadata(
-            document_number="SJ-SMU-2026-7890",
-            po_number="PO-HYP-2026-3120",
+            document_number="SJ/WINGS/2026/08/7712",
+            po_number="PO-HYPER-2026-901",
             date="25 Agustus 2026",
             sender_company="PT SAYAP MAS UTAMA (WINGS GROUP)",
-            receiver_company="HYPERMART SUPERMAL KARAWACI",
+            receiver_company="PT MATAHARI PUTRA PRIMA TBK (HYPERMART KARAWACI)",
             truck_plate="B 9552 WXY",
             driver_name="Dedi Kusnadi (Logisly Express)"
         ),
@@ -305,10 +307,281 @@ def get_preset_3_report() -> AuditReport:
         ai_model_used="Gemini 2.0 Flash (Multimodal VLM)"
     )
 
+def get_preset_4_report() -> AuditReport:
+    # Frisian Flag Cold Chain Logistics (Temperature Breach & Acidified Milk)
+    return AuditReport(
+        audit_id=f"AUD-{uuid.uuid4().hex[:8].upper()}",
+        timestamp=datetime.now().isoformat(),
+        overall_status="DISCREPANCY_FLAGGED",
+        confidence_score=0.972,
+        total_ordered_items=200,
+        total_received_items=185,
+        discrepancy_count=1,
+        total_claim_amount_idr=3300000.0,
+        metadata=AuditMetadata(
+            document_number="SJ/FFI-COLD/2026/08/3019",
+            po_number="PO-TRANS-COLD-2026-552",
+            date="25 Agustus 2026",
+            sender_company="PT FRISIAN FLAG INDONESIA",
+            receiver_company="PT TRANSMART RETAIL INDONESIA (DC LEBAK BULUS)",
+            truck_plate="B 9112 CXY",
+            driver_name="Joko Susilo (PT Cold Logistic Indo)"
+        ),
+        verification=VerificationCheck(
+            stamp_detected=True,
+            stamp_text="TRANSMART CENTRAL DC - QC COLD CHAIN PASSED - LEBAK BULUS",
+            stamp_valid=True,
+            receiver_signature_detected=True,
+            driver_signature_detected=True,
+            all_checks_passed=False,
+            audit_notes=[
+                "Cold Chain Alert: Reefer truck arrival temperature reached +14°C (Limit: +4°C).",
+                "15 Karton Susu UHT 1000ml rejected due to thermal abuse and sour coagulation.",
+                "Official QC stamp and Veterinarian checker signature verified.",
+                "Debit claim generated: IDR 3,300,000 for transporter insurance claim."
+            ]
+        ),
+        items=[
+            ExtractedItem(
+                item_number="1",
+                item_name="SUSU UHT FULL CREAM 1000ML (KARTON @12 TETRAPAK)",
+                ordered_qty=100,
+                received_qty=85,
+                unit="KARTON",
+                variance=-15,
+                status="RETURNED",
+                handwritten_note="15 KTN DITOLAK (ASAM/14°C)",
+                unit_price_estimate_idr=220000,
+                claim_amount_idr=3300000,
+                bounding_box=BoundingBox(ymin=225, xmin=50, ymax=265, xmax=950, label="⚠️ Cold Chain Spoilage: 15 KTN Susu UHT", category="handwritten_retur")
+            ),
+            ExtractedItem(
+                item_number="2",
+                item_name="SUSU KENTAL MANIS GOLD KALENG 370G (DUS @48)",
+                ordered_qty=60,
+                received_qty=60,
+                unit="DUS",
+                variance=0,
+                status="MATCH",
+                handwritten_note="Lengkap & Dingin",
+                unit_price_estimate_idr=480000,
+                claim_amount_idr=0,
+                bounding_box=BoundingBox(ymin=266, xmin=50, ymax=296, xmax=950, label="Item 2: SKM Gold Kaleng", category="item_row")
+            ),
+            ExtractedItem(
+                item_number="3",
+                item_name="OMELA KRIMER KENTAL MANIS 370G (DUS @48)",
+                ordered_qty=40,
+                received_qty=40,
+                unit="DUS",
+                variance=0,
+                status="MATCH",
+                handwritten_note="Lengkap",
+                unit_price_estimate_idr=390000,
+                claim_amount_idr=0,
+                bounding_box=BoundingBox(ymin=297, xmin=50, ymax=327, xmax=950, label="Item 3: Omela Krimer", category="item_row")
+            )
+        ],
+        bounding_boxes=[
+            BoundingBox(ymin=38, xmin=50, ymax=100, xmax=950, label="Header & Metadata", category="header"),
+            BoundingBox(ymin=115, xmin=500, ymax=185, xmax=950, label="⚠️ Reefer Truck Temp Alert (+14°C)", category="warning"),
+            BoundingBox(ymin=225, xmin=50, ymax=265, xmax=950, label="⚠️ Handwritten Rejection (15 KTN UHT)", category="handwritten_retur"),
+            BoundingBox(ymin=440, xmin=50, ymax=510, xmax=950, label="Berita Acara Klaim Suhu Reefer", category="warning"),
+            BoundingBox(ymin=620, xmin=750, ymax=740, xmax=930, label="Transmart DC QC Cold Chain Stamp", category="stamp"),
+            BoundingBox(ymin=630, xmin=100, ymax=720, xmax=250, label="Cold Chain Driver Signature", category="signature"),
+            BoundingBox(ymin=630, xmin=440, ymax=720, xmax=590, label="QC Fresh Receiving Signature", category="signature")
+        ],
+        raw_remarks="Kompresor reefer mati selama perjalanan, 15 Karton UHT asam. Ditolak pihak Transmart.",
+        execution_time_ms=510,
+        ai_model_used="Gemini 2.0 Flash (Multimodal VLM)"
+    )
+
+def get_preset_5_report() -> AuditReport:
+    # Semen Indonesia Heavy Logistics (Tarpaulin Leak / Rain Damage at Mitra10)
+    return AuditReport(
+        audit_id=f"AUD-{uuid.uuid4().hex[:8].upper()}",
+        timestamp=datetime.now().isoformat(),
+        overall_status="DISCREPANCY_FLAGGED",
+        confidence_score=0.980,
+        total_ordered_items=400,
+        total_received_items=380,
+        discrepancy_count=1,
+        total_claim_amount_idr=1360000.0,
+        metadata=AuditMetadata(
+            document_number="SIG/LOG-JBT/2026/08/1189",
+            po_number="PO-M10-BUILD-2026-778",
+            date="25 Agustus 2026",
+            sender_company="PT SEMEN INDONESIA (PERSERO) TBK",
+            receiver_company="PT CATUR MITRA SEJATI SENTOSA (MITRA10 BINTARO)",
+            truck_plate="B 9801 UYX",
+            driver_name="Slamet Riyadi (PT Varia Usaha Logistik)"
+        ),
+        verification=VerificationCheck(
+            stamp_detected=True,
+            stamp_text="PT CATUR MITRA SEJATI SENTOSA - MITRA10 BINTARO HUB - TERIMA DENGAN CATATAN",
+            stamp_valid=True,
+            receiver_signature_detected=True,
+            driver_signature_detected=True,
+            all_checks_passed=False,
+            audit_notes=[
+                "Logistics transit water damage: 20 Zak Semen Gresik 40kg hardened due to rain leak.",
+                "Handwritten correction '200' strikethrough -> '180' confirmed with note.",
+                "Mitra10 logistics stamp and warehouse manager signature verified.",
+                "Instant transport deduction debit memo: IDR 1,360,000."
+            ]
+        ),
+        items=[
+            ExtractedItem(
+                item_number="1",
+                item_name="SEMEN GRESIK PORTLAND POZZOLAN CEMENT (PPC 40KG)",
+                ordered_qty=200,
+                received_qty=180,
+                unit="ZAK",
+                variance=-20,
+                status="DAMAGED",
+                handwritten_note="20 ZAK BASAH & MEMBATU",
+                unit_price_estimate_idr=68000,
+                claim_amount_idr=1360000,
+                bounding_box=BoundingBox(ymin=225, xmin=50, ymax=265, xmax=950, label="⚠️ Water Damaged Cement: 20 Zak", category="warning")
+            ),
+            ExtractedItem(
+                item_number="2",
+                item_name="SEMEN DYNAMIX SERBAGUNA PCC 40KG",
+                ordered_qty=150,
+                received_qty=150,
+                unit="ZAK",
+                variance=0,
+                status="MATCH",
+                handwritten_note="Kering & Utuh",
+                unit_price_estimate_idr=70000,
+                claim_amount_idr=0,
+                bounding_box=BoundingBox(ymin=266, xmin=50, ymax=296, xmax=950, label="Item 2: Semen Dynamix 40kg", category="item_row")
+            ),
+            ExtractedItem(
+                item_number="3",
+                item_name="MORTAR INDONESIA PEREKAT BATA RINGAN 40KG",
+                ordered_qty=50,
+                received_qty=50,
+                unit="ZAK",
+                variance=0,
+                status="MATCH",
+                handwritten_note="Kering & Utuh",
+                unit_price_estimate_idr=85000,
+                claim_amount_idr=0,
+                bounding_box=BoundingBox(ymin=297, xmin=50, ymax=327, xmax=950, label="Item 3: Mortar Perekat", category="item_row")
+            )
+        ],
+        bounding_boxes=[
+            BoundingBox(ymin=38, xmin=50, ymax=100, xmax=950, label="Header & Metadata", category="header"),
+            BoundingBox(ymin=225, xmin=50, ymax=265, xmax=950, label="⚠️ Strikethrough & Damaged 20 Zak Semen", category="handwritten_retur"),
+            BoundingBox(ymin=440, xmin=50, ymax=510, xmax=950, label="Berita Acara Kerusakan Logistik Semen", category="warning"),
+            BoundingBox(ymin=620, xmin=740, ymax=740, xmax=940, label="Mitra10 Receiving Stamp (Catatan)", category="stamp"),
+            BoundingBox(ymin=630, xmin=100, ymax=720, xmax=250, label="Driver Signature (Slamet)", category="signature"),
+            BoundingBox(ymin=630, xmin=440, ymax=720, xmax=590, label="Mitra10 Manager Signature (Hendro)", category="signature")
+        ],
+        raw_remarks="Terpal penutup robek di tol Cipali saat hujan. 20 Zak semen membatu dan tidak dapat dijual.",
+        execution_time_ms=490,
+        ai_model_used="Gemini 2.0 Flash (Multimodal VLM)"
+    )
+
+def get_preset_6_report() -> AuditReport:
+    # Kalbe Farma Pharma Distribution (CDOB Shelf-Life / Expiry Rejection by Kimia Farma)
+    return AuditReport(
+        audit_id=f"AUD-{uuid.uuid4().hex[:8].upper()}",
+        timestamp=datetime.now().isoformat(),
+        overall_status="CRITICAL_REJECTED",
+        confidence_score=0.990,
+        total_ordered_items=230,
+        total_received_items=180,
+        discrepancy_count=1,
+        total_claim_amount_idr=27000000.0,
+        metadata=AuditMetadata(
+            document_number="KLB-FARMA/2026/08/9901",
+            po_number="PO-KF-MED-2026-440",
+            date="25 Agustus 2026",
+            sender_company="PT KALBE FARMA TBK",
+            receiver_company="PT KIMIA FARMA APOTEK (PBF PULO GADUNG)",
+            truck_plate="B 9400 PHR",
+            driver_name="Bambang Pamungkas (Kalbe Logistics)"
+        ),
+        verification=VerificationCheck(
+            stamp_detected=True,
+            stamp_text="KIMIA FARMA DC - REJEK QC - ED < 12 BULAN",
+            stamp_valid=False,
+            receiver_signature_detected=True,
+            driver_signature_detected=True,
+            all_checks_passed=False,
+            audit_notes=[
+                "CRITICAL PHARMA REJECTION: Red 'REJEK QC' triangular stamp applied by Licensed Pharmacist.",
+                "Batch #WOD092 Woods Syrup (50 Dus) rejected due to remaining shelf life <3 months (BPOM / Kimia Farma SOP).",
+                "Entire line item 3 rejected (0 units accepted).",
+                "Direct invoice deduction & return shipment order generated: IDR 27,000,000."
+            ]
+        ),
+        items=[
+            ExtractedItem(
+                item_number="1",
+                item_name="PROMAG TAB KUNYAH (DUS @30 CC) - BATCH #PMG881",
+                ordered_qty=100,
+                received_qty=100,
+                unit="DUS",
+                variance=0,
+                status="MATCH",
+                handwritten_note="ED: 10/2028 (OK)",
+                unit_price_estimate_idr=320000,
+                claim_amount_idr=0,
+                bounding_box=BoundingBox(ymin=225, xmin=50, ymax=255, xmax=950, label="Item 1: Promag Tablet", category="item_row")
+            ),
+            ExtractedItem(
+                item_number="2",
+                item_name="MIXAGRIP FLU & BATUK (DUS @25 BLS) - BATCH #MXG412",
+                ordered_qty=80,
+                received_qty=80,
+                unit="DUS",
+                variance=0,
+                status="MATCH",
+                handwritten_note="ED: 12/2027 (OK)",
+                unit_price_estimate_idr=280000,
+                claim_amount_idr=0,
+                bounding_box=BoundingBox(ymin=256, xmin=50, ymax=286, xmax=950, label="Item 2: Mixagrip", category="item_row")
+            ),
+            ExtractedItem(
+                item_number="3",
+                item_name="WOODS PEPPERMINT ANTITUSSIVE 100ML (DUS @24 BTL) - #WOD092",
+                ordered_qty=50,
+                received_qty=0,
+                unit="DUS",
+                variance=-50,
+                status="DAMAGED",
+                handwritten_note="REJEK TOTAL (ED: 11/2026)",
+                unit_price_estimate_idr=540000,
+                claim_amount_idr=27000000,
+                bounding_box=BoundingBox(ymin=287, xmin=50, ymax=327, xmax=950, label="❌ Total Rejection: 50 Dus Woods Sirup (Expired)", category="warning")
+            )
+        ],
+        bounding_boxes=[
+            BoundingBox(ymin=38, xmin=50, ymax=100, xmax=950, label="Header & Metadata", category="header"),
+            BoundingBox(ymin=287, xmin=50, ymax=327, xmax=950, label="❌ Rejected Line Item (50 Dus Woods)", category="warning"),
+            BoundingBox(ymin=440, xmin=50, ymax=510, xmax=950, label="Berita Acara Penolakan Obat PBF", category="warning"),
+            BoundingBox(ymin=610, xmin=740, ymax=730, xmax=940, label="🛑 RED REJECT STAMP (Kimia Farma QC)", category="warning"),
+            BoundingBox(ymin=630, xmin=100, ymax=720, xmax=250, label="Driver Signature (Bambang)", category="signature"),
+            BoundingBox(ymin=630, xmin=440, ymax=720, xmax=590, label="Pharmacist Signature (apt. Annisa)", category="signature")
+        ],
+        raw_remarks="Woods Sirup Batch #WOD092 ditolak total karena masa kedaluwarsa kurang dari 3 bulan.",
+        execution_time_ms=530,
+        ai_model_used="Gemini 2.0 Flash (Multimodal VLM)"
+    )
+
 def audit_mock_image(preset_id: str = "preset_1") -> AuditReport:
-    if "preset_2" in preset_id or "mayora" in preset_id.lower() or "discrepancy" in preset_id.lower():
+    if "preset_2" in preset_id or "mayora" in preset_id.lower():
         return get_preset_2_report()
-    elif "preset_3" in preset_id or "wings" in preset_id.lower() or "damage" in preset_id.lower():
+    elif "preset_3" in preset_id or "wings" in preset_id.lower():
         return get_preset_3_report()
+    elif "preset_4" in preset_id or "frisian" in preset_id.lower() or "coldchain" in preset_id.lower():
+        return get_preset_4_report()
+    elif "preset_5" in preset_id or "semen" in preset_id.lower() or "mitra10" in preset_id.lower():
+        return get_preset_5_report()
+    elif "preset_6" in preset_id or "kalbe" in preset_id.lower() or "pharma" in preset_id.lower() or "kimia" in preset_id.lower():
+        return get_preset_6_report()
     else:
         return get_preset_1_report()

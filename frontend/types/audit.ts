@@ -4,7 +4,7 @@ export interface BoundingBox {
   ymax: number;
   xmax: number;
   label: string;
-  category: 'header' | 'item_row' | 'stamp' | 'signature' | 'handwritten_retur' | 'warning';
+  category: 'header' | 'item_row' | 'stamp' | 'signature' | 'handwritten_retur' | 'warning' | 'recipient' | 'transporter' | 'table';
   confidence?: number;
 }
 
@@ -15,7 +15,7 @@ export interface ExtractedItem {
   received_qty: number;
   unit: string;
   variance: number;
-  status: 'MATCH' | 'DISCREPANCY' | 'DAMAGED' | 'MISSING';
+  status: 'MATCH' | 'DISCREPANCY' | 'DAMAGED' | 'MISSING' | 'RETURNED';
   handwritten_note?: string | null;
   unit_price_estimate_idr: number;
   claim_amount_idr: number;

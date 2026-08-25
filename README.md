@@ -117,6 +117,9 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 | **Preset 1** | **PT Indofood CBP Sukses Makmur Tbk**<br>$\rightarrow$ Alfamart DC Cikokol | 100% physical match (165 cartons), official blue DC stamp detected, checker signature verified. | 🟢 **APPROVED**<br>*(Ready to Invoice)* |
 | **Preset 2** | **PT Mayora Indah Tbk**<br>$\rightarrow$ Indomaret DC Ancol | Beng Beng delivery with 8 wet cartons returned. Handwritten strikethrough `"52"`, `"RETUR 8 DUS BASAH"`, partial stamp. Auto-calculated claim: **IDR 1,440,000**. | 🟡 **FLAGGED**<br>*(Discrepancy Debit)* |
 | **Preset 3** | **PT Sayap Mas Utama (Wings Group)**<br>$\rightarrow$ Hypermart Karawaci | Leaking SoKlin (6 Dus) & crushed Ale-Ale (10 Dus) + **MISSING STORE STAMP**. Total claim: **IDR 2,780,000**. | 🔴 **REJECTED**<br>*(Blocked)* |
+| **Preset 4** | **PT Frisian Flag Indonesia**<br>$\rightarrow$ Transmart DC Lebak Bulus | Cold chain dairy delivery with reefer temp breach ($+14^\circ\text{C}$). 15 Cartons spoiled/acidified UHT milk rejected. Claim: **IDR 3,300,000**. | 🟡 **FLAGGED**<br>*(Cold Chain Claim)* |
+| **Preset 5** | **PT Semen Indonesia (Persero) Tbk**<br>$\rightarrow$ Mitra10 DC Bintaro | 20 water-soaked & hardened cement sacks due to tarpaulin rain leak. Deducted via checker note. Claim: **IDR 1,360,000**. | 🟡 **FLAGGED**<br>*(Damage Debit)* |
+| **Preset 6** | **PT Kalbe Farma Tbk**<br>$\rightarrow$ Kimia Farma DC Pulo Gadung | Pharma CDOB audit: 50 Dus Woods Syrup rejected (<3 months shelf-life). Red triangular **REJEK QC** stamp. Claim: **IDR 27,000,000**. | 🔴 **REJECTED**<br>*(Batch Blocked)* |
 
 ---
 

@@ -2,7 +2,7 @@
 
 import React, { useRef } from 'react';
 import { PresetItem } from '../types/audit';
-import { CheckCircle2, AlertTriangle, XCircle, UploadCloud, FileSpreadsheet, Sparkles, FileUp } from 'lucide-react';
+import { CheckCircle2, AlertTriangle, XCircle, FileSpreadsheet, FileUp } from 'lucide-react';
 
 interface PresetSelectorProps {
   presets: PresetItem[];
@@ -21,7 +21,7 @@ export const PresetSelector: React.FC<PresetSelectorProps> = ({
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const getStatusBadge = (status: string) => {
+  const getStatusBadge = (status: string, presetId: string) => {
     switch (status) {
       case 'APPROVED_FOR_INVOICING':
         return (
@@ -30,16 +30,24 @@ export const PresetSelector: React.FC<PresetSelectorProps> = ({
           </span>
         );
       case 'DISCREPANCY_FLAGGED':
+        const label = presetId === 'preset_4' 
+          ? 'Suhu Dingin Bocor (+14°C)' 
+          : presetId === 'preset_5' 
+          ? '20 Zak Semen Rusak Air' 
+          : 'Selisih Retur (Klaim Debit)';
         return (
           <span className="flex items-center gap-1 text-[11px] font-bold text-amber-400 bg-amber-950/80 border border-amber-500/30 px-2 py-0.5 rounded-full shadow-[0_0_10px_rgba(245,158,11,0.15)]">
-            <AlertTriangle className="w-3 h-3 text-amber-400" /> Selisih 8 Dus (Retur)
+            <AlertTriangle className="w-3 h-3 text-amber-400" /> {label}
           </span>
         );
       case 'CRITICAL_REJECTED':
       default:
+        const rejectLabel = presetId === 'preset_6' 
+          ? 'Rejek QC (ED < 3 Bln)' 
+          : 'Missing Stamp & Damaged';
         return (
           <span className="flex items-center gap-1 text-[11px] font-bold text-rose-400 bg-rose-950/80 border border-rose-500/30 px-2 py-0.5 rounded-full shadow-[0_0_10px_rgba(244,63,94,0.15)]">
-            <XCircle className="w-3 h-3 text-rose-400" /> Missing Stamp & Damaged
+            <XCircle className="w-3 h-3 text-rose-400" /> {rejectLabel}
           </span>
         );
     }
@@ -62,7 +70,7 @@ export const PresetSelector: React.FC<PresetSelectorProps> = ({
             </h2>
           </div>
           <p className="text-xs text-slate-400 mt-0.5">
-            Uji coba dataset Surat Jalan logistik Indonesia atau unggah foto dokumen fisik langsung
+            Uji coba 6 skenario logistik rantai pasok Indonesia (FMCG, Cold Chain, Semen, Farmasi) atau unggah foto dokumen fisik
           </p>
         </div>
 
@@ -91,7 +99,7 @@ export const PresetSelector: React.FC<PresetSelectorProps> = ({
       </div>
 
       {/* Preset Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
         {presets.map((preset, idx) => {
           const isSelected = selectedPresetId === preset.id;
           return (
@@ -129,7 +137,7 @@ export const PresetSelector: React.FC<PresetSelectorProps> = ({
 
               {/* Status Badge */}
               <div className="pt-2 border-t border-white/[0.04]">
-                {getStatusBadge(preset.expected_status)}
+                {getStatusBadge(preset.expected_status, preset.id)}
               </div>
             </div>
           );

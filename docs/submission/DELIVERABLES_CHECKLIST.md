@@ -1,4 +1,4 @@
-﻿# 📋 SuratJalan.AI — COMPFEST 18 AIC Submission & Deliverables Checklist
+# 📋 SuratJalan.AI — COMPFEST 18 AIC Submission & Deliverables Checklist
 
 > **Competition**: COMPFEST 18 AI Innovation Challenge (AIC) — Fasilkom Universitas Indonesia  
 > **Theme**: *AI for the Backbone of the Economy*  
@@ -35,10 +35,13 @@
 - [x] **Git Hygiene & Conventional Commits**:
   - [x] Commits follow standard format: `feat:`, `fix:`, `refactor:`, `docs:`, `chore:`
   - [x] Clean `.gitignore` (no `.env`, `node_modules`, `venv`, or `.pyc` tracked)
-- [x] **Pre-loaded Indonesian Presets**:
+- [x] **Pre-loaded Indonesian Presets (6 Core Enterprise Scenarios)**:
   - [x] Preset 1: PT Indofood CBP Sukses Makmur (100% Matched -> Approved)
   - [x] Preset 2: PT Mayora Indah (8 Wet Cartons Returned -> Flagged Claim IDR 1,440,000)
   - [x] Preset 3: PT Sayap Mas Utama / Wings Group (Damaged Items + Missing Stamp -> Rejected Claim IDR 2,780,000)
+  - [x] Preset 4: PT Frisian Flag Indonesia (Cold Chain Temp Abuse -> Flagged Claim IDR 3,300,000)
+  - [x] Preset 5: PT Semen Indonesia (20 Rain Damaged Cement Sacks -> Flagged Claim IDR 1,360,000)
+  - [x] Preset 6: PT Kalbe Farma (Pharma CDOB Expiry Rejection -> Rejected Claim IDR 27,000,000)
 - [x] **Enterprise ERP Export Integrations**:
   - [x] SAP S/4HANA BAPI JSON payload generator
   - [x] Odoo ERP Stock Picking payload generator
