@@ -14,13 +14,13 @@ export function Badge({ className, variant = 'default', ...props }: BadgeProps) 
     warning: 'bg-amber-950/70 text-amber-300 border-amber-800/60 font-semibold',
     destructive: 'bg-rose-950/70 text-rose-300 border-rose-800/60 font-semibold',
     tactical: 'bg-blue-950/70 text-blue-300 border-blue-800/60 font-semibold',
-    mono: 'bg-zinc-900 text-zinc-300 border-zinc-800 text-[10px] font-medium'
+    mono: 'bg-zinc-900 text-zinc-300 border-zinc-800 font-medium'
   };
 
   return (
     <div
       className={cn(
-        'inline-flex items-center gap-1 rounded-md border px-2 py-0.5 text-xs transition-colors',
+        'inline-flex items-center gap-1.5 rounded-md border px-2.5 py-0.5 text-sm transition-colors',
         variantStyles[variant],
         className
       )}

@@ -89,13 +89,13 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
   return (
     <Card className="flex flex-col h-full overflow-hidden border-zinc-800 bg-zinc-950">
       {/* Header Toolbar */}
-      <div className="px-4 py-2.5 border-b border-zinc-800/80 bg-zinc-900/60 flex items-center justify-between gap-3">
+      <div className="px-4 py-3 border-b border-zinc-800/80 bg-zinc-900/60 flex items-center justify-between gap-3">
         <div className="flex items-center gap-2">
-          <Crosshair className="w-4 h-4 text-zinc-400" />
-          <span className="text-xs font-bold text-zinc-200 tracking-tight">
+          <Crosshair className="w-5 h-5 text-zinc-400" />
+          <span className="text-sm font-bold text-zinc-200 tracking-tight">
             SPATIAL GROUNDING CANVAS
           </span>
-          <Badge variant="outline" className="text-[10px] font-semibold border-zinc-800 text-zinc-400">
+          <Badge variant="outline" className="text-sm font-semibold border-zinc-800 text-zinc-400">
             {visibleBoxes.length} ANCHORS
           </Badge>
         </div>
@@ -106,13 +106,13 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
             variant="outline"
             size="icon"
             onClick={() => setZoom((z) => Math.max(0.6, z - 0.15))}
-            className="h-7 w-7 border-zinc-800 text-zinc-300"
+            className="h-8 w-8 border-zinc-800 text-zinc-300"
             title="Zoom Out"
           >
-            <ZoomOut className="w-3.5 h-3.5" />
+            <ZoomOut className="w-4 h-4" />
           </Button>
 
-          <span className="text-[11px] font-semibold px-1 text-zinc-300 min-w-10 text-center">
+          <span className="text-sm font-semibold px-1 text-zinc-300 min-w-10 text-center">
             {Math.round(zoom * 100)}%
           </span>
 
@@ -120,37 +120,37 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
             variant="outline"
             size="icon"
             onClick={() => setZoom((z) => Math.min(2.2, z + 0.15))}
-            className="h-7 w-7 border-zinc-800 text-zinc-300"
+            className="h-8 w-8 border-zinc-800 text-zinc-300"
             title="Zoom In"
           >
-            <ZoomIn className="w-3.5 h-3.5" />
+            <ZoomIn className="w-4 h-4" />
           </Button>
 
           <Button
             variant="outline"
             size="icon"
             onClick={() => setZoom(1)}
-            className="h-7 w-7 border-zinc-800 text-zinc-300 ml-0.5"
+            className="h-8 w-8 border-zinc-800 text-zinc-300 ml-0.5"
             title="Reset Zoom"
           >
-            <RotateCcw className="w-3 h-3" />
+            <RotateCcw className="w-4 h-4" />
           </Button>
 
           <Button
             variant={showCoordinates ? 'secondary' : 'outline'}
-            size="xs"
+            size="sm"
             onClick={() => setShowCoordinates(!showCoordinates)}
-            className="h-7 text-[11px] font-medium gap-1 border-zinc-800 ml-1"
+            className="h-8 text-sm font-medium gap-1.5 border-zinc-800 ml-1"
           >
-            {showCoordinates ? <Eye className="w-3 h-3 text-blue-400" /> : <EyeOff className="w-3 h-3 text-zinc-500" />}
+            {showCoordinates ? <Eye className="w-4 h-4 text-blue-400" /> : <EyeOff className="w-4 h-4 text-zinc-500" />}
             <span className="hidden sm:inline">Overlay</span>
           </Button>
         </div>
       </div>
 
       {/* Layer Filter Toolbar */}
-      <div className="px-4 py-1.5 border-b border-zinc-800/60 bg-zinc-950 flex items-center gap-1.5 overflow-x-auto text-[11px]">
-        <span className="text-zinc-500 mr-1 text-[10px] uppercase font-semibold">Layers:</span>
+      <div className="px-4 py-2 border-b border-zinc-800/60 bg-zinc-950 flex items-center gap-2 overflow-x-auto text-sm">
+        <span className="text-zinc-500 mr-1 text-sm uppercase font-semibold">Layers:</span>
         {(
           [
             { id: 'all', label: 'All Anchors' },
@@ -163,7 +163,7 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
           <button
             key={layer.id}
             onClick={() => setActiveLayer(layer.id)}
-            className={`px-2 py-0.5 rounded text-[10px] transition-colors ${
+            className={`px-2.5 py-1 rounded text-sm transition-colors ${
               activeLayer === layer.id
                 ? 'bg-zinc-800 text-zinc-100 font-bold border border-zinc-700'
                 : 'text-zinc-500 hover:text-zinc-300 hover:bg-zinc-900 font-medium'
@@ -182,12 +182,12 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
         {/* Inference Loading State */}
         {isAuditing && (
           <div className="absolute inset-0 z-40 bg-zinc-950/80 backdrop-blur-sm flex flex-col items-center justify-center gap-3">
-            <div className="h-12 w-12 rounded-xl bg-zinc-900 border border-zinc-700 flex items-center justify-center">
-              <ScanLine className="w-6 h-6 text-blue-400 animate-spin" />
+            <div className="h-14 w-14 rounded-xl bg-zinc-900 border border-zinc-700 flex items-center justify-center">
+              <ScanLine className="w-7 h-7 text-blue-400 animate-spin" />
             </div>
-            <div className="text-center text-xs">
+            <div className="text-center text-sm">
               <p className="font-bold text-zinc-100 uppercase">MULTIMODAL VLM AUDITING...</p>
-              <p className="text-zinc-400 text-[11px] mt-0.5">Gemini 2.0 Flash Spatial Extraction</p>
+              <p className="text-zinc-400 text-sm mt-0.5">Gemini 2.0 Flash Spatial Extraction</p>
             </div>
           </div>
         )}
@@ -234,7 +234,7 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
                   }}
                 >
                   <span
-                    className={`absolute -top-3.5 left-0.5 text-[9px] px-1.5 py-0.2 rounded font-semibold shadow-md whitespace-nowrap pointer-events-none ${style.badge}`}
+                    className={`absolute -top-4 left-0.5 text-sm px-2 py-0.5 rounded font-semibold shadow-md whitespace-nowrap pointer-events-none ${style.badge}`}
                   >
                     {box.label}
                   </span>
@@ -245,27 +245,27 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
       </div>
 
       {/* Legend Footer */}
-      <div className="px-4 py-2 border-t border-zinc-800/80 bg-zinc-900/40 flex flex-wrap items-center justify-between gap-3 text-[11px] text-zinc-400">
-        <div className="flex flex-wrap items-center gap-3 font-medium">
+      <div className="px-4 py-2.5 border-t border-zinc-800/80 bg-zinc-900/40 flex flex-wrap items-center justify-between gap-3 text-sm text-zinc-400">
+        <div className="flex flex-wrap items-center gap-3.5 font-medium">
           <span className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-xs bg-emerald-500" />
+            <span className="w-2.5 h-2.5 rounded-xs bg-emerald-500" />
             <span className="text-zinc-300">Verified Item</span>
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-xs bg-rose-500" />
+            <span className="w-2.5 h-2.5 rounded-xs bg-rose-500" />
             <span className="text-rose-300">Discrepancy / Retur</span>
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-xs bg-cyan-400" />
+            <span className="w-2.5 h-2.5 rounded-xs bg-cyan-400" />
             <span className="text-cyan-300">DC Stamp</span>
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-xs bg-purple-400" />
+            <span className="w-2.5 h-2.5 rounded-xs bg-purple-400" />
             <span className="text-purple-300">Signature</span>
           </span>
         </div>
 
-        <span className="text-[10px] text-zinc-500 font-medium">
+        <span className="text-sm text-zinc-500 font-medium">
           COORDINATES: NORMALIZED [0..1000]
         </span>
       </div>

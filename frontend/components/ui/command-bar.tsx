@@ -63,25 +63,25 @@ export function CommandBar({
 
       <div className="relative z-50 w-full max-w-xl rounded-xl border border-zinc-800 bg-zinc-950 shadow-2xl overflow-hidden animate-in zoom-in-95">
         {/* Search Input */}
-        <div className="flex items-center gap-3 px-4 py-3 border-b border-zinc-800/80 bg-zinc-900/60">
-          <Search className="w-4 h-4 text-zinc-400 shrink-0" />
+        <div className="flex items-center gap-3 px-4 py-3.5 border-b border-zinc-800/80 bg-zinc-900/60">
+          <Search className="w-5 h-5 text-zinc-400 shrink-0" />
           <input
             ref={inputRef}
             type="text"
             placeholder="Ketik perintah atau cari sampel Surat Jalan... (ESC untuk tutup)"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full bg-transparent text-xs text-zinc-100 placeholder:text-zinc-500 focus:outline-none"
+            className="w-full bg-transparent text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none"
           />
-          <kbd className="px-1.5 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-[10px] font-medium text-zinc-400">
+          <kbd className="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-sm font-medium text-zinc-400">
             ESC
           </kbd>
         </div>
 
         {/* Action List */}
-        <div className="max-h-80 overflow-y-auto p-2 space-y-1 text-xs">
+        <div className="max-h-80 overflow-y-auto p-2 space-y-1 text-sm">
           {/* Quick Actions */}
-          <div className="px-2 py-1 text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
+          <div className="px-3 py-1.5 text-sm font-semibold uppercase tracking-wider text-zinc-500">
             Perintah Cepat
           </div>
 
@@ -90,13 +90,13 @@ export function CommandBar({
               onOpenExport();
               handleClose();
             }}
-            className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-zinc-200 hover:bg-zinc-800/80 hover:text-white transition-colors group"
+            className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-zinc-200 hover:bg-zinc-800/80 hover:text-white transition-colors group"
           >
             <div className="flex items-center gap-2.5">
               <Share2 className="w-4 h-4 text-blue-400 group-hover:text-blue-300" />
               <span>Buka Gateway Sinkronisasi ERP (SAP / Odoo / Jurnal.id)</span>
             </div>
-            <kbd className="text-[10px] font-medium text-zinc-500 group-hover:text-zinc-300">Export</kbd>
+            <kbd className="text-sm font-medium text-zinc-500 group-hover:text-zinc-300">Export</kbd>
           </button>
 
           <button
@@ -104,17 +104,17 @@ export function CommandBar({
               onRerunAudit();
               handleClose();
             }}
-            className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-zinc-200 hover:bg-zinc-800/80 hover:text-white transition-colors group"
+            className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-zinc-200 hover:bg-zinc-800/80 hover:text-white transition-colors group"
           >
             <div className="flex items-center gap-2.5">
               <RefreshCw className="w-4 h-4 text-emerald-400 group-hover:text-emerald-300" />
               <span>Jalankan Ulang Audit Multimodal VLM</span>
             </div>
-            <kbd className="text-[10px] font-medium text-zinc-500 group-hover:text-zinc-300">Re-audit</kbd>
+            <kbd className="text-sm font-medium text-zinc-500 group-hover:text-zinc-300">Re-audit</kbd>
           </button>
 
           {/* Presets */}
-          <div className="px-2 pt-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
+          <div className="px-3 pt-3 py-1.5 text-sm font-semibold uppercase tracking-wider text-zinc-500">
             Skenario Sampel Surat Jalan ({filteredPresets.length})
           </div>
 
@@ -125,16 +125,16 @@ export function CommandBar({
                 onSelectPreset(p.id);
                 handleClose();
               }}
-              className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-zinc-200 hover:bg-zinc-800/80 hover:text-white transition-colors group text-left"
+              className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-zinc-200 hover:bg-zinc-800/80 hover:text-white transition-colors group text-left"
             >
               <div className="flex items-center gap-2.5 min-w-0">
                 <FileText className="w-4 h-4 text-zinc-400 group-hover:text-blue-400 shrink-0" />
                 <div className="min-w-0">
                   <div className="font-semibold text-zinc-100 truncate">{p.company}</div>
-                  <div className="text-[11px] text-zinc-400 truncate">{p.title}</div>
+                  <div className="text-sm text-zinc-400 truncate">{p.title}</div>
                 </div>
               </div>
-              <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-400 shrink-0 ml-2">
+              <span className="text-sm font-bold px-2 py-0.5 rounded bg-zinc-800 text-zinc-400 shrink-0 ml-2">
                 #{idx + 1}
               </span>
             </button>
@@ -142,11 +142,11 @@ export function CommandBar({
         </div>
 
         {/* Footer */}
-        <div className="px-4 py-2 border-t border-zinc-800/80 bg-zinc-900/40 flex items-center justify-between text-[11px] text-zinc-500 font-medium">
+        <div className="px-4 py-2.5 border-t border-zinc-800/80 bg-zinc-900/40 flex items-center justify-between text-sm text-zinc-500 font-medium">
           <span>SuratJalan.AI Command Core</span>
           <div className="flex items-center gap-2">
             <span>Navigasi Cepat</span>
-            <kbd className="px-1 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-[10px]">↵ Enter</kbd>
+            <kbd className="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-sm">↵ Enter</kbd>
           </div>
         </div>
       </div>

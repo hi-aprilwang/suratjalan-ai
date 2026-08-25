@@ -27,8 +27,8 @@ export const PresetSelector: React.FC<PresetSelectorProps> = ({
     switch (status) {
       case 'APPROVED_FOR_INVOICING':
         return (
-          <Badge variant="success" className="text-[10px] font-semibold">
-            <CheckCircle2 className="w-3 h-3" /> MATCH (APPROVED)
+          <Badge variant="success" className="text-sm font-semibold">
+            <CheckCircle2 className="w-4 h-4" /> MATCH (APPROVED)
           </Badge>
         );
       case 'DISCREPANCY_FLAGGED':
@@ -39,8 +39,8 @@ export const PresetSelector: React.FC<PresetSelectorProps> = ({
             ? 'DAMAGED (20 ZAK)'
             : 'RETUR (8 DUS)';
         return (
-          <Badge variant="warning" className="text-[10px] font-semibold">
-            <AlertTriangle className="w-3 h-3" /> {label}
+          <Badge variant="warning" className="text-sm font-semibold">
+            <AlertTriangle className="w-4 h-4" /> {label}
           </Badge>
         );
       case 'CRITICAL_REJECTED':
@@ -48,8 +48,8 @@ export const PresetSelector: React.FC<PresetSelectorProps> = ({
         const rejectLabel =
           presetId === 'preset_6' ? 'QC REJECT (EXPIRED)' : 'MISSING STAMP';
         return (
-          <Badge variant="destructive" className="text-[10px] font-semibold">
-            <XCircle className="w-3 h-3" /> {rejectLabel}
+          <Badge variant="destructive" className="text-sm font-semibold">
+            <XCircle className="w-4 h-4" /> {rejectLabel}
           </Badge>
         );
     }
@@ -61,12 +61,12 @@ export const PresetSelector: React.FC<PresetSelectorProps> = ({
   };
 
   return (
-    <div className="space-y-2.5">
+    <div className="space-y-3">
       {/* Header bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 px-1">
         <div className="flex items-center gap-2">
-          <Layers className="w-4 h-4 text-zinc-400" />
-          <span className="text-xs font-semibold uppercase tracking-wider text-zinc-300">
+          <Layers className="w-5 h-5 text-zinc-400" />
+          <span className="text-sm font-semibold uppercase tracking-wider text-zinc-300">
             Skenario Sampel Uji Coba Logistik // 6 Industri Rantai Pasok
           </span>
         </div>
@@ -85,26 +85,26 @@ export const PresetSelector: React.FC<PresetSelectorProps> = ({
           />
           <Button
             variant="outline"
-            size="xs"
+            size="sm"
             onClick={() => fileInputRef.current?.click()}
             disabled={isAuditing}
-            className="gap-1.5 font-medium text-[11px] border-zinc-800 bg-zinc-900/60 hover:bg-zinc-800 text-zinc-300"
+            className="gap-2 font-medium text-sm border-zinc-800 bg-zinc-900/60 hover:bg-zinc-800 text-zinc-300"
           >
-            <Upload className="w-3 h-3 text-zinc-400" />
+            <Upload className="w-4 h-4 text-zinc-400" />
             <span>Unggah Dokumen Fisik Sendiri</span>
           </Button>
         </div>
       </div>
 
       {/* Preset Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-2.5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3">
         {presets.map((preset, idx) => {
           const isSelected = selectedPresetId === preset.id;
           return (
             <div
               key={preset.id}
               onClick={() => !isAuditing && onSelectPreset(preset.id)}
-              className={`group cursor-pointer rounded-lg p-3 border transition-all duration-150 relative flex flex-col justify-between ${
+              className={`group cursor-pointer rounded-lg p-3.5 border transition-all duration-150 relative flex flex-col justify-between ${
                 isSelected
                   ? 'bg-zinc-900 border-zinc-500 shadow-md ring-1 ring-zinc-500/50'
                   : 'bg-zinc-950/80 border-zinc-800/80 hover:border-zinc-700 hover:bg-zinc-900/50'
@@ -112,24 +112,24 @@ export const PresetSelector: React.FC<PresetSelectorProps> = ({
             >
               {/* Card Top */}
               <div>
-                <div className="flex items-center justify-between gap-1 mb-1.5">
-                  <span className="text-[10px] font-bold text-zinc-500 group-hover:text-zinc-300 transition-colors">
+                <div className="flex items-center justify-between gap-1 mb-2">
+                  <span className="text-sm font-bold text-zinc-500 group-hover:text-zinc-300 transition-colors">
                     {getCategoryCode(idx)}
                   </span>
-                  <kbd className="text-[9px] font-semibold px-1 py-0.2 rounded bg-zinc-900 border border-zinc-800 text-zinc-400">
+                  <kbd className="text-sm font-semibold px-1.5 py-0.5 rounded bg-zinc-900 border border-zinc-800 text-zinc-400">
                     {idx + 1}
                   </kbd>
                 </div>
-                <h4 className="text-xs font-semibold text-zinc-100 truncate line-clamp-1 leading-snug">
+                <h4 className="text-sm font-semibold text-zinc-100 truncate line-clamp-1 leading-snug">
                   {preset.company.replace('PT ', '')}
                 </h4>
-                <p className="text-[11px] text-zinc-400 line-clamp-2 mt-1 leading-relaxed">
+                <p className="text-sm text-zinc-400 line-clamp-2 mt-1.5 leading-relaxed">
                   {preset.description}
                 </p>
               </div>
 
               {/* Card Bottom */}
-              <div className="mt-3 pt-2 border-t border-zinc-800/60 flex items-center justify-between">
+              <div className="mt-3.5 pt-2.5 border-t border-zinc-800/60 flex items-center justify-between">
                 {getStatusBadge(preset.expected_status, preset.id)}
               </div>
             </div>

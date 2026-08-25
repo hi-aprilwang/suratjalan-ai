@@ -57,9 +57,9 @@ export function DialogContent({
       {onClose && (
         <button
           onClick={onClose}
-          className="absolute right-4 top-4 rounded-md p-1 text-zinc-400 opacity-70 transition-opacity hover:opacity-100 hover:bg-zinc-800 focus:outline-none"
+          className="absolute right-4 top-4 rounded-md p-1.5 text-zinc-400 opacity-70 transition-opacity hover:opacity-100 hover:bg-zinc-800 focus:outline-none"
         >
-          <X className="h-4 w-4" />
+          <X className="h-5 w-5" />
           <span className="sr-only">Close</span>
         </button>
       )}
@@ -73,11 +73,11 @@ export function DialogHeader({ className, ...props }: React.HTMLAttributes<HTMLD
 }
 
 export function DialogTitle({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
-  return <h2 className={cn('text-base font-semibold leading-none tracking-tight text-zinc-100', className)} {...props} />;
+  return <h2 className={cn('text-lg font-semibold leading-none tracking-tight text-zinc-100', className)} {...props} />;
 }
 
 export function DialogDescription({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
-  return <p className={cn('text-xs text-zinc-400', className)} {...props} />;
+  return <p className={cn('text-sm text-zinc-400', className)} {...props} />;
 }
 
 export function DialogFooter({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
