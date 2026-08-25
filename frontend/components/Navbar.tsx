@@ -33,10 +33,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-mono font-bold text-sm tracking-tight text-zinc-100">
+                <span className="font-bold text-sm tracking-tight text-zinc-100">
                   SURATJALAN<span className="text-blue-400">.AI</span>
                 </span>
-                <Badge variant="outline" className="text-[10px] font-mono border-zinc-800 text-zinc-400">
+                <Badge variant="outline" className="text-[10px] border-zinc-800 text-zinc-400 font-medium">
                   AIC-v1.0
                 </Badge>
               </div>
@@ -48,7 +48,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Subtitle / Department */}
           <div className="hidden lg:flex items-center gap-2 text-xs text-zinc-400">
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="font-mono text-[11px] text-zinc-400">
+            <span className="text-[11px] text-zinc-400 font-medium">
               AUDIT ENGINE ACTIVE // INDONESIAN SUPPLY CHAINS
             </span>
           </div>
@@ -64,7 +64,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <Search className="w-3.5 h-3.5 text-zinc-500 group-hover:text-zinc-300 transition-colors" />
               <span>Cari dokumen, skenario, atau perintah...</span>
             </div>
-            <div className="flex items-center gap-1 font-mono text-[10px] text-zinc-500">
+            <div className="flex items-center gap-1 text-[10px] text-zinc-500 font-medium">
               <kbd className="px-1.5 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300">⌘K</kbd>
             </div>
           </button>
@@ -73,7 +73,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Right: Telemetry & Actions */}
         <div className="flex items-center gap-2.5">
           {/* Latency badge */}
-          <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-zinc-900 border border-zinc-800 text-[11px] font-mono text-zinc-300">
+          <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-zinc-900 border border-zinc-800 text-[11px] font-medium text-zinc-300">
             <Activity className="w-3 h-3 text-emerald-400" />
             <span>{latencyMs}ms</span>
           </div>
@@ -83,7 +83,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             variant="outline"
             size="xs"
             onClick={onToggleModel}
-            className="font-mono text-[11px] h-7 gap-1.5 border-zinc-800 bg-zinc-900/80 text-zinc-300 hover:bg-zinc-800"
+            className="text-[11px] font-medium h-7 gap-1.5 border-zinc-800 bg-zinc-900/80 text-zinc-300 hover:bg-zinc-800"
             title="Toggle Live Gemini Flash / Zero-Config Engine"
           >
             <span className={`h-1.5 w-1.5 rounded-full ${isLiveModel ? 'bg-emerald-400' : 'bg-blue-400'}`} />

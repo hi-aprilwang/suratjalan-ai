@@ -73,7 +73,7 @@ export function CommandBar({
             onChange={(e) => setSearch(e.target.value)}
             className="w-full bg-transparent text-xs text-zinc-100 placeholder:text-zinc-500 focus:outline-none"
           />
-          <kbd className="px-1.5 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-[10px] font-mono text-zinc-400">
+          <kbd className="px-1.5 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-[10px] font-medium text-zinc-400">
             ESC
           </kbd>
         </div>
@@ -96,7 +96,7 @@ export function CommandBar({
               <Share2 className="w-4 h-4 text-blue-400 group-hover:text-blue-300" />
               <span>Buka Gateway Sinkronisasi ERP (SAP / Odoo / Jurnal.id)</span>
             </div>
-            <kbd className="text-[10px] font-mono text-zinc-500 group-hover:text-zinc-300">Export</kbd>
+            <kbd className="text-[10px] font-medium text-zinc-500 group-hover:text-zinc-300">Export</kbd>
           </button>
 
           <button
@@ -110,7 +110,7 @@ export function CommandBar({
               <RefreshCw className="w-4 h-4 text-emerald-400 group-hover:text-emerald-300" />
               <span>Jalankan Ulang Audit Multimodal VLM</span>
             </div>
-            <kbd className="text-[10px] font-mono text-zinc-500 group-hover:text-zinc-300">Re-audit</kbd>
+            <kbd className="text-[10px] font-medium text-zinc-500 group-hover:text-zinc-300">Re-audit</kbd>
           </button>
 
           {/* Presets */}
@@ -134,7 +134,7 @@ export function CommandBar({
                   <div className="text-[11px] text-zinc-400 truncate">{p.title}</div>
                 </div>
               </div>
-              <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-400 shrink-0 ml-2">
+              <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-400 shrink-0 ml-2">
                 #{idx + 1}
               </span>
             </button>
@@ -142,7 +142,7 @@ export function CommandBar({
         </div>
 
         {/* Footer */}
-        <div className="px-4 py-2 border-t border-zinc-800/80 bg-zinc-900/40 flex items-center justify-between text-[11px] text-zinc-500 font-mono">
+        <div className="px-4 py-2 border-t border-zinc-800/80 bg-zinc-900/40 flex items-center justify-between text-[11px] text-zinc-500 font-medium">
           <span>SuratJalan.AI Command Core</span>
           <div className="flex items-center gap-2">
             <span>Navigasi Cepat</span>

@@ -28,25 +28,25 @@ export const DiscrepancyTable: React.FC<DiscrepancyTableProps> = ({
   const getItemBadge = (status: string, variance: number) => {
     if (status === 'MATCH' && variance === 0) {
       return (
-        <Badge variant="success" className="text-[10px] font-mono">
+        <Badge variant="success" className="text-[10px] font-semibold">
           <CheckCircle2 className="w-3 h-3" /> MATCH (0)
         </Badge>
       );
     } else if (status === 'RETURNED' || variance < 0) {
       return (
-        <Badge variant="warning" className="text-[10px] font-mono">
+        <Badge variant="warning" className="text-[10px] font-semibold">
           <AlertTriangle className="w-3 h-3" /> RETUR ({variance})
         </Badge>
       );
     } else if (status === 'DAMAGED') {
       return (
-        <Badge variant="destructive" className="text-[10px] font-mono">
+        <Badge variant="destructive" className="text-[10px] font-semibold">
           <XCircle className="w-3 h-3" /> RUSAK ({variance})
         </Badge>
       );
     } else {
       return (
-        <Badge variant="outline" className="text-[10px] font-mono text-zinc-400">
+        <Badge variant="outline" className="text-[10px] font-semibold text-zinc-400">
           {status} ({variance})
         </Badge>
       );
@@ -59,27 +59,27 @@ export const DiscrepancyTable: React.FC<DiscrepancyTableProps> = ({
       <div className="px-4 py-2.5 border-b border-zinc-800/80 bg-zinc-900/60 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <FileSpreadsheet className="w-4 h-4 text-zinc-400" />
-          <span className="font-mono text-xs font-bold text-zinc-200 tracking-tight">
+          <span className="text-xs font-bold text-zinc-200 tracking-tight">
             REKONSILIASI LINE ITEM (PURCHASE ORDER VS FISIK POD)
           </span>
         </div>
-        <span className="text-[10px] font-mono text-zinc-400 bg-zinc-900 border border-zinc-800 px-2 py-0.5 rounded">
+        <span className="text-[10px] font-semibold text-zinc-400 bg-zinc-900 border border-zinc-800 px-2 py-0.5 rounded">
           {items.length} LINE ITEMS
         </span>
       </div>
 
       {/* Table */}
       <div className="overflow-x-auto">
-        <table className="w-full text-left text-xs border-collapse">
+        <table className="w-full text-left text-xs border-collapse font-sans">
           <thead>
-            <tr className="border-b border-zinc-800/80 bg-zinc-900/40 text-[10px] font-mono uppercase tracking-wider text-zinc-400">
+            <tr className="border-b border-zinc-800/80 bg-zinc-900/40 text-[10px] uppercase tracking-wider text-zinc-400 font-semibold">
               <th className="py-2.5 px-3 w-10 text-center">No</th>
               <th className="py-2.5 px-3">Nama SKU / Produk</th>
-              <th className="py-2.5 px-3 text-right font-mono">PO Qty</th>
-              <th className="py-2.5 px-3 text-right font-mono">Terima</th>
+              <th className="py-2.5 px-3 text-right">PO Qty</th>
+              <th className="py-2.5 px-3 text-right">Terima</th>
               <th className="py-2.5 px-3 text-center">Status Audit</th>
               <th className="py-2.5 px-3">Catatan Tulisan Tangan / OCR</th>
-              <th className="py-2.5 px-3 text-right font-mono">Klaim Debit</th>
+              <th className="py-2.5 px-3 text-right">Klaim Debit</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-zinc-800/60 font-sans">
@@ -100,7 +100,7 @@ export const DiscrepancyTable: React.FC<DiscrepancyTableProps> = ({
                       : 'hover:bg-zinc-900/60'
                   }`}
                 >
-                  <td className="py-2 px-3 text-center font-mono text-[11px] text-zinc-500">
+                  <td className="py-2 px-3 text-center text-[11px] text-zinc-500 font-medium">
                     {item.item_number}
                   </td>
                   <td className="py-2 px-3">
@@ -108,30 +108,30 @@ export const DiscrepancyTable: React.FC<DiscrepancyTableProps> = ({
                       {item.item_name}
                     </div>
                   </td>
-                  <td className="py-2 px-3 text-right font-mono text-xs text-zinc-300">
-                    {item.ordered_qty} <span className="text-[10px] text-zinc-500">{item.unit}</span>
+                  <td className="py-2 px-3 text-right text-xs text-zinc-300 font-medium">
+                    {item.ordered_qty} <span className="text-[10px] text-zinc-500 font-normal">{item.unit}</span>
                   </td>
-                  <td className="py-2 px-3 text-right font-mono text-xs font-semibold text-zinc-100">
-                    {item.received_qty} <span className="text-[10px] text-zinc-500">{item.unit}</span>
+                  <td className="py-2 px-3 text-right text-xs font-bold text-zinc-100">
+                    {item.received_qty} <span className="text-[10px] text-zinc-500 font-normal">{item.unit}</span>
                   </td>
                   <td className="py-2 px-3 text-center">
                     {getItemBadge(item.status, item.variance)}
                   </td>
                   <td className="py-2 px-3 text-[11px]">
                     {item.handwritten_note ? (
-                      <div className="flex items-center gap-1.5 text-zinc-300 font-mono text-[10px]">
+                      <div className="flex items-center gap-1.5 text-zinc-300 text-[10px] font-medium">
                         <PenTool className="w-3 h-3 text-zinc-500 shrink-0" />
                         <span className="truncate max-w-[200px]">{item.handwritten_note}</span>
                       </div>
                     ) : (
-                      <span className="text-zinc-600 font-mono">-</span>
+                      <span className="text-zinc-600">-</span>
                     )}
                   </td>
-                  <td className="py-2 px-3 text-right font-mono text-xs font-semibold">
+                  <td className="py-2 px-3 text-right text-xs font-bold">
                     {item.claim_amount_idr > 0 ? (
                       <span className="text-rose-400">-{formatIDR(item.claim_amount_idr)}</span>
                     ) : (
-                      <span className="text-zinc-500">Rp 0</span>
+                      <span className="text-zinc-500 font-medium">Rp 0</span>
                     )}
                   </td>
                 </tr>

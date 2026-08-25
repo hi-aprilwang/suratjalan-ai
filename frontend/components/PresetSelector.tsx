@@ -27,7 +27,7 @@ export const PresetSelector: React.FC<PresetSelectorProps> = ({
     switch (status) {
       case 'APPROVED_FOR_INVOICING':
         return (
-          <Badge variant="success" className="text-[10px] font-mono">
+          <Badge variant="success" className="text-[10px] font-semibold">
             <CheckCircle2 className="w-3 h-3" /> MATCH (APPROVED)
           </Badge>
         );
@@ -39,7 +39,7 @@ export const PresetSelector: React.FC<PresetSelectorProps> = ({
             ? 'DAMAGED (20 ZAK)'
             : 'RETUR (8 DUS)';
         return (
-          <Badge variant="warning" className="text-[10px] font-mono">
+          <Badge variant="warning" className="text-[10px] font-semibold">
             <AlertTriangle className="w-3 h-3" /> {label}
           </Badge>
         );
@@ -48,7 +48,7 @@ export const PresetSelector: React.FC<PresetSelectorProps> = ({
         const rejectLabel =
           presetId === 'preset_6' ? 'QC REJECT (EXPIRED)' : 'MISSING STAMP';
         return (
-          <Badge variant="destructive" className="text-[10px] font-mono">
+          <Badge variant="destructive" className="text-[10px] font-semibold">
             <XCircle className="w-3 h-3" /> {rejectLabel}
           </Badge>
         );
@@ -66,7 +66,7 @@ export const PresetSelector: React.FC<PresetSelectorProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 px-1">
         <div className="flex items-center gap-2">
           <Layers className="w-4 h-4 text-zinc-400" />
-          <span className="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-300">
+          <span className="text-xs font-semibold uppercase tracking-wider text-zinc-300">
             Skenario Sampel Uji Coba Logistik // 6 Industri Rantai Pasok
           </span>
         </div>
@@ -88,7 +88,7 @@ export const PresetSelector: React.FC<PresetSelectorProps> = ({
             size="xs"
             onClick={() => fileInputRef.current?.click()}
             disabled={isAuditing}
-            className="gap-1.5 font-mono text-[11px] border-zinc-800 bg-zinc-900/60 hover:bg-zinc-800 text-zinc-300"
+            className="gap-1.5 font-medium text-[11px] border-zinc-800 bg-zinc-900/60 hover:bg-zinc-800 text-zinc-300"
           >
             <Upload className="w-3 h-3 text-zinc-400" />
             <span>Unggah Dokumen Fisik Sendiri</span>
@@ -113,10 +113,10 @@ export const PresetSelector: React.FC<PresetSelectorProps> = ({
               {/* Card Top */}
               <div>
                 <div className="flex items-center justify-between gap-1 mb-1.5">
-                  <span className="font-mono text-[10px] font-bold text-zinc-500 group-hover:text-zinc-300 transition-colors">
+                  <span className="text-[10px] font-bold text-zinc-500 group-hover:text-zinc-300 transition-colors">
                     {getCategoryCode(idx)}
                   </span>
-                  <kbd className="font-mono text-[9px] px-1 py-0.2 rounded bg-zinc-900 border border-zinc-800 text-zinc-400">
+                  <kbd className="text-[9px] font-semibold px-1 py-0.2 rounded bg-zinc-900 border border-zinc-800 text-zinc-400">
                     {idx + 1}
                   </kbd>
                 </div>
