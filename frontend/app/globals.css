@@ -107,3 +107,13 @@ html.dark body {
 .animate-reticle {
   animation: scanningReticle 2s ease-in-out infinite alternate;
 }
+
+/* Hide Next.js Dev Toolbar & Indicators */
+nextjs-portal,
+#nextjs-dev-overlay,
+[data-nextjs-dialog-overlay],
+[data-nextjs-toast],
+[data-next-badge],
+[data-next-toolbar] {
+  display: none !important;
+}
