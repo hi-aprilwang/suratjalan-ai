@@ -65,8 +65,8 @@ export const PresetSelector: React.FC<PresetSelectorProps> = ({
       {/* Header bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 px-1">
         <div className="flex items-center gap-2">
-          <Layers className="w-5 h-5 text-zinc-400" />
-          <span className="text-sm font-semibold uppercase tracking-wider text-zinc-300">
+          <Layers className="w-5 h-5 text-zinc-600 dark:text-zinc-400" />
+          <span className="text-sm font-semibold uppercase tracking-wider text-zinc-700 dark:text-zinc-300">
             Skenario Sampel Uji Coba Logistik // 6 Industri Rantai Pasok
           </span>
         </div>
@@ -88,9 +88,9 @@ export const PresetSelector: React.FC<PresetSelectorProps> = ({
             size="sm"
             onClick={() => fileInputRef.current?.click()}
             disabled={isAuditing}
-            className="gap-2 font-medium text-sm border-zinc-800 bg-zinc-900/60 hover:bg-zinc-800 text-zinc-300"
+            className="gap-2 font-medium text-sm border-zinc-300 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-800 dark:text-zinc-300"
           >
-            <Upload className="w-4 h-4 text-zinc-400" />
+            <Upload className="w-4 h-4 text-zinc-500 dark:text-zinc-400" />
             <span>Unggah Dokumen Fisik Sendiri</span>
           </Button>
         </div>
@@ -106,30 +106,30 @@ export const PresetSelector: React.FC<PresetSelectorProps> = ({
               onClick={() => !isAuditing && onSelectPreset(preset.id)}
               className={`group cursor-pointer rounded-lg p-3.5 border transition-all duration-150 relative flex flex-col justify-between ${
                 isSelected
-                  ? 'bg-zinc-900 border-zinc-500 shadow-md ring-1 ring-zinc-500/50'
-                  : 'bg-zinc-950/80 border-zinc-800/80 hover:border-zinc-700 hover:bg-zinc-900/50'
+                  ? 'bg-zinc-100 dark:bg-zinc-900 border-zinc-400 dark:border-zinc-500 shadow-md ring-1 ring-zinc-400/50 dark:ring-zinc-500/50'
+                  : 'bg-white dark:bg-zinc-950/80 border-zinc-200 dark:border-zinc-800/80 hover:border-zinc-400 dark:hover:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-900/50 shadow-xs'
               }`}
             >
               {/* Card Top */}
               <div>
                 <div className="flex items-center justify-between gap-1 mb-2">
-                  <span className="text-sm font-bold text-zinc-500 group-hover:text-zinc-300 transition-colors">
+                  <span className="text-sm font-bold text-zinc-500 dark:text-zinc-500 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors">
                     {getCategoryCode(idx)}
                   </span>
-                  <kbd className="text-sm font-semibold px-1.5 py-0.5 rounded bg-zinc-900 border border-zinc-800 text-zinc-400">
+                  <kbd className="text-sm font-semibold px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">
                     {idx + 1}
                   </kbd>
                 </div>
-                <h4 className="text-sm font-semibold text-zinc-100 truncate line-clamp-1 leading-snug">
+                <h4 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100 truncate line-clamp-1 leading-snug">
                   {preset.company.replace('PT ', '')}
                 </h4>
-                <p className="text-sm text-zinc-400 line-clamp-2 mt-1.5 leading-relaxed">
+                <p className="text-sm text-zinc-600 dark:text-zinc-400 line-clamp-2 mt-1.5 leading-relaxed">
                   {preset.description}
                 </p>
               </div>
 
               {/* Card Bottom */}
-              <div className="mt-3.5 pt-2.5 border-t border-zinc-800/60 flex items-center justify-between">
+              <div className="mt-3.5 pt-2.5 border-t border-zinc-200 dark:border-zinc-800/60 flex items-center justify-between">
                 {getStatusBadge(preset.expected_status, preset.id)}
               </div>
             </div>

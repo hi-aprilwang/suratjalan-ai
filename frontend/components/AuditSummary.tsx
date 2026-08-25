@@ -36,16 +36,16 @@ export const AuditSummary: React.FC<AuditSummaryProps> = ({ report }) => {
           title: 'CLEARANCE GRANTED // READY FOR INVOICE POSTING',
           subtitle: '100% PO Quantity Match • Rubber Stamp & Checker Signatures Validated',
           badge: <Badge variant="success">APPROVED (100% MATCH)</Badge>,
-          border: 'border-emerald-800/80 bg-emerald-950/20',
-          icon: <CheckCircle2 className="w-6 h-6 text-emerald-400 shrink-0" />
+          border: 'border-emerald-500/40 dark:border-emerald-800/80 bg-emerald-50/70 dark:bg-emerald-950/20 text-emerald-950 dark:text-emerald-100',
+          icon: <CheckCircle2 className="w-6 h-6 text-emerald-600 dark:text-emerald-400 shrink-0" />
         };
       case 'DISCREPANCY_FLAGGED':
         return {
           title: 'DISCREPANCY DETECTED // AUTO DEBIT CLAIM GENERATED',
           subtitle: `Fisik Retur / Kerusakan Teridentifikasi • Potongan Klaim ${formatIDR(report.total_claim_amount_idr)}`,
           badge: <Badge variant="warning">FLAGGED (DEBIT CLAIM)</Badge>,
-          border: 'border-amber-800/80 bg-amber-950/20',
-          icon: <AlertTriangle className="w-6 h-6 text-amber-400 shrink-0" />
+          border: 'border-amber-500/40 dark:border-amber-800/80 bg-amber-50/70 dark:bg-amber-950/20 text-amber-950 dark:text-amber-100',
+          icon: <AlertTriangle className="w-6 h-6 text-amber-600 dark:text-amber-400 shrink-0" />
         };
       case 'CRITICAL_REJECTED':
       default:
@@ -53,8 +53,8 @@ export const AuditSummary: React.FC<AuditSummaryProps> = ({ report }) => {
           title: 'CRITICAL AUDIT EXCEPTION // INVOICE BLOCKED',
           subtitle: 'Stempel Toko Hilang atau Selisih Batch/Kerusakan Total Ditemukan',
           badge: <Badge variant="destructive">BLOCKED (REJECTED)</Badge>,
-          border: 'border-rose-800/80 bg-rose-950/20',
-          icon: <XCircle className="w-6 h-6 text-rose-400 shrink-0" />
+          border: 'border-rose-500/40 dark:border-rose-800/80 bg-rose-50/70 dark:bg-rose-950/20 text-rose-950 dark:text-rose-100',
+          icon: <XCircle className="w-6 h-6 text-rose-600 dark:text-rose-400 shrink-0" />
         };
     }
   };
@@ -70,17 +70,17 @@ export const AuditSummary: React.FC<AuditSummaryProps> = ({ report }) => {
             {verdict.icon}
             <div>
               <div className="flex flex-wrap items-center gap-2">
-                <h3 className="text-sm sm:text-base font-bold text-zinc-100 uppercase tracking-tight">
+                <h3 className="text-sm sm:text-base font-bold uppercase tracking-tight">
                   {verdict.title}
                 </h3>
               </div>
-              <p className="text-sm text-zinc-300 font-medium mt-1">
+              <p className="text-sm opacity-90 font-medium mt-1">
                 {verdict.subtitle}
               </p>
             </div>
           </div>
           <div className="shrink-0 flex items-center gap-2">
-            <span className="text-sm text-zinc-500 hidden sm:inline font-semibold">
+            <span className="text-sm opacity-70 hidden sm:inline font-semibold">
               ID: {report.audit_id}
             </span>
             {verdict.badge}
@@ -91,13 +91,13 @@ export const AuditSummary: React.FC<AuditSummaryProps> = ({ report }) => {
       {/* KPI Metrics Ticker Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {/* Confidence */}
-        <Card className="p-3.5 bg-zinc-950 border-zinc-800/80">
-          <div className="flex items-center justify-between text-zinc-400 text-sm uppercase font-semibold">
+        <Card className="p-3.5 bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800/80">
+          <div className="flex items-center justify-between text-zinc-500 dark:text-zinc-400 text-sm uppercase font-semibold">
             <span>VLM Confidence</span>
-            <Sparkles className="w-4 h-4 text-emerald-400" />
+            <Sparkles className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
           </div>
           <div className="mt-1.5 flex items-baseline gap-1.5">
-            <span className="text-xl font-bold text-emerald-400">
+            <span className="text-xl font-bold text-emerald-600 dark:text-emerald-400">
               {(report.confidence_score * 100).toFixed(1)}%
             </span>
             <span className="text-sm text-zinc-500 font-semibold">Grounded</span>
@@ -105,13 +105,13 @@ export const AuditSummary: React.FC<AuditSummaryProps> = ({ report }) => {
         </Card>
 
         {/* Physical Quantity vs PO */}
-        <Card className="p-3.5 bg-zinc-950 border-zinc-800/80">
-          <div className="flex items-center justify-between text-zinc-400 text-sm uppercase font-semibold">
+        <Card className="p-3.5 bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800/80">
+          <div className="flex items-center justify-between text-zinc-500 dark:text-zinc-400 text-sm uppercase font-semibold">
             <span>Fisik / PO Target</span>
-            <FileCheck2 className="w-4 h-4 text-blue-400" />
+            <FileCheck2 className="w-4 h-4 text-blue-600 dark:text-blue-400" />
           </div>
           <div className="mt-1.5 flex items-baseline gap-1.5">
-            <span className="text-xl font-bold text-zinc-100">
+            <span className="text-xl font-bold text-zinc-900 dark:text-zinc-100">
               {report.total_received_items}
             </span>
             <span className="text-sm text-zinc-500 font-medium">
@@ -121,17 +121,17 @@ export const AuditSummary: React.FC<AuditSummaryProps> = ({ report }) => {
         </Card>
 
         {/* Claim Deduction */}
-        <Card className="p-3.5 bg-zinc-950 border-zinc-800/80">
-          <div className="flex items-center justify-between text-zinc-400 text-sm uppercase font-semibold">
+        <Card className="p-3.5 bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800/80">
+          <div className="flex items-center justify-between text-zinc-500 dark:text-zinc-400 text-sm uppercase font-semibold">
             <span>Klaim Pemotongan</span>
             <TrendingDown
-              className={`w-4 h-4 ${report.total_claim_amount_idr > 0 ? 'text-rose-400' : 'text-emerald-400'}`}
+              className={`w-4 h-4 ${report.total_claim_amount_idr > 0 ? 'text-rose-600 dark:text-rose-400' : 'text-emerald-600 dark:text-emerald-400'}`}
             />
           </div>
           <div className="mt-1.5">
             <span
               className={`text-sm sm:text-base font-bold truncate block ${
-                report.total_claim_amount_idr > 0 ? 'text-rose-400' : 'text-emerald-400'
+                report.total_claim_amount_idr > 0 ? 'text-rose-600 dark:text-rose-400' : 'text-emerald-600 dark:text-emerald-400'
               }`}
             >
               {report.total_claim_amount_idr > 0
@@ -142,13 +142,13 @@ export const AuditSummary: React.FC<AuditSummaryProps> = ({ report }) => {
         </Card>
 
         {/* Latency Speed */}
-        <Card className="p-3.5 bg-zinc-950 border-zinc-800/80">
-          <div className="flex items-center justify-between text-zinc-400 text-sm uppercase font-semibold">
+        <Card className="p-3.5 bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800/80">
+          <div className="flex items-center justify-between text-zinc-500 dark:text-zinc-400 text-sm uppercase font-semibold">
             <span>Inference Time</span>
-            <Clock className="w-4 h-4 text-amber-400" />
+            <Clock className="w-4 h-4 text-amber-600 dark:text-amber-400" />
           </div>
           <div className="mt-1.5 flex items-baseline gap-1.5">
-            <span className="text-xl font-bold text-zinc-100">
+            <span className="text-xl font-bold text-zinc-900 dark:text-zinc-100">
               {report.execution_time_ms}
             </span>
             <span className="text-sm text-zinc-500 font-medium">ms</span>
@@ -159,10 +159,10 @@ export const AuditSummary: React.FC<AuditSummaryProps> = ({ report }) => {
       {/* Metadata & Forensics Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {/* Document Header Metadata */}
-        <Card className="p-4 bg-zinc-950 border-zinc-800/80 space-y-3">
-          <div className="flex items-center gap-2 pb-2.5 border-b border-zinc-800/80">
-            <Building2 className="w-4 h-4 text-zinc-400" />
-            <span className="text-sm font-semibold uppercase tracking-wider text-zinc-200">
+        <Card className="p-4 bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800/80 space-y-3">
+          <div className="flex items-center gap-2 pb-2.5 border-b border-zinc-200 dark:border-zinc-800/80">
+            <Building2 className="w-4 h-4 text-zinc-500 dark:text-zinc-400" />
+            <span className="text-sm font-semibold uppercase tracking-wider text-zinc-800 dark:text-zinc-200">
               Metadata Dokumen & Logistik
             </span>
           </div>
@@ -170,75 +170,75 @@ export const AuditSummary: React.FC<AuditSummaryProps> = ({ report }) => {
           <div className="grid grid-cols-2 gap-2.5 text-sm">
             <div>
               <span className="text-sm text-zinc-500 block font-medium">No. Surat Jalan:</span>
-              <span className="font-bold text-zinc-200">{report.metadata.document_number}</span>
+              <span className="font-bold text-zinc-900 dark:text-zinc-200">{report.metadata.document_number}</span>
             </div>
             <div>
               <span className="text-sm text-zinc-500 block font-medium">No. PO Pemesan:</span>
-              <span className="font-bold text-zinc-200">{report.metadata.po_number || '-'}</span>
+              <span className="font-bold text-zinc-900 dark:text-zinc-200">{report.metadata.po_number || '-'}</span>
             </div>
             <div>
               <span className="text-sm text-zinc-500 block font-medium">Pengirim / Vendor:</span>
-              <span className="font-medium text-zinc-300 truncate block">{report.metadata.sender_company}</span>
+              <span className="font-medium text-zinc-800 dark:text-zinc-300 truncate block">{report.metadata.sender_company}</span>
             </div>
             <div>
               <span className="text-sm text-zinc-500 block font-medium">Penerima / DC:</span>
-              <span className="font-medium text-zinc-300 truncate block">{report.metadata.receiver_company}</span>
+              <span className="font-medium text-zinc-800 dark:text-zinc-300 truncate block">{report.metadata.receiver_company}</span>
             </div>
             <div>
               <span className="text-sm text-zinc-500 block font-medium">Nopol Armada:</span>
-              <span className="font-semibold text-zinc-200">{report.metadata.truck_plate || '-'}</span>
+              <span className="font-semibold text-zinc-800 dark:text-zinc-200">{report.metadata.truck_plate || '-'}</span>
             </div>
             <div>
               <span className="text-sm text-zinc-500 block font-medium">Nama Sopir:</span>
-              <span className="font-medium text-zinc-300 truncate block">{report.metadata.driver_name || '-'}</span>
+              <span className="font-medium text-zinc-800 dark:text-zinc-300 truncate block">{report.metadata.driver_name || '-'}</span>
             </div>
           </div>
         </Card>
 
         {/* Legal & Stamping Verification */}
-        <Card className="p-4 bg-zinc-950 border-zinc-800/80 space-y-3">
-          <div className="flex items-center gap-2 pb-2.5 border-b border-zinc-800/80">
-            <Stamp className="w-4 h-4 text-zinc-400" />
-            <span className="text-sm font-semibold uppercase tracking-wider text-zinc-200">
+        <Card className="p-4 bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800/80 space-y-3">
+          <div className="flex items-center gap-2 pb-2.5 border-b border-zinc-200 dark:border-zinc-800/80">
+            <Stamp className="w-4 h-4 text-zinc-500 dark:text-zinc-400" />
+            <span className="text-sm font-semibold uppercase tracking-wider text-zinc-800 dark:text-zinc-200">
               Verifikasi Stempel & Tanda Tangan
             </span>
           </div>
 
           <div className="space-y-2 text-sm">
-            <div className="flex items-center justify-between p-2 rounded-md bg-zinc-900/60 border border-zinc-800/60">
-              <span className="text-zinc-300 font-medium">Stempel Resmi Gudang/Toko:</span>
+            <div className="flex items-center justify-between p-2 rounded-md bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800/60">
+              <span className="text-zinc-700 dark:text-zinc-300 font-medium">Stempel Resmi Gudang/Toko:</span>
               {report.verification.stamp_valid ? (
-                <span className="text-emerald-400 font-semibold flex items-center gap-1.5">
+                <span className="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1.5">
                   <CheckCircle2 className="w-4 h-4" /> TERVALIDASI
                 </span>
               ) : (
-                <span className="text-rose-400 font-semibold flex items-center gap-1.5">
+                <span className="text-rose-600 dark:text-rose-400 font-semibold flex items-center gap-1.5">
                   <XCircle className="w-4 h-4" /> MISSING / DITOLAK
                 </span>
               )}
             </div>
 
-            <div className="flex items-center justify-between p-2 rounded-md bg-zinc-900/60 border border-zinc-800/60">
-              <span className="text-zinc-300 font-medium">Tanda Tangan Checker:</span>
+            <div className="flex items-center justify-between p-2 rounded-md bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800/60">
+              <span className="text-zinc-700 dark:text-zinc-300 font-medium">Tanda Tangan Checker:</span>
               {report.verification.receiver_signature_detected ? (
-                <span className="text-emerald-400 font-semibold flex items-center gap-1.5">
+                <span className="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1.5">
                   <CheckCircle2 className="w-4 h-4" /> TERDETEKSI
                 </span>
               ) : (
-                <span className="text-rose-400 font-semibold flex items-center gap-1.5">
+                <span className="text-rose-600 dark:text-rose-400 font-semibold flex items-center gap-1.5">
                   <XCircle className="w-4 h-4" /> TIDAK ADA
                 </span>
               )}
             </div>
 
-            <div className="flex items-center justify-between p-2 rounded-md bg-zinc-900/60 border border-zinc-800/60">
-              <span className="text-zinc-300 font-medium">Tanda Tangan Sopir:</span>
+            <div className="flex items-center justify-between p-2 rounded-md bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800/60">
+              <span className="text-zinc-700 dark:text-zinc-300 font-medium">Tanda Tangan Sopir:</span>
               {report.verification.driver_signature_detected ? (
-                <span className="text-emerald-400 font-semibold flex items-center gap-1.5">
+                <span className="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1.5">
                   <CheckCircle2 className="w-4 h-4" /> TERDETEKSI
                 </span>
               ) : (
-                <span className="text-rose-400 font-semibold flex items-center gap-1.5">
+                <span className="text-rose-600 dark:text-rose-400 font-semibold flex items-center gap-1.5">
                   <XCircle className="w-4 h-4" /> TIDAK ADA
                 </span>
               )}

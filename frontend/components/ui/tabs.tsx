@@ -48,7 +48,7 @@ export function TabsList({ className, ...props }: React.HTMLAttributes<HTMLDivEl
   return (
     <div
       className={cn(
-        'inline-flex h-10 items-center justify-center rounded-lg bg-zinc-900/90 p-1 text-zinc-400 border border-zinc-800/80',
+        'inline-flex h-10 items-center justify-center rounded-lg bg-zinc-100 dark:bg-zinc-900/90 p-1 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800/80 transition-colors',
         className
       )}
       {...props}
@@ -77,8 +77,8 @@ export function TabsTrigger({
         'inline-flex items-center justify-center whitespace-nowrap rounded-md px-3.5 py-1.5 text-sm font-medium transition-all',
         'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-400',
         isSelected
-          ? 'bg-zinc-800 text-zinc-100 shadow-sm border border-zinc-700/60 font-semibold'
-          : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/40',
+          ? 'bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200 dark:border-zinc-700/60 font-semibold'
+          : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-zinc-200/50 dark:hover:bg-zinc-800/40',
         className
       )}
       {...props}

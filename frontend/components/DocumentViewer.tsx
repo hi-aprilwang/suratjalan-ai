@@ -48,38 +48,38 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
   const getBoxStyle = (category: string, isHighlighted: boolean) => {
     if (isHighlighted) {
       return {
-        border: 'border-yellow-400 border-2 bg-yellow-400/20 ring-2 ring-yellow-400/60 z-30 shadow-lg',
+        border: 'border-yellow-500 dark:border-yellow-400 border-2 bg-yellow-400/20 ring-2 ring-yellow-400/60 z-30 shadow-lg',
         badge: 'bg-yellow-400 text-zinc-950 font-bold'
       };
     }
     switch (category) {
       case 'stamp':
         return {
-          border: 'border-cyan-400 border bg-cyan-500/10 hover:bg-cyan-500/25',
-          badge: 'bg-cyan-950 text-cyan-300 border border-cyan-800'
+          border: 'border-cyan-500 dark:border-cyan-400 border-2 bg-cyan-500/10 hover:bg-cyan-500/25',
+          badge: 'bg-cyan-100 dark:bg-cyan-950 text-cyan-800 dark:text-cyan-300 border border-cyan-300 dark:border-cyan-800'
         };
       case 'signature':
         return {
-          border: 'border-purple-400 border bg-purple-500/10 hover:bg-purple-500/25',
-          badge: 'bg-purple-950 text-purple-300 border border-purple-800'
+          border: 'border-purple-500 dark:border-purple-400 border-2 bg-purple-500/10 hover:bg-purple-500/25',
+          badge: 'bg-purple-100 dark:bg-purple-950 text-purple-800 dark:text-purple-300 border border-purple-300 dark:border-purple-800'
         };
       case 'handwritten_retur':
       case 'warning':
         return {
           border: 'border-rose-500 border-2 bg-rose-500/15 hover:bg-rose-500/30',
-          badge: 'bg-rose-950 text-rose-300 border border-rose-800 font-bold'
+          badge: 'bg-rose-100 dark:bg-rose-950 text-rose-800 dark:text-rose-300 border border-rose-300 dark:border-rose-800 font-bold'
         };
       case 'header':
       case 'recipient':
       case 'transporter':
         return {
-          border: 'border-zinc-500 border bg-zinc-500/10 hover:bg-zinc-500/20',
-          badge: 'bg-zinc-900 text-zinc-300 border border-zinc-700'
+          border: 'border-zinc-400 dark:border-zinc-500 border bg-zinc-500/10 hover:bg-zinc-500/20',
+          badge: 'bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-300 border border-zinc-300 dark:border-zinc-700'
         };
       default:
         return {
-          border: 'border-emerald-500 border bg-emerald-500/10 hover:bg-emerald-500/25',
-          badge: 'bg-emerald-950 text-emerald-300 border border-emerald-800 font-semibold'
+          border: 'border-emerald-500 border-2 bg-emerald-500/10 hover:bg-emerald-500/25',
+          badge: 'bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800 font-semibold'
         };
     }
   };
@@ -87,15 +87,15 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
   const visibleBoxes = filterBoxes(boundingBoxes);
 
   return (
-    <Card className="flex flex-col h-full overflow-hidden border-zinc-800 bg-zinc-950">
+    <Card className="flex flex-col h-full overflow-hidden border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950">
       {/* Header Toolbar */}
-      <div className="px-4 py-3 border-b border-zinc-800/80 bg-zinc-900/60 flex items-center justify-between gap-3">
+      <div className="px-4 py-3 border-b border-zinc-200 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-900/60 flex items-center justify-between gap-3">
         <div className="flex items-center gap-2">
-          <Crosshair className="w-5 h-5 text-zinc-400" />
-          <span className="text-sm font-bold text-zinc-200 tracking-tight">
+          <Crosshair className="w-5 h-5 text-zinc-500 dark:text-zinc-400" />
+          <span className="text-sm font-bold text-zinc-900 dark:text-zinc-200 tracking-tight">
             SPATIAL GROUNDING CANVAS
           </span>
-          <Badge variant="outline" className="text-sm font-semibold border-zinc-800 text-zinc-400">
+          <Badge variant="outline" className="text-sm font-semibold border-zinc-300 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">
             {visibleBoxes.length} ANCHORS
           </Badge>
         </div>
@@ -106,13 +106,13 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
             variant="outline"
             size="icon"
             onClick={() => setZoom((z) => Math.max(0.6, z - 0.15))}
-            className="h-8 w-8 border-zinc-800 text-zinc-300"
+            className="h-8 w-8 border-zinc-300 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300"
             title="Zoom Out"
           >
             <ZoomOut className="w-4 h-4" />
           </Button>
 
-          <span className="text-sm font-semibold px-1 text-zinc-300 min-w-10 text-center">
+          <span className="text-sm font-semibold px-1 text-zinc-700 dark:text-zinc-300 min-w-10 text-center">
             {Math.round(zoom * 100)}%
           </span>
 
@@ -120,7 +120,7 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
             variant="outline"
             size="icon"
             onClick={() => setZoom((z) => Math.min(2.2, z + 0.15))}
-            className="h-8 w-8 border-zinc-800 text-zinc-300"
+            className="h-8 w-8 border-zinc-300 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300"
             title="Zoom In"
           >
             <ZoomIn className="w-4 h-4" />
@@ -130,7 +130,7 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
             variant="outline"
             size="icon"
             onClick={() => setZoom(1)}
-            className="h-8 w-8 border-zinc-800 text-zinc-300 ml-0.5"
+            className="h-8 w-8 border-zinc-300 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 ml-0.5"
             title="Reset Zoom"
           >
             <RotateCcw className="w-4 h-4" />
@@ -140,16 +140,16 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
             variant={showCoordinates ? 'secondary' : 'outline'}
             size="sm"
             onClick={() => setShowCoordinates(!showCoordinates)}
-            className="h-8 text-sm font-medium gap-1.5 border-zinc-800 ml-1"
+            className="h-8 text-sm font-medium gap-1.5 border-zinc-300 dark:border-zinc-800 ml-1"
           >
-            {showCoordinates ? <Eye className="w-4 h-4 text-blue-400" /> : <EyeOff className="w-4 h-4 text-zinc-500" />}
+            {showCoordinates ? <Eye className="w-4 h-4 text-blue-600 dark:text-blue-400" /> : <EyeOff className="w-4 h-4 text-zinc-500" />}
             <span className="hidden sm:inline">Overlay</span>
           </Button>
         </div>
       </div>
 
       {/* Layer Filter Toolbar */}
-      <div className="px-4 py-2 border-b border-zinc-800/60 bg-zinc-950 flex items-center gap-2 overflow-x-auto text-sm">
+      <div className="px-4 py-2 border-b border-zinc-200 dark:border-zinc-800/60 bg-zinc-100 dark:bg-zinc-950 flex items-center gap-2 overflow-x-auto text-sm">
         <span className="text-zinc-500 mr-1 text-sm uppercase font-semibold">Layers:</span>
         {(
           [
@@ -165,8 +165,8 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
             onClick={() => setActiveLayer(layer.id)}
             className={`px-2.5 py-1 rounded text-sm transition-colors ${
               activeLayer === layer.id
-                ? 'bg-zinc-800 text-zinc-100 font-bold border border-zinc-700'
-                : 'text-zinc-500 hover:text-zinc-300 hover:bg-zinc-900 font-medium'
+                ? 'bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-bold border border-zinc-300 dark:border-zinc-700 shadow-xs'
+                : 'text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300 hover:bg-zinc-200/60 dark:hover:bg-zinc-900 font-medium'
             }`}
           >
             {layer.label}
@@ -177,29 +177,29 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
       {/* Viewport */}
       <div
         ref={containerRef}
-        className="flex-1 relative overflow-auto p-4 flex items-center justify-center min-h-[500px] max-h-[720px] bg-zinc-950 select-none"
+        className="flex-1 relative overflow-auto p-4 flex items-center justify-center min-h-[500px] max-h-[720px] bg-zinc-100/60 dark:bg-zinc-950 select-none"
       >
         {/* Inference Loading State */}
         {isAuditing && (
-          <div className="absolute inset-0 z-40 bg-zinc-950/80 backdrop-blur-sm flex flex-col items-center justify-center gap-3">
-            <div className="h-14 w-14 rounded-xl bg-zinc-900 border border-zinc-700 flex items-center justify-center">
-              <ScanLine className="w-7 h-7 text-blue-400 animate-spin" />
+          <div className="absolute inset-0 z-40 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-sm flex flex-col items-center justify-center gap-3">
+            <div className="h-14 w-14 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 flex items-center justify-center shadow-lg">
+              <ScanLine className="w-7 h-7 text-blue-600 dark:text-blue-400 animate-spin" />
             </div>
             <div className="text-center text-sm">
-              <p className="font-bold text-zinc-100 uppercase">MULTIMODAL VLM AUDITING...</p>
-              <p className="text-zinc-400 text-sm mt-0.5">Gemini 2.0 Flash Spatial Extraction</p>
+              <p className="font-bold text-zinc-900 dark:text-zinc-100 uppercase">MULTIMODAL VLM AUDITING...</p>
+              <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-0.5">Gemini 2.0 Flash Spatial Extraction</p>
             </div>
           </div>
         )}
 
         {/* Document Render Container */}
         <div
-          className="relative inline-block transition-transform duration-150 origin-top rounded-lg border border-zinc-800 shadow-2xl overflow-hidden bg-white"
+          className="relative inline-block transition-transform duration-150 origin-top rounded-lg border border-zinc-300 dark:border-zinc-800 shadow-xl overflow-hidden bg-white"
           style={{ transform: `scale(${zoom})` }}
         >
           {/* Laser Reticle Bar */}
           {isAuditing && (
-            <div className="absolute left-0 right-0 h-0.5 bg-blue-400 shadow-[0_0_8px_#38bdf8] z-30 animate-reticle" />
+            <div className="absolute left-0 right-0 h-0.5 bg-blue-500 dark:bg-blue-400 shadow-[0_0_8px_#38bdf8] z-30 animate-reticle" />
           )}
 
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -245,23 +245,23 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
       </div>
 
       {/* Legend Footer */}
-      <div className="px-4 py-2.5 border-t border-zinc-800/80 bg-zinc-900/40 flex flex-wrap items-center justify-between gap-3 text-sm text-zinc-400">
+      <div className="px-4 py-2.5 border-t border-zinc-200 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-900/40 flex flex-wrap items-center justify-between gap-3 text-sm text-zinc-600 dark:text-zinc-400">
         <div className="flex flex-wrap items-center gap-3.5 font-medium">
           <span className="flex items-center gap-1.5">
             <span className="w-2.5 h-2.5 rounded-xs bg-emerald-500" />
-            <span className="text-zinc-300">Verified Item</span>
+            <span className="text-zinc-700 dark:text-zinc-300">Verified Item</span>
           </span>
           <span className="flex items-center gap-1.5">
             <span className="w-2.5 h-2.5 rounded-xs bg-rose-500" />
-            <span className="text-rose-300">Discrepancy / Retur</span>
+            <span className="text-rose-600 dark:text-rose-300">Discrepancy / Retur</span>
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-xs bg-cyan-400" />
-            <span className="text-cyan-300">DC Stamp</span>
+            <span className="w-2.5 h-2.5 rounded-xs bg-cyan-500 dark:bg-cyan-400" />
+            <span className="text-cyan-700 dark:text-cyan-300">DC Stamp</span>
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-xs bg-purple-400" />
-            <span className="text-purple-300">Signature</span>
+            <span className="w-2.5 h-2.5 rounded-xs bg-purple-500 dark:bg-purple-400" />
+            <span className="text-purple-700 dark:text-purple-300">Signature</span>
           </span>
         </div>
 

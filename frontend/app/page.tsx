@@ -112,7 +112,7 @@ export default function AuditWorkstationPage() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col font-sans antialiased selection:bg-blue-600 selection:text-white">
+    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 flex flex-col font-sans antialiased selection:bg-blue-600 selection:text-white transition-colors duration-200">
       {/* Navigation Header */}
       <Navbar
         isLiveModel={isLiveModel}
@@ -135,9 +135,9 @@ export default function AuditWorkstationPage() {
         />
 
         {/* View Switcher Tabs */}
-        <div className="flex items-center justify-between gap-3 pt-2 border-b border-zinc-800/80 pb-3">
+        <div className="flex items-center justify-between gap-3 pt-2 border-b border-zinc-200 dark:border-zinc-800/80 pb-3">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-auto">
-            <TabsList className="bg-zinc-900 border-zinc-800">
+            <TabsList className="bg-zinc-100 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800">
               <TabsTrigger value="workstation" className="gap-2 text-sm font-medium">
                 <Layers className="w-4 h-4" />
                 <span>Audit Workstation (Split View)</span>
@@ -155,7 +155,7 @@ export default function AuditWorkstationPage() {
               size="sm"
               onClick={() => handleSelectPreset(selectedPresetId || 'preset_1')}
               disabled={isAuditing}
-              className="gap-2 font-medium text-sm border-zinc-800 text-zinc-300 h-9"
+              className="gap-2 font-medium text-sm border-zinc-300 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-800 dark:text-zinc-300 h-9"
             >
               <RefreshCw className={`w-4 h-4 ${isAuditing ? 'animate-spin' : ''}`} />
               <span>Ulangi Audit</span>
@@ -202,24 +202,24 @@ export default function AuditWorkstationPage() {
               />
 
               {/* Bottom Telemetry Footer */}
-              <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4 flex flex-wrap items-center justify-between gap-3 text-sm">
-                <div className="flex items-center gap-2.5 text-zinc-300 text-sm">
-                  <div className="h-7 w-7 rounded-md bg-zinc-900 border border-zinc-800 flex items-center justify-center text-blue-400">
+              <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 flex flex-wrap items-center justify-between gap-3 text-sm shadow-xs">
+                <div className="flex items-center gap-2.5 text-zinc-700 dark:text-zinc-300 text-sm">
+                  <div className="h-7 w-7 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 flex items-center justify-center text-blue-600 dark:text-blue-400">
                     <Cpu className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="font-semibold text-zinc-200">
+                    <span className="font-semibold text-zinc-900 dark:text-zinc-200">
                       AI INFERENCE: {report.ai_model_used}
                     </span>
-                    <span className="text-zinc-400 block text-sm">
+                    <span className="text-zinc-500 dark:text-zinc-400 block text-sm">
                       Pydantic v2 Schema Enforcement • Zero Hallucination Guard
                     </span>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <Badge variant="outline" className="text-sm text-zinc-400 border-zinc-800 font-medium">
-                    <ShieldCheck className="w-4 h-4 text-emerald-400 mr-1.5" />
+                  <Badge variant="outline" className="text-sm text-zinc-600 dark:text-zinc-400 border-zinc-300 dark:border-zinc-800 font-medium">
+                    <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400 mr-1.5" />
                     COMPFEST 18 AIC VALIDATED
                   </Badge>
                 </div>
@@ -230,55 +230,55 @@ export default function AuditWorkstationPage() {
           </div>
         ) : (
           /* Tab 2: Analytics & Unit Economics Impact View */
-          <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-6 space-y-6">
-            <div className="border-b border-zinc-800/80 pb-4">
+          <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-6 space-y-6 shadow-xs">
+            <div className="border-b border-zinc-200 dark:border-zinc-800/80 pb-4">
               <div className="flex items-center gap-2 mb-1.5">
-                <TrendingUp className="w-5 h-5 text-emerald-400" />
-                <h3 className="text-base font-bold text-zinc-100 uppercase tracking-tight">
+                <TrendingUp className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+                <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-tight">
                   ANALISIS ROI & DAMPAK EKONOMI // SMART LOGISTICS INDONESIA
                 </h3>
               </div>
-              <p className="text-sm text-zinc-400">
+              <p className="text-sm text-zinc-600 dark:text-zinc-400">
                 Kalkulasi efisiensi biaya operasional dan percepatan perputaran modal kerja distributor & 3PL Indonesia
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-5 space-y-2.5">
-                <div className="flex items-center justify-between text-zinc-400 text-sm uppercase font-semibold">
+              <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/40 p-5 space-y-2.5">
+                <div className="flex items-center justify-between text-zinc-500 dark:text-zinc-400 text-sm uppercase font-semibold">
                   <span>Audit Speed Velocity</span>
-                  <Clock className="w-4 h-4 text-emerald-400" />
+                  <Clock className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                 </div>
-                <span className="text-2xl font-bold text-emerald-400 block">
+                <span className="text-2xl font-bold text-emerald-600 dark:text-emerald-400 block">
                   400x Lebih Cepat
                 </span>
-                <p className="text-sm text-zinc-400 leading-relaxed">
+                <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
                   Dari rata-rata 10 menit entry manual per lembar menjadi &lt;1.5 detik menggunakan Multimodal Gemini 2.0 Flash VLM.
                 </p>
               </div>
 
-              <div className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-5 space-y-2.5">
-                <div className="flex items-center justify-between text-zinc-400 text-sm uppercase font-semibold">
+              <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/40 p-5 space-y-2.5">
+                <div className="flex items-center justify-between text-zinc-500 dark:text-zinc-400 text-sm uppercase font-semibold">
                   <span>Cost Efficiency</span>
-                  <Coins className="w-4 h-4 text-blue-400" />
+                  <Coins className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                 </div>
-                <span className="text-2xl font-bold text-blue-400 block">
+                <span className="text-2xl font-bold text-blue-600 dark:text-blue-400 block">
                   &gt; 99.9% Savings
                 </span>
-                <p className="text-sm text-zinc-400 leading-relaxed">
+                <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
                   Biaya pemrosesan Rp 2.4 per dokumen (Gemini Flash token) vs Rp 3.500 per dokumen untuk gaji staff admin logistik.
                 </p>
               </div>
 
-              <div className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-5 space-y-2.5">
-                <div className="flex items-center justify-between text-zinc-400 text-sm uppercase font-semibold">
+              <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/40 p-5 space-y-2.5">
+                <div className="flex items-center justify-between text-zinc-500 dark:text-zinc-400 text-sm uppercase font-semibold">
                   <span>Cash Flow Acceleration</span>
-                  <Zap className="w-4 h-4 text-amber-400" />
+                  <Zap className="w-4 h-4 text-amber-600 dark:text-amber-400" />
                 </div>
-                <span className="text-2xl font-bold text-amber-400 block">
+                <span className="text-2xl font-bold text-amber-600 dark:text-amber-400 block">
                   Same-Day Clearance
                 </span>
-                <p className="text-sm text-zinc-400 leading-relaxed">
+                <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
                   Membuka likuiditas modal kerja bagi jutaan UMKM logistik dari sebelumnya 14-30 hari menjadi hitungan jam.
                 </p>
               </div>
@@ -306,7 +306,7 @@ export default function AuditWorkstationPage() {
       />
 
       {/* Footer */}
-      <footer className="mt-auto border-t border-zinc-800 bg-zinc-950 py-4 text-center text-sm text-zinc-500 font-medium">
+      <footer className="mt-auto border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 py-4 text-center text-sm text-zinc-500 font-medium transition-colors">
         <p>
           SURATJALAN.AI // COMPFEST 18 AI INNOVATION CHALLENGE (AIC) // UNIVERSITAS INDONESIA
         </p>
