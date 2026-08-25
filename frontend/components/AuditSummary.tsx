@@ -7,17 +7,14 @@ import {
   AlertTriangle,
   XCircle,
   Building2,
-  Calendar,
-  Truck,
-  User,
   Stamp,
   FileCheck2,
-  DollarSign,
   Clock,
   Sparkles,
-  ArrowRight,
   TrendingDown
 } from 'lucide-react';
+import { Card } from './ui/card';
+import { Badge } from './ui/badge';
 
 interface AuditSummaryProps {
   report: AuditReport;
@@ -36,31 +33,28 @@ export const AuditSummary: React.FC<AuditSummaryProps> = ({ report }) => {
     switch (report.overall_status) {
       case 'APPROVED_FOR_INVOICING':
         return {
-          title: 'FAKTUR SIAP DITERBITKAN (APPROVED)',
-          subtitle: '100% Sesuai Purchase Order • Stempel & Tanda Tangan Valid',
-          desc: 'Seluruh barang fisik telah diterima lengkap tanpa selisih. Rekonsiliasi akuntansi otomatis disetujui untuk pembayaran.',
-          bg: 'bg-gradient-to-r from-emerald-950/80 via-emerald-900/40 to-slate-900/80 border-emerald-500/50 shadow-[0_0_30px_rgba(16,185,129,0.2)]',
-          badgeBg: 'bg-emerald-500 text-slate-950 font-black',
-          icon: <CheckCircle2 className="w-7 h-7 text-emerald-400 shrink-0" />
+          title: 'CLEARANCE GRANTED // READY FOR INVOICE POSTING',
+          subtitle: '100% PO Quantity Match • Rubber Stamp & Checker Signatures Validated',
+          badge: <Badge variant="success">APPROVED (100% MATCH)</Badge>,
+          border: 'border-emerald-800/80 bg-emerald-950/20',
+          icon: <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
         };
       case 'DISCREPANCY_FLAGGED':
         return {
-          title: 'SELISIH / RETUR FISIK TERDETEKSI (FLAGGED)',
-          subtitle: 'Terdapat 8 Dus Retur Beng Beng • Debit Memo Otomatis',
-          desc: 'Tercatat coretan tangan retur fisik pada surat jalan. Sistem telah menghitung pemotongan faktur sebesar IDR 1.440.000.',
-          bg: 'bg-gradient-to-r from-amber-950/80 via-amber-900/40 to-slate-900/80 border-amber-500/50 shadow-[0_0_30px_rgba(245,158,11,0.2)]',
-          badgeBg: 'bg-amber-500 text-slate-950 font-black',
-          icon: <AlertTriangle className="w-7 h-7 text-amber-400 shrink-0" />
+          title: 'DISCREPANCY DETECTED // AUTO DEBIT CLAIM GENERATED',
+          subtitle: `Fisik Retur / Kerusakan Teridentifikasi • Potongan Klaim ${formatIDR(report.total_claim_amount_idr)}`,
+          badge: <Badge variant="warning">FLAGGED (DEBIT CLAIM)</Badge>,
+          border: 'border-amber-800/80 bg-amber-950/20',
+          icon: <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0" />
         };
       case 'CRITICAL_REJECTED':
       default:
         return {
-          title: 'PENGAJUAN FAKTUR DITOLAK (REJECTED)',
-          subtitle: 'Stempel Toko Hilang & Kerusakan Parah Melebihi Toleransi',
-          desc: 'Stempel resmi toko tidak terdeteksi dan terdapat 16 dus barang pecah/penyok. Tagihan dibekukan hingga ada Berita Acara resmi.',
-          bg: 'bg-gradient-to-r from-rose-950/80 via-rose-900/40 to-slate-900/80 border-rose-500/50 shadow-[0_0_30px_rgba(244,63,94,0.2)]',
-          badgeBg: 'bg-rose-500 text-white font-black',
-          icon: <XCircle className="w-7 h-7 text-rose-400 shrink-0" />
+          title: 'CRITICAL AUDIT EXCEPTION // INVOICE BLOCKED',
+          subtitle: 'Stempel Toko Hilang atau Selisih Batch/Kerusakan Total Ditemukan',
+          badge: <Badge variant="destructive">BLOCKED (REJECTED)</Badge>,
+          border: 'border-rose-800/80 bg-rose-950/20',
+          icon: <XCircle className="w-5 h-5 text-rose-400 shrink-0" />
         };
     }
   };
@@ -68,191 +62,189 @@ export const AuditSummary: React.FC<AuditSummaryProps> = ({ report }) => {
   const verdict = getVerdictDetails();
 
   return (
-    <div className="space-y-4">
-      {/* Hero Verdict Banner */}
-      <div className={`rounded-2xl border p-5 backdrop-blur-xl transition-all duration-300 ${verdict.bg}`}>
-        <div className="flex items-start gap-4">
-          <div className="p-2.5 rounded-2xl bg-white/[0.06] border border-white/10 shadow-inner">
+    <div className="space-y-3">
+      {/* Executive Decision Banner */}
+      <div className={`rounded-xl border p-4 backdrop-blur-sm transition-all ${verdict.border}`}>
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex items-start gap-3">
             {verdict.icon}
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="flex flex-wrap items-center justify-between gap-2 mb-1">
-              <h3 className="text-base font-black tracking-tight text-white uppercase">
-                {verdict.title}
-              </h3>
-              <span className="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-slate-950/80 border border-white/10 text-slate-300">
-                AUDIT ID: {report.audit_id}
-              </span>
+            <div>
+              <div className="flex flex-wrap items-center gap-2">
+                <h3 className="font-mono text-xs font-bold text-zinc-100 uppercase tracking-tight">
+                  {verdict.title}
+                </h3>
+              </div>
+              <p className="text-xs text-zinc-300 font-medium mt-0.5">
+                {verdict.subtitle}
+              </p>
             </div>
-            <p className="text-xs font-bold text-slate-200">
-              {verdict.subtitle}
-            </p>
-            <p className="text-xs mt-1.5 text-slate-300 font-normal leading-relaxed">
-              {verdict.desc}
-            </p>
+          </div>
+          <div className="shrink-0 flex items-center gap-2">
+            <span className="font-mono text-[10px] text-zinc-500 hidden sm:inline">
+              ID: {report.audit_id}
+            </span>
+            {verdict.badge}
           </div>
         </div>
       </div>
 
-      {/* KPI Cards Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        {/* Confidence Card */}
-        <div className="bg-slate-900/60 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-4 shadow-md hover:border-white/20 transition-all">
-          <div className="flex items-center justify-between">
-            <span className="text-[10px] text-slate-400 uppercase font-bold tracking-wider">
-              AI Confidence
-            </span>
-            <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+      {/* KPI Metrics Ticker Grid */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+        {/* Confidence */}
+        <Card className="p-3 bg-zinc-950 border-zinc-800/80">
+          <div className="flex items-center justify-between text-zinc-400 text-[10px] font-mono uppercase">
+            <span>VLM Confidence</span>
+            <Sparkles className="w-3 h-3 text-emerald-400" />
           </div>
           <div className="mt-1 flex items-baseline gap-1.5">
-            <span className="text-xl font-black text-emerald-400">
+            <span className="font-mono text-lg font-bold text-emerald-400">
               {(report.confidence_score * 100).toFixed(1)}%
             </span>
-            <span className="text-[10px] text-emerald-400 font-bold">VLM Grounded</span>
+            <span className="text-[10px] font-mono text-zinc-500">Grounded</span>
           </div>
-        </div>
+        </Card>
 
-        {/* Quantity Match Card */}
-        <div className="bg-slate-900/60 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-4 shadow-md hover:border-white/20 transition-all">
-          <div className="flex items-center justify-between">
-            <span className="text-[10px] text-slate-400 uppercase font-bold tracking-wider">
-              Fisik vs PO
-            </span>
-            <FileCheck2 className="w-3.5 h-3.5 text-blue-400" />
+        {/* Physical Quantity vs PO */}
+        <Card className="p-3 bg-zinc-950 border-zinc-800/80">
+          <div className="flex items-center justify-between text-zinc-400 text-[10px] font-mono uppercase">
+            <span>Fisik / PO Target</span>
+            <FileCheck2 className="w-3 h-3 text-blue-400" />
           </div>
           <div className="mt-1 flex items-baseline gap-1.5">
-            <span className="text-xl font-black text-white">
+            <span className="font-mono text-lg font-bold text-zinc-100">
               {report.total_received_items}
             </span>
-            <span className="text-xs text-slate-400">/ {report.total_ordered_items} Dus</span>
-          </div>
-        </div>
-
-        {/* Claim Deduction Card */}
-        <div className="bg-slate-900/60 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-4 shadow-md hover:border-white/20 transition-all">
-          <div className="flex items-center justify-between">
-            <span className="text-[10px] text-slate-400 uppercase font-bold tracking-wider">
-              Potongan Klaim
+            <span className="text-[10px] font-mono text-zinc-500">
+              / {report.total_ordered_items} Unit
             </span>
-            <TrendingDown className={`w-3.5 h-3.5 ${report.total_claim_amount_idr > 0 ? 'text-rose-400' : 'text-emerald-400'}`} />
+          </div>
+        </Card>
+
+        {/* Claim Deduction */}
+        <Card className="p-3 bg-zinc-950 border-zinc-800/80">
+          <div className="flex items-center justify-between text-zinc-400 text-[10px] font-mono uppercase">
+            <span>Klaim Pemotongan</span>
+            <TrendingDown
+              className={`w-3 h-3 ${report.total_claim_amount_idr > 0 ? 'text-rose-400' : 'text-emerald-400'}`}
+            />
           </div>
           <div className="mt-1">
             <span
-              className={`text-sm sm:text-base font-black line-clamp-1 ${
+              className={`font-mono text-xs sm:text-sm font-bold truncate block ${
                 report.total_claim_amount_idr > 0 ? 'text-rose-400' : 'text-emerald-400'
               }`}
             >
-              {report.total_claim_amount_idr > 0 ? `-${formatIDR(report.total_claim_amount_idr)}` : 'Rp 0 (Lengkap)'}
+              {report.total_claim_amount_idr > 0
+                ? `-${formatIDR(report.total_claim_amount_idr)}`
+                : 'Rp 0 (Clear)'}
             </span>
           </div>
-        </div>
+        </Card>
 
-        {/* Inference Latency Card */}
-        <div className="bg-slate-900/60 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-4 shadow-md hover:border-white/20 transition-all">
-          <div className="flex items-center justify-between">
-            <span className="text-[10px] text-slate-400 uppercase font-bold tracking-wider">
-              Latency Speed
-            </span>
-            <Clock className="w-3.5 h-3.5 text-amber-400" />
+        {/* Latency Speed */}
+        <Card className="p-3 bg-zinc-950 border-zinc-800/80">
+          <div className="flex items-center justify-between text-zinc-400 text-[10px] font-mono uppercase">
+            <span>Inference Time</span>
+            <Clock className="w-3 h-3 text-amber-400" />
           </div>
           <div className="mt-1 flex items-baseline gap-1.5">
-            <span className="text-xl font-black text-blue-400 font-mono">
+            <span className="font-mono text-lg font-bold text-zinc-100">
               {report.execution_time_ms}
             </span>
-            <span className="text-xs text-slate-400 font-mono">ms</span>
+            <span className="text-[10px] font-mono text-zinc-500">ms</span>
           </div>
-        </div>
+        </Card>
       </div>
 
-      {/* Metadata & Legal Verification Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+      {/* Metadata & Forensics Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
         {/* Document Header Metadata */}
-        <div className="bg-slate-900/60 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-4 space-y-3">
-          <div className="flex items-center gap-2 pb-2 border-b border-white/[0.06]">
-            <Building2 className="w-4 h-4 text-blue-400" />
-            <h4 className="font-extrabold text-slate-200 uppercase tracking-wider text-xs">
-              Informasi Dokumen & Pengiriman
-            </h4>
+        <Card className="p-3.5 bg-zinc-950 border-zinc-800/80 space-y-2.5">
+          <div className="flex items-center gap-2 pb-2 border-b border-zinc-800/80">
+            <Building2 className="w-3.5 h-3.5 text-zinc-400" />
+            <span className="font-mono text-xs font-semibold uppercase tracking-wider text-zinc-200">
+              Metadata Dokumen & Logistik
+            </span>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 text-xs">
+          <div className="grid grid-cols-2 gap-2 text-xs">
             <div>
-              <span className="text-[10px] text-slate-500 font-medium block">Nomor Surat Jalan:</span>
-              <span className="font-bold text-slate-200 font-mono">{report.metadata.document_number}</span>
+              <span className="text-[10px] font-mono text-zinc-500 block">No. Surat Jalan:</span>
+              <span className="font-mono font-bold text-zinc-200">{report.metadata.document_number}</span>
             </div>
             <div>
-              <span className="text-[10px] text-slate-500 font-medium block">Nomor Purchase Order:</span>
-              <span className="font-bold text-slate-200 font-mono">{report.metadata.po_number || '-'}</span>
+              <span className="text-[10px] font-mono text-zinc-500 block">No. PO Pemesan:</span>
+              <span className="font-mono font-bold text-zinc-200">{report.metadata.po_number || '-'}</span>
             </div>
             <div>
-              <span className="text-[10px] text-slate-500 font-medium block">Vendor / Pengirim:</span>
-              <span className="font-semibold text-slate-300 line-clamp-1">{report.metadata.sender_company}</span>
+              <span className="text-[10px] font-mono text-zinc-500 block">Pengirim / Vendor:</span>
+              <span className="font-medium text-zinc-300 truncate block">{report.metadata.sender_company}</span>
             </div>
             <div>
-              <span className="text-[10px] text-slate-500 font-medium block">Customer / DC Tujuan:</span>
-              <span className="font-semibold text-slate-300 line-clamp-1">{report.metadata.receiver_company}</span>
+              <span className="text-[10px] font-mono text-zinc-500 block">Penerima / DC:</span>
+              <span className="font-medium text-zinc-300 truncate block">{report.metadata.receiver_company}</span>
             </div>
             <div>
-              <span className="text-[10px] text-slate-500 font-medium block">Nomor Polisi Armada:</span>
-              <span className="font-bold text-amber-300 font-mono">{report.metadata.truck_plate || '-'}</span>
+              <span className="text-[10px] font-mono text-zinc-500 block">Nopol Armada:</span>
+              <span className="font-mono font-semibold text-zinc-200">{report.metadata.truck_plate || '-'}</span>
             </div>
             <div>
-              <span className="text-[10px] text-slate-500 font-medium block">Nama Driver / Ekspedisi:</span>
-              <span className="font-semibold text-slate-300">{report.metadata.driver_name || '-'}</span>
+              <span className="text-[10px] font-mono text-zinc-500 block">Nama Sopir:</span>
+              <span className="font-medium text-zinc-300 truncate block">{report.metadata.driver_name || '-'}</span>
             </div>
           </div>
-        </div>
+        </Card>
 
         {/* Legal & Stamping Verification */}
-        <div className="bg-slate-900/60 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-4 space-y-3">
-          <div className="flex items-center gap-2 pb-2 border-b border-white/[0.06]">
-            <Stamp className="w-4 h-4 text-indigo-400" />
-            <h4 className="font-extrabold text-slate-200 uppercase tracking-wider text-xs">
+        <Card className="p-3.5 bg-zinc-950 border-zinc-800/80 space-y-2.5">
+          <div className="flex items-center gap-2 pb-2 border-b border-zinc-800/80">
+            <Stamp className="w-3.5 h-3.5 text-zinc-400" />
+            <span className="font-mono text-xs font-semibold uppercase tracking-wider text-zinc-200">
               Verifikasi Stempel & Tanda Tangan
-            </h4>
+            </span>
           </div>
 
-          <div className="space-y-2 text-xs">
-            <div className="flex items-center justify-between p-2 rounded-xl bg-white/[0.02] border border-white/[0.04]">
-              <span className="text-slate-300 font-medium">Stempel Resmi Toko/DC:</span>
+          <div className="space-y-1.5 text-xs">
+            <div className="flex items-center justify-between p-1.5 rounded-md bg-zinc-900/60 border border-zinc-800/60">
+              <span className="text-zinc-300">Stempel Resmi Gudang/Toko:</span>
               {report.verification.stamp_valid ? (
-                <span className="text-emerald-400 font-bold flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5" /> Terverifikasi & Valid
+                <span className="text-emerald-400 font-mono font-semibold flex items-center gap-1">
+                  <CheckCircle2 className="w-3 h-3" /> TERVALIDASI
                 </span>
               ) : (
-                <span className="text-rose-400 font-bold flex items-center gap-1.5 animate-pulse">
-                  <XCircle className="w-3.5 h-3.5" /> Stempel Tidak Ditemukan
+                <span className="text-rose-400 font-mono font-semibold flex items-center gap-1">
+                  <XCircle className="w-3 h-3" /> MISSING / DITOLAK
                 </span>
               )}
             </div>
 
-            <div className="flex items-center justify-between p-2 rounded-xl bg-white/[0.02] border border-white/[0.04]">
-              <span className="text-slate-300 font-medium">TTD Penerima (Checker):</span>
+            <div className="flex items-center justify-between p-1.5 rounded-md bg-zinc-900/60 border border-zinc-800/60">
+              <span className="text-zinc-300">Tanda Tangan Checker:</span>
               {report.verification.receiver_signature_detected ? (
-                <span className="text-emerald-400 font-bold flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5" /> Terverifikasi
+                <span className="text-emerald-400 font-mono font-semibold flex items-center gap-1">
+                  <CheckCircle2 className="w-3 h-3" /> TERDETEKSI
                 </span>
               ) : (
-                <span className="text-rose-400 font-bold flex items-center gap-1.5">
-                  <XCircle className="w-3.5 h-3.5" /> Belum Ditandatangani
+                <span className="text-rose-400 font-mono font-semibold flex items-center gap-1">
+                  <XCircle className="w-3 h-3" /> TIDAK ADA
                 </span>
               )}
             </div>
 
-            <div className="flex items-center justify-between p-2 rounded-xl bg-white/[0.02] border border-white/[0.04]">
-              <span className="text-slate-300 font-medium">TTD Sopir Pengemudi:</span>
+            <div className="flex items-center justify-between p-1.5 rounded-md bg-zinc-900/60 border border-zinc-800/60">
+              <span className="text-zinc-300">Tanda Tangan Sopir:</span>
               {report.verification.driver_signature_detected ? (
-                <span className="text-emerald-400 font-bold flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5" /> Terverifikasi
+                <span className="text-emerald-400 font-mono font-semibold flex items-center gap-1">
+                  <CheckCircle2 className="w-3 h-3" /> TERDETEKSI
                 </span>
               ) : (
-                <span className="text-rose-400 font-bold flex items-center gap-1.5">
-                  <XCircle className="w-3.5 h-3.5" /> Belum Ditandatangani
+                <span className="text-rose-400 font-mono font-semibold flex items-center gap-1">
+                  <XCircle className="w-3 h-3" /> TIDAK ADA
                 </span>
               )}
             </div>
           </div>
-        </div>
+        </Card>
       </div>
     </div>
   );

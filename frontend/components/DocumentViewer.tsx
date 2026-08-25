@@ -2,7 +2,18 @@
 
 import React, { useState, useRef } from 'react';
 import { BoundingBox } from '../types/audit';
-import { ZoomIn, ZoomOut, RotateCcw, Eye, EyeOff, Layers, Scan, Crosshair, Sparkles } from 'lucide-react';
+import {
+  ZoomIn,
+  ZoomOut,
+  RotateCcw,
+  Eye,
+  EyeOff,
+  Crosshair,
+  ScanLine
+} from 'lucide-react';
+import { Button } from './ui/button';
+import { Badge } from './ui/badge';
+import { Card } from './ui/card';
 
 interface DocumentViewerProps {
   imageUrl: string;
@@ -20,157 +31,190 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
   isAuditing
 }) => {
   const [zoom, setZoom] = useState(1);
-  const [showBoxes, setShowBoxes] = useState(true);
+  const [activeLayer, setActiveLayer] = useState<'all' | 'items' | 'stamps' | 'signatures' | 'warnings'>('all');
+  const [showCoordinates, setShowCoordinates] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const filterBoxes = (boxes: BoundingBox[]) => {
+    if (activeLayer === 'all') return boxes;
+    if (activeLayer === 'items') return boxes.filter((b) => b.category === 'item_row' || b.category === 'table');
+    if (activeLayer === 'stamps') return boxes.filter((b) => b.category === 'stamp');
+    if (activeLayer === 'signatures') return boxes.filter((b) => b.category === 'signature');
+    if (activeLayer === 'warnings')
+      return boxes.filter((b) => b.category === 'warning' || b.category === 'handwritten_retur');
+    return boxes;
+  };
 
   const getBoxStyle = (category: string, isHighlighted: boolean) => {
     if (isHighlighted) {
       return {
-        border: 'border-yellow-400 border-2 bg-yellow-400/30 ring-4 ring-yellow-400/40 shadow-[0_0_20px_rgba(250,204,21,0.6)] z-20',
-        badge: 'bg-yellow-400 text-slate-950 font-black scale-105'
+        border: 'border-yellow-400 border-2 bg-yellow-400/20 ring-2 ring-yellow-400/60 z-30 shadow-lg',
+        badge: 'bg-yellow-400 text-zinc-950 font-bold'
       };
     }
     switch (category) {
       case 'stamp':
         return {
-          border: 'border-cyan-400/90 border-2 bg-cyan-500/15 hover:bg-cyan-500/30 shadow-[0_0_15px_rgba(34,211,238,0.3)]',
-          badge: 'bg-cyan-500 text-slate-950 font-bold'
+          border: 'border-cyan-400 border bg-cyan-500/10 hover:bg-cyan-500/25',
+          badge: 'bg-cyan-950 text-cyan-300 border border-cyan-800'
         };
       case 'signature':
         return {
-          border: 'border-purple-400/90 border-2 bg-purple-500/15 hover:bg-purple-500/30 shadow-[0_0_15px_rgba(192,132,252,0.3)]',
-          badge: 'bg-purple-500 text-white font-bold'
+          border: 'border-purple-400 border bg-purple-500/10 hover:bg-purple-500/25',
+          badge: 'bg-purple-950 text-purple-300 border border-purple-800'
         };
       case 'handwritten_retur':
       case 'warning':
         return {
-          border: 'border-rose-500 border-2 bg-rose-500/20 hover:bg-rose-500/35 shadow-[0_0_20px_rgba(244,63,94,0.5)] animate-pulse',
-          badge: 'bg-rose-600 text-white font-black'
+          border: 'border-rose-500 border-2 bg-rose-500/15 hover:bg-rose-500/30',
+          badge: 'bg-rose-950 text-rose-300 border border-rose-800 font-bold'
         };
       case 'header':
+      case 'recipient':
+      case 'transporter':
         return {
-          border: 'border-slate-400/80 border bg-slate-500/10 hover:bg-slate-500/25',
-          badge: 'bg-slate-800 text-slate-200 font-semibold'
+          border: 'border-zinc-500 border bg-zinc-500/10 hover:bg-zinc-500/20',
+          badge: 'bg-zinc-900 text-zinc-300 border border-zinc-700'
         };
       default:
         return {
-          border: 'border-emerald-400/80 border bg-emerald-500/15 hover:bg-emerald-500/30 shadow-[0_0_10px_rgba(52,211,153,0.2)]',
-          badge: 'bg-emerald-600 text-white font-bold'
+          border: 'border-emerald-500 border bg-emerald-500/10 hover:bg-emerald-500/25',
+          badge: 'bg-emerald-950 text-emerald-300 border border-emerald-800 font-semibold'
         };
     }
   };
 
+  const visibleBoxes = filterBoxes(boundingBoxes);
+
   return (
-    <div className="bg-slate-900/60 backdrop-blur-xl rounded-2xl border border-white/[0.08] flex flex-col h-full overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.37)]">
-      {/* Viewer Header Toolbar */}
-      <div className="px-4 py-3 border-b border-white/[0.08] flex items-center justify-between bg-slate-950/70">
+    <Card className="flex flex-col h-full overflow-hidden border-zinc-800 bg-zinc-950">
+      {/* Header Toolbar */}
+      <div className="px-4 py-2.5 border-b border-zinc-800/80 bg-zinc-900/60 flex items-center justify-between gap-3">
         <div className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded-lg bg-blue-500/20 border border-blue-400/30 flex items-center justify-center text-blue-400">
-            <Scan className="w-3.5 h-3.5" />
-          </div>
-          <div>
-            <span className="text-xs font-bold text-slate-100 uppercase tracking-wider block">
-              Spatial Coordinate Grounding
-            </span>
-            <span className="text-[10px] text-slate-400">
-              {boundingBoxes.length} Visual Grounding Anchors
-            </span>
-          </div>
+          <Crosshair className="w-4 h-4 text-zinc-400" />
+          <span className="font-mono text-xs font-bold text-zinc-200 tracking-tight">
+            SPATIAL GROUNDING CANVAS
+          </span>
+          <Badge variant="mono" className="text-[10px]">
+            {visibleBoxes.length} ANCHORS
+          </Badge>
         </div>
 
-        {/* Floating Controls */}
-        <div className="flex items-center gap-1.5 bg-slate-950/80 p-1 rounded-xl border border-white/[0.08] text-slate-300">
-          <button
+        {/* View Controls */}
+        <div className="flex items-center gap-1.5">
+          <Button
+            variant="outline"
+            size="icon"
             onClick={() => setZoom((z) => Math.max(0.6, z - 0.15))}
-            className="p-1.5 hover:bg-white/10 rounded-lg hover:text-white transition-colors"
+            className="h-7 w-7 border-zinc-800 text-zinc-300"
             title="Zoom Out"
           >
             <ZoomOut className="w-3.5 h-3.5" />
-          </button>
-          <span className="text-[11px] font-mono font-bold px-1.5 text-slate-300">
+          </Button>
+
+          <span className="text-[11px] font-mono font-semibold px-1 text-zinc-300 min-w-10 text-center">
             {Math.round(zoom * 100)}%
           </span>
-          <button
+
+          <Button
+            variant="outline"
+            size="icon"
             onClick={() => setZoom((z) => Math.min(2.2, z + 0.15))}
-            className="p-1.5 hover:bg-white/10 rounded-lg hover:text-white transition-colors"
+            className="h-7 w-7 border-zinc-800 text-zinc-300"
             title="Zoom In"
           >
             <ZoomIn className="w-3.5 h-3.5" />
-          </button>
-          <div className="w-[1px] h-3.5 bg-white/10 mx-0.5" />
-          <button
+          </Button>
+
+          <Button
+            variant="outline"
+            size="icon"
             onClick={() => setZoom(1)}
-            className="p-1.5 hover:bg-white/10 rounded-lg hover:text-white transition-colors"
+            className="h-7 w-7 border-zinc-800 text-zinc-300 ml-0.5"
             title="Reset Zoom"
           >
-            <RotateCcw className="w-3.5 h-3.5" />
-          </button>
-          <div className="w-[1px] h-3.5 bg-white/10 mx-0.5" />
-          <button
-            onClick={() => setShowBoxes(!showBoxes)}
-            className={`p-1.5 rounded-lg transition-colors flex items-center gap-1 text-[11px] font-semibold px-2 ${
-              showBoxes
-                ? 'bg-blue-600/30 text-blue-300 border border-blue-400/30 shadow-[0_0_10px_rgba(59,130,246,0.2)]'
-                : 'hover:bg-white/10 text-slate-400'
-            }`}
-            title="Toggle Bounding Boxes"
+            <RotateCcw className="w-3 h-3" />
+          </Button>
+
+          <Button
+            variant={showCoordinates ? 'secondary' : 'outline'}
+            size="xs"
+            onClick={() => setShowCoordinates(!showCoordinates)}
+            className="h-7 text-[11px] font-mono gap-1 border-zinc-800 ml-1"
           >
-            {showBoxes ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
-            <span className="hidden md:inline">Grounding</span>
-          </button>
+            {showCoordinates ? <Eye className="w-3 h-3 text-blue-400" /> : <EyeOff className="w-3 h-3 text-zinc-500" />}
+            <span className="hidden sm:inline">Overlay</span>
+          </Button>
         </div>
       </div>
 
-      {/* Image & Bounding Box Viewport */}
+      {/* Layer Filter Toolbar */}
+      <div className="px-4 py-1.5 border-b border-zinc-800/60 bg-zinc-950 flex items-center gap-1.5 overflow-x-auto text-[11px] font-mono">
+        <span className="text-zinc-500 mr-1 text-[10px] uppercase">Layers:</span>
+        {(
+          [
+            { id: 'all', label: 'All Anchors' },
+            { id: 'items', label: 'Line Items' },
+            { id: 'stamps', label: 'Stamps' },
+            { id: 'signatures', label: 'Signatures' },
+            { id: 'warnings', label: 'Discrepancies' }
+          ] as const
+        ).map((layer) => (
+          <button
+            key={layer.id}
+            onClick={() => setActiveLayer(layer.id)}
+            className={`px-2 py-0.5 rounded text-[10px] font-medium transition-colors ${
+              activeLayer === layer.id
+                ? 'bg-zinc-800 text-zinc-100 font-bold border border-zinc-700'
+                : 'text-zinc-500 hover:text-zinc-300 hover:bg-zinc-900'
+            }`}
+          >
+            {layer.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Viewport */}
       <div
         ref={containerRef}
-        className="flex-1 relative overflow-auto p-4 sm:p-6 flex items-center justify-center min-h-[500px] max-h-[720px] bg-slate-950/60"
+        className="flex-1 relative overflow-auto p-4 flex items-center justify-center min-h-[500px] max-h-[720px] bg-zinc-950 select-none"
       >
-        {/* Laser Scanner Line while Auditing */}
+        {/* Inference Loading State */}
         {isAuditing && (
-          <>
-            <div className="absolute inset-0 z-30 bg-slate-950/80 backdrop-blur-md flex flex-col items-center justify-center gap-4">
-              <div className="relative">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center shadow-[0_0_30px_rgba(59,130,246,0.5)] animate-pulse">
-                  <Sparkles className="w-8 h-8 text-white animate-spin" />
-                </div>
-              </div>
-              <div className="text-center space-y-1">
-                <p className="text-sm font-extrabold text-white tracking-wide">
-                  Gemini 2.0 Flash VLM Grounding...
-                </p>
-                <p className="text-xs text-blue-400 font-mono">
-                  Extracting Indonesian handwriting, stamps & line items
-                </p>
-              </div>
+          <div className="absolute inset-0 z-40 bg-zinc-950/80 backdrop-blur-sm flex flex-col items-center justify-center gap-3">
+            <div className="h-12 w-12 rounded-xl bg-zinc-900 border border-zinc-700 flex items-center justify-center">
+              <ScanLine className="w-6 h-6 text-blue-400 animate-spin" />
             </div>
-          </>
+            <div className="text-center font-mono text-xs">
+              <p className="font-bold text-zinc-100">MULTIMODAL VLM AUDITING...</p>
+              <p className="text-zinc-500 text-[11px] mt-0.5">Gemini 2.0 Flash Spatial Extraction</p>
+            </div>
+          </div>
         )}
 
+        {/* Document Render Container */}
         <div
-          className="relative inline-block transition-transform duration-200 origin-top shadow-[0_12px_40px_rgba(0,0,0,0.6)] rounded-xl overflow-hidden border border-white/15"
+          className="relative inline-block transition-transform duration-150 origin-top rounded-lg border border-zinc-800 shadow-2xl overflow-hidden bg-white"
           style={{ transform: `scale(${zoom})` }}
         >
-          {/* Laser scanning line overlay */}
+          {/* Laser Reticle Bar */}
           {isAuditing && (
-            <div className="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_15px_#22d3ee] z-20 animate-laser" />
+            <div className="absolute left-0 right-0 h-0.5 bg-blue-400 shadow-[0_0_8px_#38bdf8] z-30 animate-reticle" />
           )}
 
-          {/* Document Base Image */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={imageUrl}
-            alt="Surat Jalan Physical Scan"
-            className="w-full max-w-[650px] object-contain rounded-xl select-none pointer-events-none"
+            alt="Surat Jalan POD Physical Document"
+            className="w-full max-w-[650px] object-contain select-none pointer-events-none"
           />
 
-          {/* Spatial Grounding Bounding Boxes Overlay */}
-          {showBoxes &&
-            boundingBoxes.map((box, idx) => {
+          {/* Spatial Grounding Bounding Box Overlays */}
+          {showCoordinates &&
+            visibleBoxes.map((box, idx) => {
               const isHighlighted = highlightedIndex === idx;
               const style = getBoxStyle(box.category, isHighlighted);
 
-              // Convert normalized 0-1000 coordinates to percentages
               const topPct = (box.ymin / 1000) * 100;
               const leftPct = (box.xmin / 1000) * 100;
               const heightPct = ((box.ymax - box.ymin) / 1000) * 100;
@@ -181,7 +225,7 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
                   key={idx}
                   onMouseEnter={() => onHoverBox(idx)}
                   onMouseLeave={() => onHoverBox(null)}
-                  className={`absolute transition-all duration-150 cursor-pointer rounded-sm ${style.border}`}
+                  className={`absolute transition-all duration-100 cursor-pointer rounded-xs ${style.border}`}
                   style={{
                     top: `${topPct}%`,
                     left: `${leftPct}%`,
@@ -189,9 +233,8 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
                     width: `${widthPct}%`
                   }}
                 >
-                  {/* Floating Box Tag */}
                   <span
-                    className={`absolute -top-3.5 left-1 text-[9px] px-2 py-0.5 rounded-full shadow-lg whitespace-nowrap pointer-events-none transition-all ${style.badge}`}
+                    className={`absolute -top-3.5 left-0.5 text-[9px] px-1.5 py-0.2 rounded font-mono shadow-md whitespace-nowrap pointer-events-none ${style.badge}`}
                   >
                     {box.label}
                   </span>
@@ -202,31 +245,30 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
       </div>
 
       {/* Legend Footer */}
-      <div className="px-4 py-2.5 border-t border-white/[0.08] bg-slate-950/90 flex flex-wrap items-center justify-between gap-3 text-[11px] text-slate-400">
+      <div className="px-4 py-2 border-t border-zinc-800/80 bg-zinc-900/40 flex flex-wrap items-center justify-between gap-3 text-[11px] font-mono text-zinc-400">
         <div className="flex flex-wrap items-center gap-3">
-          <span className="font-bold text-slate-300 text-xs">Entity Types:</span>
           <span className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
-            <span className="text-slate-300">Verified Item</span>
+            <span className="w-2 h-2 rounded-xs bg-emerald-500" />
+            <span className="text-zinc-300">Verified Item</span>
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.5)]" />
-            <span className="text-rose-300 font-semibold">Selisih / Retur</span>
+            <span className="w-2 h-2 rounded-xs bg-rose-500" />
+            <span className="text-rose-300">Discrepancy / Retur</span>
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
-            <span className="text-cyan-300 font-semibold">Stempel DC</span>
+            <span className="w-2 h-2 rounded-xs bg-cyan-400" />
+            <span className="text-cyan-300">DC Stamp</span>
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-purple-400 shadow-[0_0_8px_rgba(192,132,252,0.5)]" />
-            <span className="text-purple-300 font-semibold">Tanda Tangan</span>
+            <span className="w-2 h-2 rounded-xs bg-purple-400" />
+            <span className="text-purple-300">Signature</span>
           </span>
         </div>
 
-        <span className="text-[10px] font-mono text-slate-500 hidden sm:inline">
-          Format Grounding: Normalized [0, 1000]
+        <span className="text-[10px] text-zinc-500">
+          COORDINATES: NORMALIZED [0..1000]
         </span>
       </div>
-    </div>
+    </Card>
   );
 };

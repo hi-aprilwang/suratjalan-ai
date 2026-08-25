@@ -2,7 +2,9 @@
 
 import React, { useRef } from 'react';
 import { PresetItem } from '../types/audit';
-import { CheckCircle2, AlertTriangle, XCircle, FileSpreadsheet, FileUp } from 'lucide-react';
+import { CheckCircle2, AlertTriangle, XCircle, Layers, Upload } from 'lucide-react';
+import { Badge } from './ui/badge';
+import { Button } from './ui/button';
 
 interface PresetSelectorProps {
   presets: PresetItem[];
@@ -25,56 +27,50 @@ export const PresetSelector: React.FC<PresetSelectorProps> = ({
     switch (status) {
       case 'APPROVED_FOR_INVOICING':
         return (
-          <span className="flex items-center gap-1 text-[11px] font-bold text-emerald-400 bg-emerald-950/80 border border-emerald-500/30 px-2 py-0.5 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.15)]">
-            <CheckCircle2 className="w-3 h-3 text-emerald-400" /> 100% Match (Approved)
-          </span>
+          <Badge variant="success" className="text-[10px] font-mono">
+            <CheckCircle2 className="w-3 h-3" /> MATCH (APPROVED)
+          </Badge>
         );
       case 'DISCREPANCY_FLAGGED':
-        const label = presetId === 'preset_4' 
-          ? 'Suhu Dingin Bocor (+14°C)' 
-          : presetId === 'preset_5' 
-          ? '20 Zak Semen Rusak Air' 
-          : 'Selisih Retur (Klaim Debit)';
+        const label =
+          presetId === 'preset_4'
+            ? 'COLD-ABUSE (+14°C)'
+            : presetId === 'preset_5'
+            ? 'DAMAGED (20 ZAK)'
+            : 'RETUR (8 DUS)';
         return (
-          <span className="flex items-center gap-1 text-[11px] font-bold text-amber-400 bg-amber-950/80 border border-amber-500/30 px-2 py-0.5 rounded-full shadow-[0_0_10px_rgba(245,158,11,0.15)]">
-            <AlertTriangle className="w-3 h-3 text-amber-400" /> {label}
-          </span>
+          <Badge variant="warning" className="text-[10px] font-mono">
+            <AlertTriangle className="w-3 h-3" /> {label}
+          </Badge>
         );
       case 'CRITICAL_REJECTED':
       default:
-        const rejectLabel = presetId === 'preset_6' 
-          ? 'Rejek QC (ED < 3 Bln)' 
-          : 'Missing Stamp & Damaged';
+        const rejectLabel =
+          presetId === 'preset_6' ? 'QC REJECT (EXPIRED)' : 'MISSING STAMP';
         return (
-          <span className="flex items-center gap-1 text-[11px] font-bold text-rose-400 bg-rose-950/80 border border-rose-500/30 px-2 py-0.5 rounded-full shadow-[0_0_10px_rgba(244,63,94,0.15)]">
-            <XCircle className="w-3 h-3 text-rose-400" /> {rejectLabel}
-          </span>
+          <Badge variant="destructive" className="text-[10px] font-mono">
+            <XCircle className="w-3 h-3" /> {rejectLabel}
+          </Badge>
         );
     }
   };
 
-  const getPresetKeyNum = (index: number) => {
-    return index + 1;
+  const getCategoryCode = (index: number) => {
+    const codes = ['FMCG-01', 'CONF-02', 'HSHLD-03', 'COLD-04', 'HEAVY-05', 'PHRMA-06'];
+    return codes[index] || `DOC-0${index + 1}`;
   };
 
   return (
-    <div className="bg-slate-900/60 backdrop-blur-xl rounded-2xl border border-white/[0.08] p-4 sm:p-5 shadow-[0_8px_32px_rgba(0,0,0,0.37)]">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
-        <div>
-          <div className="flex items-center gap-2">
-            <span className="w-6 h-6 rounded-lg bg-blue-500/20 border border-blue-400/30 flex items-center justify-center text-blue-400">
-              <FileSpreadsheet className="w-3.5 h-3.5" />
-            </span>
-            <h2 className="text-xs font-extrabold uppercase tracking-wider text-slate-200">
-              Pilih Sampel Surat Jalan / Upload Dokumen
-            </h2>
-          </div>
-          <p className="text-xs text-slate-400 mt-0.5">
-            Uji coba 6 skenario logistik rantai pasok Indonesia (FMCG, Cold Chain, Semen, Farmasi) atau unggah foto dokumen fisik
-          </p>
+    <div className="space-y-2.5">
+      {/* Header bar */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 px-1">
+        <div className="flex items-center gap-2">
+          <Layers className="w-4 h-4 text-zinc-400" />
+          <span className="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-300">
+            Skenario Sampel Uji Coba Logistik // 6 Industri Rantai Pasok
+          </span>
         </div>
 
-        {/* Upload Button */}
         <div>
           <input
             type="file"
@@ -87,56 +83,53 @@ export const PresetSelector: React.FC<PresetSelectorProps> = ({
               }
             }}
           />
-          <button
+          <Button
+            variant="outline"
+            size="xs"
             onClick={() => fileInputRef.current?.click()}
             disabled={isAuditing}
-            className="group relative flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white transition-all shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_25px_rgba(59,130,246,0.5)] disabled:opacity-50 active:scale-95"
+            className="gap-1.5 font-mono text-[11px] border-zinc-800 bg-zinc-900/60 hover:bg-zinc-800 text-zinc-300"
           >
-            <FileUp className="w-4 h-4 transition-transform group-hover:-translate-y-0.5" />
-            <span>Unggah Dokumen Sendiri</span>
-          </button>
+            <Upload className="w-3 h-3 text-zinc-400" />
+            <span>Unggah Dokumen Fisik Sendiri</span>
+          </Button>
         </div>
       </div>
 
-      {/* Preset Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
+      {/* Preset Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-2.5">
         {presets.map((preset, idx) => {
           const isSelected = selectedPresetId === preset.id;
           return (
             <div
               key={preset.id}
               onClick={() => !isAuditing && onSelectPreset(preset.id)}
-              className={`group cursor-pointer rounded-2xl p-4 border transition-all duration-200 relative flex flex-col justify-between ${
+              className={`group cursor-pointer rounded-lg p-3 border transition-all duration-150 relative flex flex-col justify-between ${
                 isSelected
-                  ? 'bg-gradient-to-b from-blue-950/60 to-slate-900/80 border-blue-500/80 shadow-[0_0_25px_rgba(59,130,246,0.25)] ring-1 ring-blue-400/40'
-                  : 'bg-slate-950/40 border-white/[0.06] hover:border-white/20 hover:bg-slate-900/50'
+                  ? 'bg-zinc-900 border-zinc-500 shadow-md ring-1 ring-zinc-500/50'
+                  : 'bg-zinc-950/80 border-zinc-800/80 hover:border-zinc-700 hover:bg-zinc-900/50'
               }`}
             >
-              {/* Header & Key Badge */}
-              <div className="flex items-start justify-between gap-2 mb-2">
-                <div className="flex items-center gap-2">
-                  <span className="w-5 h-5 rounded-md bg-white/[0.06] border border-white/[0.08] text-[10px] font-mono font-bold flex items-center justify-center text-slate-400 group-hover:text-blue-400 group-hover:border-blue-400/30 transition-colors">
-                    {getPresetKeyNum(idx)}
+              {/* Card Top */}
+              <div>
+                <div className="flex items-center justify-between gap-1 mb-1.5">
+                  <span className="font-mono text-[10px] font-bold text-zinc-500 group-hover:text-zinc-300 transition-colors">
+                    {getCategoryCode(idx)}
                   </span>
-                  <span className="text-xs font-bold text-slate-100 line-clamp-1">
-                    {preset.company}
-                  </span>
+                  <kbd className="font-mono text-[9px] px-1 py-0.2 rounded bg-zinc-900 border border-zinc-800 text-zinc-400">
+                    {idx + 1}
+                  </kbd>
                 </div>
-                {isSelected && (
-                  <span className="flex h-2 w-2 relative">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-                  </span>
-                )}
+                <h4 className="text-xs font-semibold text-zinc-100 truncate line-clamp-1 leading-snug">
+                  {preset.company.replace('PT ', '')}
+                </h4>
+                <p className="text-[11px] text-zinc-400 line-clamp-2 mt-1 leading-relaxed">
+                  {preset.description}
+                </p>
               </div>
 
-              {/* Description */}
-              <p className="text-[11px] text-slate-400 line-clamp-2 mb-3 leading-relaxed">
-                {preset.description}
-              </p>
-
-              {/* Status Badge */}
-              <div className="pt-2 border-t border-white/[0.04]">
+              {/* Card Bottom */}
+              <div className="mt-3 pt-2 border-t border-zinc-800/60 flex items-center justify-between">
                 {getStatusBadge(preset.expected_status, preset.id)}
               </div>
             </div>
