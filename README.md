@@ -360,14 +360,24 @@ All project commits adhere strictly to [Conventional Commits](https://www.conven
 
 ## 👥 Team & Competition Details
 
-- **Competition**: COMPFEST 18 AI Innovation Challenge (AIC)
-- **Institution**: Universitas Indonesia (Fasilkom UI)
+- **Competition**: COMPFEST 18 AI Innovation Challenge (AIC) — Fasilkom Universitas Indonesia
 - **Theme**: *AI for the Backbone of the Economy*
 - **Pillar**: *Smart Logistics (Gudang, Distribusi & Pergerakan Barang)*
+- **Institution**: **Universitas Bina Nusantara (BINUS University)**
 - **Repository**: [https://github.com/hi-aprilwang/suratjalan-ai](https://github.com/hi-aprilwang/suratjalan-ai)
+
+### 🧑‍💻 Team Members:
+| Member Name | Role / Focus | NIM | Email | University |
+| :--- | :---: | :---: | :--- | :--- |
+| **Restu Radhyazka Prasetio (Azka)** | Team Lead / AI Systems | `3002802400` | `rrazka28@gmail.com` | Bina Nusantara University |
+| **Ghaus Ulhaq (Ghaus/Rei)** | Backend & Inference | `3002824641` | `ghaus1ulhaq@gmail.com` | Bina Nusantara University |
+| **Justin Winata (JW)** | Frontend & Workstation UI | `3002790810` | `justinwinata2008@gmail.com` | Bina Nusantara University |
+| **Daniel Nathanael (Daniel)** | Data Pipeline & Synthetic | `3002754856` | `danielnathanael0810yyyy@gmail.com` | Bina Nusantara University |
+| **Putri Aprilyani (April)** | Product & Business Analysis | `3002864935` | `Hi.aprilwang@gmail.com` | Bina Nusantara University |
 
 ---
 
 <div align="center">
-  <sub>Built with ❤️ for Indonesian Supply Chains • COMPFEST 18 AI Innovation Challenge</sub>
+  <sub>Built with ❤️ by BINUS University for Indonesian Supply Chains • COMPFEST 18 AI Innovation Challenge</sub>
 </div>
+

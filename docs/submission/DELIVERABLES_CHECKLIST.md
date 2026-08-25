@@ -51,34 +51,35 @@
 
 ## 📄 2. Proposal Document Checklist (Weight: 45% Combined)
 
-- [ ] **Document Format & Restrictions**:
-  - [ ] Format: Single PDF file (`.pdf`)
-  - [ ] Page Limit: Maximum **20 pages** (excluding Cover Page and Table of Contents)
-  - [ ] Language: Bahasa Indonesia or English (professional tone)
-- [ ] **Section 1: Identitas & Executive Summary**:
-  - [ ] Nama Tim & Data Anggota (Nama Lengkap, Institusi, Kontak)
-  - [ ] Judul Inovasi & Tagline
-  - [ ] Executive Summary (1-page snapshot of the Indonesian supply chain crisis & SuratJalan.AI solution)
-- [ ] **Section 2: Latar Belakang & Urgensi (Indonesian Problem Context)**:
-  - [ ] The 3-ply carbon paper *Surat Jalan* bottleneck in Indonesia
-  - [ ] 14–30 day invoice delays causing MSME working capital freeze
-  - [ ] FMCG DC check-in friction (Indomaret DC, Alfamart DC, Hypermart)
-- [ ] **Section 3: Solusi & Orisinalitas Inovasi**:
-  - [ ] Multimodal VLM with spatial coordinate grounding (`[ymin, xmin, ymax, xmax]`)
-  - [ ] Handwritten strikethrough detection + physical warehouse stamp verification
-  - [ ] Automatic IDR claim calculation vs Purchase Order baseline
-- [ ] **Section 4: Metodologi & Arsitektur Teknis**:
-  - [ ] System Architecture Diagram (FE, BE, Gemini VLM, ERP Dispatcher)
-  - [ ] Data pipeline & synthetic data augmentation methodology
-  - [ ] Discrepancy math & deterministic validation logic
-- [ ] **Section 5: Analisis Kelayakan, Model Bisnis & Unit Economics (+3.5% Bonus)**:
-  - [ ] Unit Economics Table (Cost per document: Rp 2.4 vs Rp 3,500 manual entry)
-  - [ ] B2B SaaS pricing model (Tiered per-audit or enterprise volume subscription)
-  - [ ] Target market sizing (3PL freight carriers, FMCG principals, distributor networks)
-- [ ] **Section 6: Tata Kelola AI Etis, Privasi & Keamanan (AI Governance Bonus)**:
-  - [ ] Data privacy: Enterprise PII redaction and secure in-memory processing
-  - [ ] Human-in-the-loop (HITL) audit verification for high-risk claims
-  - [ ] Model bias mitigation across diverse handwriting and physical stamp ink conditions
+- [x] **Document Format & Restrictions**:
+  - [x] Format: Single PDF file (`docs/submission/PROPOSAL_INOVASI.pdf` & `docs/PROPOSAL_LENGKAP_COMPFEST_18.md`)
+  - [x] Page Limit: Compliant with maximum **20 pages** (excluding Cover Page and Table of Contents)
+  - [x] Language: Bahasa Indonesia (professional academic & business tone)
+- [x] **Section 1: Identitas & Executive Summary**:
+  - [x] Data Anggota Tim (Bina Nusantara University: Azka, Ghaus, JW, Daniel, April)
+  - [x] Judul Inovasi & Tagline (*SuratJalan.AI — #EncloseTheGap*)
+  - [x] Executive Summary (1-page snapshot of the Indonesian supply chain crisis & SuratJalan.AI solution)
+- [x] **Section 2: Latar Belakang & Urgensi (Indonesian Problem Context)**:
+  - [x] The 3-ply carbon paper *Surat Jalan* bottleneck in Indonesia
+  - [x] 14–30 day invoice delays causing MSME working capital freeze
+  - [x] FMCG DC check-in friction (Indomaret DC, Alfamart DC, Hypermart)
+- [x] **Section 3: Solusi & Orisinalitas Inovasi**:
+  - [x] Multimodal VLM with spatial coordinate grounding (`[ymin, xmin, ymax, xmax]`)
+  - [x] Handwritten strikethrough detection + physical warehouse stamp verification
+  - [x] Automatic IDR claim calculation vs Purchase Order baseline
+- [x] **Section 4: Metodologi & Arsitektur Teknis**:
+  - [x] System Architecture Diagram (FE, BE, Gemini VLM, ERP Dispatcher)
+  - [x] Data pipeline & synthetic data augmentation methodology
+  - [x] Discrepancy math & deterministic validation logic
+- [x] **Section 5: Analisis Kelayakan, Model Bisnis & Unit Economics (+3.5% Bonus)**:
+  - [x] Unit Economics Table (Cost per document: Rp 2.4 vs Rp 3,500 manual entry)
+  - [x] B2B SaaS pricing model (Tiered per-audit or enterprise volume subscription)
+  - [x] Target market sizing (3PL freight carriers, FMCG principals, distributor networks)
+- [x] **Section 6: Tata Kelola AI Etis, Privasi & Keamanan (AI Governance Bonus)**:
+  - [x] Data privacy: Enterprise PII redaction and secure in-memory processing
+  - [x] Human-in-the-loop (HITL) audit verification for high-risk claims
+  - [x] Model bias mitigation across diverse handwriting and physical stamp ink conditions
+
 
 ---
 

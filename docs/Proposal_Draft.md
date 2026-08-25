@@ -18,17 +18,23 @@
 │ IDENTITAS PROYEK & TAUTAN RESMI:                                                                 │
 │ • Judul Inovasi       : SuratJalan.AI (ResiVision)                                               │
 │ • Kategori Kompetisi  : AI Innovation Challenge (AIC) — COMPFEST 18                              │
+│ • Asal Institusi      : Universitas Bina Nusantara (BINUS University)                            │
 │ • Repository Publik   : https://github.com/hi-aprilwang/suratjalan-ai                             │
 │ • Interactive Web App : http://localhost:3000 (0-Config Local Docker Ready)                      │
 │ • Backend API Console : http://localhost:8000/docs (FastAPI Swagger UI)                          │
-├──────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ BIODATA ANGGOTA TIM (Placeholder - Dapat Dilengkapi):                                           │
-│ 1. Ketua Tim          : [Nama Lengkap Ketua Tim] | NIM: [NIM] | Email: [Email] | HP: [No HP]     │
-│ 2. Anggota 1          : [Nama Lengkap Anggota 1] | NIM: [NIM] | Email: [Email] | HP: [No HP]     │
-│ 3. Anggota 2          : [Nama Lengkap Anggota 2] | NIM: [NIM] | Email: [Email] | HP: [No HP]     │
-│ • Asal Institusi      : [Nama Universitas / Perguruan Tinggi]                                   │
 └──────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
+
+### 📋 Biodata Lengkap Anggota Tim
+
+| No | Nama Lengkap | Panggilan | NIM | Nomor HP / WhatsApp | Email Resmi | Ukuran Baju | Institusi |
+| :-: | :--- | :---: | :---: | :---: | :--- | :---: | :--- |
+| **1** | **Restu Radhyazka Prasetio** | Azka | `3002802400` | `082213061913` | `rrazka28@gmail.com` | **XXL** | Bina Nusantara University |
+| **2** | **Ghaus Ulhaq** | Ghaus / Rei | `3002824641` | `085776432214` | `ghaus1ulhaq@gmail.com` | **L** | Bina Nusantara University |
+| **3** | **Justin Winata** | JW | `3002790810` | `082302013888` | `justinwinata2008@gmail.com` | **XXL** | Bina Nusantara University |
+| **4** | **Daniel Nathanael** | Daniel | `3002754856` | `089694908579` | `danielnathanael0810yyyy@gmail.com` | **M** | Bina Nusantara University |
+| **5** | **Putri Aprilyani** | April | `3002864935` | `087878103256` | `Hi.aprilwang@gmail.com` | **XS** | Bina Nusantara University |
+
 
 ---
 
