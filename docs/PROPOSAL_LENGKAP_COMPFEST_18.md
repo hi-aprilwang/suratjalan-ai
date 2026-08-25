@@ -104,6 +104,14 @@ Dalam tata kelola rantai pasok formal di Indonesia, *Surat Jalan* memegang fungs
 
 ### 1.2 Anatomi Titik Friksi Surat Jalan 3-Ply Carbon Paper
 
+```mermaid
+graph LR
+    A["1. Pemuatan Pabrik<br>(Surat Jalan 3-Ply)"] --> B["2. Bongkar Muat DC<br>(Coretan Retur & Stempel)"]
+    B --> C["3. Foto Kamera HP<br>(Buram & Minim Cahaya)"]
+    C --> D["4. Audit Manual Admin<br>(Ketik Ulang 5-10 mnt)"]
+    D --> E["5. Faktur Tertahan 30 Hari<br>(Modal Transporter Macet)"]
+```
+
 | Tahap Operasional | Aktivitas Lapangan | Titik Friksi & Risiko Bisnis |
 | :--- | :--- | :--- |
 | **1. Pemuatan Pabrik** | Surat jalan 3-ply dicetak komputer dan diserahkan ke pengemudi. | Kertas fisik rentan rusak, sobek, atau hilang selama perjalanan antarpulau. |
@@ -156,6 +164,18 @@ Inovasi ini selaras secara sempurna dengan tema **COMPFEST 18: *"AI for the Back
 
 ## BAB III: SOLUSI DAN ORISINALITAS INOVASI TEKNOLOGI AI
 
+```mermaid
+graph LR
+    IMG["Foto Fisik Surat Jalan"] --> VLM["Gemini 2.0 Flash VLM"]
+    VLM --> GROUND["Spatial Bounding Box [y, x]"]
+    VLM --> MATH["Deterministic Claim Math"]
+    GROUND --> VERDICT{"3-Tier Verdict Engine"}
+    MATH --> VERDICT
+    VERDICT -->|Approved| SAP["SAP / Odoo / Jurnal ERP"]
+    VERDICT -->|Flagged| CLAIM["Nota Debet Klaim IDR"]
+    VERDICT -->|Rejected| ALERT["Security / CDOB Block"]
+```
+
 | Komponen Inovasi | Mekanisme & Logika Kerja | Nilai Tambah bagi Rantai Pasok |
 | :--- | :--- | :--- |
 | **1. Multimodal VLM (Gemini 2.0 Flash)** | Memproses citra visual dan teks secara simultan dalam 1 pass ($<1,5\text{s}$). | Membaca tulisan tangan, stempel basah, dan tabel tanpa OCR terfragmentasi. |
@@ -163,6 +183,7 @@ Inovasi ini selaras secara sempurna dengan tema **COMPFEST 18: *"AI for the Back
 | **3. Deterministic Reconciliation Math** | Menghitung selisih unit $\Delta Q_i$ dan valuasi klaim finansial Rupiah otomatis. | Menjamin nol kesalahan kalkulasi matematis (*zero calculation error*). |
 | **4. 3-Tier Verdict Automation** | Klasifikasi otomatis: *Approved* (Hijau), *Flagged* (Kuning), *Critical Rejected* (Merah). | Mempercepat pengambilan keputusan kliring faktur secara terstandarisasi. |
 | **5. Multi-ERP Payload Gateway** | Menghasilkan payload terstruktur untuk SAP S/4HANA, Odoo 17, dan Mekari Jurnal.id. | Mengintegrasikan gudang fisik langsung ke sistem akuntansi cloud. |
+
 
 ### 3.1 Multimodal Vision-Language Model (Gemini 2.0 Flash VLM)
 Alih-alih menggunakan OCR bertingkat yang rentan terhadap akumulasi error (*cascading errors*), SuratJalan.AI menggunakan arsitektur Vision-Language Model mutakhir Google Gemini 2.0 Flash yang memproses token citra visual dan token teks secara holistik:
@@ -197,6 +218,44 @@ Setelah kuantitas diekstraksi, sistem menjalankan kalkulasi deterministik bebas 
 ## BAB IV: METODOLOGI DAN ARSITEKTUR TEKNIS
 
 ### 4.1 Arsitektur Sistem Menyeluruh
+
+```mermaid
+graph TD
+    subgraph Client["Frontend Workstation (Next.js 16 + React 19 + TypeScript + Tailwind CSS)"]
+        UI["Dashboard Audit Interaktif"]
+        CANVAS["Canvas Bounding Box Viewer & Hover Sync"]
+        TABLE["Tabel Rekonsiliasi & Kalkulator Klaim IDR"]
+        GATEWAY["Modal Gateway Sinkronisasi ERP"]
+    end
+
+    subgraph Server["Backend API Service (FastAPI + Python 3.11 + Pydantic v2)"]
+        ROUTE["Endpoint API (/api/audit, /api/export)"]
+        PROC["Image Normalization & Validation (Pillow)"]
+        MATH_CORE["Deterministic Reconciliation Engine"]
+    end
+
+    subgraph AI_Layer["AI & Fallback Layer"]
+        GEMINI["Google Gemini 2.0 Flash VLM (Live Inference)"]
+        OFFLINE["Deterministic Indonesian Presets (0-Config)"]
+    end
+
+    subgraph ERP_Layer["Enterprise ERP Integration"]
+        SAP["SAP S/4HANA (BAPI_GOODSMVT_CREATE)"]
+        ODOO["Odoo ERP 17 (stock.picking)"]
+        JURNAL["Mekari Jurnal.id (Auto Debit Memo)"]
+    end
+
+    UI --> ROUTE
+    ROUTE --> PROC
+    PROC --> GEMINI
+    PROC --> OFFLINE
+    GEMINI --> MATH_CORE
+    OFFLINE --> MATH_CORE
+    MATH_CORE --> UI
+    GATEWAY --> SAP
+    GATEWAY --> ODOO
+    GATEWAY --> JURNAL
+```
 
 | Lapisan Arsitektur | Komponen & Teknologi | Fungsi & Tanggung Jawab Utama |
 | :--- | :--- | :--- |

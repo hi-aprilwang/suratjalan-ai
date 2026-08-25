@@ -177,6 +177,23 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     font-size: 7.2pt;
   }}
 
+  /* Mermaid Graphs & Diagrams */
+  .mermaid {{
+    text-align: center;
+    margin: 14px auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 10px;
+  }}
+
+  .mermaid svg {{
+    max-width: 100% !important;
+    height: auto !important;
+  }}
+
   /* Math Blocks & Formulas */
   .math-block {{
     background: #f8fafc;
@@ -319,6 +336,12 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     font-weight: 500;
   }}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {{
+    mermaid.initialize({{ startOnLoad: true, theme: 'neutral', securityLevel: 'loose' }});
+  }});
+</script>
 </head>
 <body>
   <div class="doc-header">
@@ -407,12 +430,18 @@ def format_math_latex(raw_str):
     s = re.sub(r'\s+', ' ', s).strip()
     return s
 
-
 def render_math_and_clean(text):
     text = clean_emojis_and_ascii(text)
 
     # Clean any timestamps
     text = re.sub(r'2026-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[+\-]\d{2}:\d{2}', '', text)
+
+    # Convert Mermaid code blocks to pre.mermaid elements for vector SVG rendering
+    def mermaid_repl(m):
+        raw = m.group(1).strip()
+        return f'<pre class="mermaid">\n{raw}\n</pre>'
+
+    text = re.sub(r'```mermaid\s*([\s\S]*?)```', mermaid_repl, text)
 
     # Convert GitHub Alert boxes
     text = re.sub(
@@ -493,6 +522,8 @@ def convert_md_to_pdf(md_path, pdf_path, title="SuratJalan.AI Document"):
         "--disable-gpu",
         "--no-sandbox",
         "--no-pdf-header-footer",
+        "--run-all-compositor-stages-before-draw",
+        "--virtual-time-budget=4000",
         f"--print-to-pdf={pdf_path}",
         tmp_html_path
     ]
