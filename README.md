@@ -14,11 +14,11 @@
 
 ## 📑 Table of Contents
 1. [🌟 Executive Summary & The Indonesian Crisis](#-executive-summary--the-indonesian-crisis)
-2. [👥 User Personas & End-to-End Workflow](#-user-personas--end-to-end-workflow)
-3. [✨ Key Architectural Innovations & Features](#-key-architectural-innovations--features)
-4. [🏗️ System Architecture & Data Flow](#️-system-architecture--data-flow)
-5. [🧪 Pre-Loaded Indonesian Enterprise Presets](#-pre-loaded-indonesian-enterprise-presets)
-6. [🚀 Quick Start & 0-Config Local Reproduction](#-quick-start--0-config-local-reproduction)
+2. [⚡ Quick Start for Judges / Cara Menjalankan Proyek (0-Config)](#-quick-start-for-judges--cara-menjalankan-proyek-0-config)
+3. [👥 User Personas & End-to-End Workflow](#-user-personas--end-to-end-workflow)
+4. [✨ Key Architectural Innovations & Features](#-key-architectural-innovations--features)
+5. [🏗️ System Architecture & Data Flow](#️-system-architecture--data-flow)
+6. [🧪 Pre-Loaded Indonesian Enterprise Presets](#-pre-loaded-indonesian-enterprise-presets)
 7. [🏢 Enterprise ERP Integration Gateway](#-enterprise-erp-integration-gateway)
 8. [💰 Unit Economics & Financial ROI Analysis (+3.5% Bonus)](#-unit-economics--financial-roi-analysis-35-bonus)
 9. [🛡️ Responsible AI, Privacy & Governance (+3.5% Bonus)](#️-responsible-ai-privacy--governance-35-bonus)
@@ -51,6 +51,76 @@ When delivery trucks arrive at distribution centers (*Indomaret DC, Alfamart DC,
 1. **Multimodal VLM Extraction in $<1.5\text{s}$**: Reads messy Indonesian cursive handwriting, rubber stamps (*"DITERIMA GUDANG"*, *"RETUR"*), and line-item tables with spatial coordinate grounding (`[ymin, xmin, ymax, xmax]`).
 2. **Automated Mathematical Reconciliation**: Cross-references physical received quantities against digital Purchase Order baselines, calculating exact IDR claim deductions.
 3. **Instant ERP Dispatch**: Generates RFC/BAPI-compliant payloads for **SAP S/4HANA**, **Odoo ERP**, and **Jurnal.id**, converting weeks of billing lag into **Same-Day Invoice Clearance**.
+
+---
+
+## ⚡ Quick Start for Judges / Cara Menjalankan Proyek (0-Config)
+
+> [!IMPORTANT]
+> **COMPFEST 18 AIC Jury Evaluation Notice**:  
+> This repository is engineered for **100% 0-Config Local Reproducibility**. It includes a self-contained offline deterministic fallback engine that runs immediately with **zero external API keys, zero cloud setup, and zero environment friction**.
+
+### 🐳 Option A: 1-Command Startup via Docker Compose (Recommended for Judges)
+
+Clone the repository and launch the multi-stage production containers with a single command:
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/hi-aprilwang/suratjalan-ai.git
+cd suratjalan-ai
+
+# 2. Build and launch Frontend (:3000) and Backend (:8000)
+docker compose up --build
+```
+
+#### 🧭 Judge Evaluation Navigation Hub:
+| Service | URL | Purpose & Feature Test |
+| :--- | :--- | :--- |
+| 🎨 **Frontend Workstation** | [http://localhost:3000](http://localhost:3000) | Full interactive audit dashboard with dual canvas view, laser scan beam, & live ERP sync. |
+| ℹ️ **How It Works Page** | [http://localhost:3000/how-it-works](http://localhost:3000/how-it-works) | Visual step-by-step workflow & Indonesian logistics problem explanation. |
+| 📖 **Interactive Swagger Docs** | [http://localhost:8000/docs](http://localhost:8000/docs) | Live FastAPI OpenAPI documentation & schema test console. |
+| 🩺 **Backend Healthcheck** | [http://localhost:8000/api/health](http://localhost:8000/api/health) | Container health & AI engine status probe. |
+
+---
+
+### 💻 Option B: Manual Local Setup (Without Docker)
+
+<details>
+<summary><b>Click to expand manual setup instructions (Python + Node.js)</b></summary>
+
+#### 1. Backend Service (FastAPI • Python 3.11+):
+```bash
+cd backend
+python -m venv venv
+
+# Activate virtual environment
+# On Windows:
+venv\Scripts\activate
+# On Linux/macOS:
+source venv/bin/activate
+
+pip install -r requirements.txt
+
+# Start backend server on http://localhost:8000
+uvicorn app.main:app --reload --port 8000
+```
+
+#### 2. Frontend Workstation (Next.js 16 • pnpm):
+```bash
+cd frontend
+pnpm install
+pnpm dev
+```
+Open [http://localhost:3000](http://localhost:3000) on your browser.
+
+</details>
+
+---
+
+### 🎮 Evaluation Cheat-Sheet for Juries:
+1. **Interactive Presets**: Use buttons or keyboard shortcuts <kbd>1</kbd> to <kbd>6</kbd> to instantly switch between authentic Indonesian enterprise scenarios (Clean delivery, damaged wet boxes, missing store stamp, cold-chain temp abuse, cement rain damage, and pharma expiry rejection).
+2. **Visual Spatial Grounding**: Hover over any row in the **Discrepancy Matrix** table to watch the canvas dynamically highlight the corresponding bounding box coordinates on the physical document scan.
+3. **Enterprise ERP Sync**: Click **"Sinkronisasi ERP / Export JSON"** to inspect and download RFC/BAPI-compliant payloads generated for SAP S/4HANA, Odoo, and Jurnal.id.
 
 ---
 
@@ -166,57 +236,6 @@ SuratJalan.AI includes **6 authentic enterprise test presets** covering Indonesi
 | **Preset 4** | **PT FRISIAN FLAG INDONESIA**<br>$\rightarrow$ Transmart DC Lebak Bulus | **Cold Chain / Dairy Temp Abuse (+14°C)**<br>Reefer truck breach (+14°C vs standard +4°C). 15 Karton UHT milk acidified and rejected. Checker temperature note grounded. | **Rp 3.300.000** | 🟡 **FLAGGED**<br>*(Cold Chain Claim)* |
 | **Preset 5** | **PT SEMEN INDONESIA (PERSERO) TBK**<br>$\rightarrow$ Mitra10 DC Bintaro | **Heavy Industry / Rain Damaged Cement**<br>Tronton truck delivery with 20 rain-soaked hardened cement sacks deducted via checker note. | **Rp 1.360.000** | 🟡 **FLAGGED**<br>*(Damage Debit)* |
 | **Preset 6** | **PT KALBE FARMA TBK**<br>$\rightarrow$ Kimia Farma DC Pulo Gadung | **Pharma CDOB Expiry Rejection**<br>Kimia Farma DC rejection of Woods Syrup batch with <3 months shelf-life. Red triangular **REJEK QC** stamp detected. | **Rp 27.000.000** | 🔴 **REJECTED**<br>*(Batch Quarantined)* |
-
----
-
-## 🚀 Quick Start & 0-Config Local Reproduction
-
-The repository is built for **immediate, zero-friction local reproducibility** as required by the COMPFEST 18 AIC guidelines.
-
-### Option A: 1-Command Startup via Docker Compose (Recommended for Judges)
-
-```bash
-# 1. Clone the repository
-git clone https://github.com/hi-aprilwang/suratjalan-ai.git
-cd suratjalan-ai
-
-# 2. Launch both Backend (:8000) and Frontend (:3000) containers
-docker compose up --build
-```
-
-- 🌐 **Frontend Workstation**: [http://localhost:3000](http://localhost:3000)
-- 📖 **Interactive API Documentation (Swagger)**: [http://localhost:8000/docs](http://localhost:8000/docs)
-- 🩺 **Backend Health Endpoint**: [http://localhost:8000/api/health](http://localhost:8000/api/health)
-- ℹ️ **How It Works Page**: [http://localhost:3000/how-it-works](http://localhost:3000/how-it-works)
-
----
-
-### Option B: Manual Local Development
-
-#### 1. Backend Setup (FastAPI Python 3.11):
-```bash
-cd backend
-python -m venv venv
-
-# Activate virtual environment
-# Windows:
-venv\Scripts\activate
-# Linux/macOS:
-source venv/bin/activate
-
-pip install -r requirements.txt
-
-# Start FastAPI server on port 8000
-uvicorn app.main:app --reload --port 8000
-```
-
-#### 2. Frontend Setup (Next.js 16 with pnpm):
-```bash
-cd frontend
-pnpm install
-pnpm dev
-```
-Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
