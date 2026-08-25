@@ -1,0 +1,324 @@
+import { AuditReport, PresetItem } from '../types/audit';
+
+export const PRESETS: PresetItem[] = [
+  {
+    id: 'preset_1',
+    title: 'Preset 1: Clean Delivery (100% Match)',
+    company: 'PT INDOFOOD CBP SUKSES MAKMUR TBK',
+    expected_status: 'APPROVED_FOR_INVOICING',
+    image_url: '/samples/preset_1_indofood_clean.png',
+    description: 'Complete delivery to Alfamart DC Cikokol with all 165 cartons accounted for, valid rubber stamp, and verified checker signature.'
+  },
+  {
+    id: 'preset_2',
+    title: 'Preset 2: Partial Return / Damaged Wet Cartons',
+    company: 'PT MAYORA INDAH TBK',
+    expected_status: 'DISCREPANCY_FLAGGED',
+    image_url: '/samples/preset_2_mayora_discrepancy.png',
+    description: 'Beng Beng delivery with 8 wet cartons returned. Features handwritten strikethrough correction, retur note, and partial receiving stamp.'
+  },
+  {
+    id: 'preset_3',
+    title: 'Preset 3: Critical Damage & Missing Stamp Alert',
+    company: 'PT SAYAP MAS UTAMA (WINGS GROUP)',
+    expected_status: 'CRITICAL_REJECTED',
+    image_url: '/samples/preset_3_wings_damage_alert.png',
+    description: 'Delivery to Hypermart with leaking SoKlin & crushed Ale-Ale cartons, plus MISSING receiver store stamp.'
+  }
+];
+
+export const MOCK_REPORTS: Record<string, AuditReport> = {
+  preset_1: {
+    audit_id: 'AUD-ICBP9481',
+    timestamp: new Date().toISOString(),
+    overall_status: 'APPROVED_FOR_INVOICING',
+    confidence_score: 0.985,
+    total_ordered_items: 165,
+    total_received_items: 165,
+    discrepancy_count: 0,
+    total_claim_amount_idr: 0,
+    metadata: {
+      document_number: 'SJ/ICBP/2026/08/9481',
+      po_number: 'PO-WHS-2026-881',
+      date: '25 Agustus 2026',
+      sender_company: 'PT INDOFOOD CBP SUKSES MAKMUR TBK',
+      receiver_company: 'PT SUMBER ALFARIA TRIJAYA TBK (ALFAMART DC)',
+      truck_plate: 'B 9421 UXZ',
+      driver_name: 'Budi Santoso (PT Surya Logistik)'
+    },
+    verification: {
+      stamp_detected: true,
+      stamp_text: 'PT SUMBER ALFARIA TRIJAYA - DITERIMA DC CIKOKOL',
+      stamp_valid: true,
+      receiver_signature_detected: true,
+      driver_signature_detected: true,
+      all_checks_passed: true,
+      audit_notes: [
+        'Official DC receiving stamp clearly detected and verified.',
+        'Warehouse checker and driver signatures present.',
+        '100% physical item count matches original Purchase Order.'
+      ]
+    },
+    items: [
+      {
+        item_number: '1',
+        item_name: 'INDOMIE GORENG SPESIAL 85G (KARTON @40 PCS)',
+        ordered_qty: 50,
+        received_qty: 50,
+        unit: 'KARTON',
+        variance: 0,
+        status: 'MATCH',
+        handwritten_note: 'Kondisi Baik - Segel Utuh',
+        unit_price_estimate_idr: 125000,
+        claim_amount_idr: 0,
+        bounding_box: { ymin: 225, xmin: 50, ymax: 255, xmax: 950, label: 'Item 1: Indomie Goreng', category: 'item_row' }
+      },
+      {
+        item_number: '2',
+        item_name: 'CHITATO SAPI PANGGANG 68G (KARTON @30 PCS)',
+        ordered_qty: 30,
+        received_qty: 30,
+        unit: 'KARTON',
+        variance: 0,
+        status: 'MATCH',
+        handwritten_note: 'Kondisi Baik',
+        unit_price_estimate_idr: 210000,
+        claim_amount_idr: 0,
+        bounding_box: { ymin: 256, xmin: 50, ymax: 286, xmax: 950, label: 'Item 2: Chitato Sapi Panggang', category: 'item_row' }
+      },
+      {
+        item_number: '3',
+        item_name: 'POP MIE KUAH AYAM BAWANG 75G (KARTON @24 PCS)',
+        ordered_qty: 40,
+        received_qty: 40,
+        unit: 'KARTON',
+        variance: 0,
+        status: 'MATCH',
+        handwritten_note: 'Kondisi Baik',
+        unit_price_estimate_idr: 145000,
+        claim_amount_idr: 0,
+        bounding_box: { ymin: 287, xmin: 50, ymax: 317, xmax: 950, label: 'Item 3: Pop Mie', category: 'item_row' }
+      },
+      {
+        item_number: '4',
+        item_name: 'INDOFOOD KECAP MANIS POUCH 520ML (DUS @12 PCS)',
+        ordered_qty: 25,
+        received_qty: 25,
+        unit: 'DUS',
+        variance: 0,
+        status: 'MATCH',
+        handwritten_note: 'Kondisi Baik',
+        unit_price_estimate_idr: 180000,
+        claim_amount_idr: 0,
+        bounding_box: { ymin: 318, xmin: 50, ymax: 348, xmax: 950, label: 'Item 4: Kecap Manis', category: 'item_row' }
+      },
+      {
+        item_number: '5',
+        item_name: 'BUMBU RACIK AYAM GORENG (DUS @120 PCS)',
+        ordered_qty: 20,
+        received_qty: 20,
+        unit: 'DUS',
+        variance: 0,
+        status: 'MATCH',
+        handwritten_note: 'Kondisi Baik',
+        unit_price_estimate_idr: 240000,
+        claim_amount_idr: 0,
+        bounding_box: { ymin: 349, xmin: 50, ymax: 379, xmax: 950, label: 'Item 5: Bumbu Racik', category: 'item_row' }
+      }
+    ],
+    bounding_boxes: [
+      { ymin: 38, xmin: 50, ymax: 100, xmax: 950, label: 'Header & Metadata', category: 'header' },
+      { ymin: 200, xmin: 50, ymax: 380, xmax: 950, label: 'Reconciliation Items Table', category: 'item_row' },
+      { ymin: 620, xmin: 750, ymax: 740, xmax: 930, label: 'Verified DC Receiving Stamp', category: 'stamp' },
+      { ymin: 630, xmin: 100, ymax: 720, xmax: 250, label: 'Driver Signature (Budi)', category: 'signature' },
+      { ymin: 630, xmin: 440, ymax: 720, xmax: 590, label: 'DC Receiver Signature (Agus)', category: 'signature' }
+    ],
+    raw_remarks: 'Barang diterima lengkap dalam keadaan bersih dan tersegel.',
+    execution_time_ms: 480,
+    ai_model_used: 'Gemini 2.0 Flash (Multimodal VLM)'
+  },
+  preset_2: {
+    audit_id: 'AUD-MYR4421',
+    timestamp: new Date().toISOString(),
+    overall_status: 'DISCREPANCY_FLAGGED',
+    confidence_score: 0.965,
+    total_ordered_items: 250,
+    total_received_items: 242,
+    discrepancy_count: 1,
+    total_claim_amount_idr: 1440000,
+    metadata: {
+      document_number: 'MYR-LOG-JKT-2026-4421',
+      po_number: 'PO-IDM-2026-1049',
+      date: '25 Agustus 2026',
+      sender_company: 'PT MAYORA INDAH TBK',
+      receiver_company: 'PT INDOMARCO PRISMATAMA (INDOMARET DC ANCOL)',
+      truck_plate: 'B 9081 PQR',
+      driver_name: 'Hendra Gunawan'
+    },
+    verification: {
+      stamp_detected: true,
+      stamp_text: 'INDOMARCO PRISMATAMA - DC ANCOL - TERIMA SEBAGIAN / RETUR',
+      stamp_valid: true,
+      receiver_signature_detected: true,
+      driver_signature_detected: true,
+      all_checks_passed: false,
+      audit_notes: [
+        'Discrepancy detected on Beng Beng Regular: Ordered 60 Dus, Received 52 Dus (Shortage of 8 Dus).',
+        "Handwritten strikethrough and annotation 'RETUR 8 DUS (KARDUS BASAH)' extracted with high confidence.",
+        "Partial receiving stamp 'TERIMA SEBAGIAN / RETUR' confirmed on document.",
+        'Invoice debit claim recommendation generated: IDR 1,440,000 deduction.'
+      ]
+    },
+    items: [
+      {
+        item_number: '1',
+        item_name: 'ROMA BISKUIT KELAPA 300G (DUS @24)',
+        ordered_qty: 100,
+        received_qty: 100,
+        unit: 'DUS',
+        variance: 0,
+        status: 'MATCH',
+        handwritten_note: 'Lengkap',
+        unit_price_estimate_idr: 155000,
+        claim_amount_idr: 0,
+        bounding_box: { ymin: 225, xmin: 50, ymax: 255, xmax: 950, label: 'Item 1: Roma Kelapa', category: 'item_row' }
+      },
+      {
+        item_number: '2',
+        item_name: 'BENG BENG REGULAR 20x20G (DUS @12 BOX)',
+        ordered_qty: 60,
+        received_qty: 52,
+        unit: 'DUS',
+        variance: -8,
+        status: 'DISCREPANCY',
+        handwritten_note: 'RETUR 8 DUS (KARDUS BASAH) - Sopir bawa kembali',
+        unit_price_estimate_idr: 180000,
+        claim_amount_idr: 1440000,
+        bounding_box: { ymin: 256, xmin: 50, ymax: 295, xmax: 950, label: 'Discrepancy Alert: Beng Beng -8 Dus', category: 'handwritten_retur' }
+      },
+      {
+        item_number: '3',
+        item_name: 'TORABIKA CAPPUCCINO 10x25G (DUS @10 RCG)',
+        ordered_qty: 50,
+        received_qty: 50,
+        unit: 'DUS',
+        variance: 0,
+        status: 'MATCH',
+        handwritten_note: 'Lengkap',
+        unit_price_estimate_idr: 165000,
+        claim_amount_idr: 0,
+        bounding_box: { ymin: 296, xmin: 50, ymax: 326, xmax: 950, label: 'Item 3: Torabika Cappuccino', category: 'item_row' }
+      },
+      {
+        item_number: '4',
+        item_name: 'KOPIKO COFFEE CANDY 150G (DUS @24 BAG)',
+        ordered_qty: 40,
+        received_qty: 40,
+        unit: 'DUS',
+        variance: 0,
+        status: 'MATCH',
+        handwritten_note: 'Lengkap',
+        unit_price_estimate_idr: 190000,
+        claim_amount_idr: 0,
+        bounding_box: { ymin: 327, xmin: 50, ymax: 357, xmax: 950, label: 'Item 4: Kopiko Candy', category: 'item_row' }
+      }
+    ],
+    bounding_boxes: [
+      { ymin: 38, xmin: 50, ymax: 100, xmax: 950, label: 'Header & Metadata', category: 'header' },
+      { ymin: 256, xmin: 50, ymax: 295, xmax: 950, label: '⚠️ Handwritten Retur 8 Dus (Beng Beng)', category: 'handwritten_retur' },
+      { ymin: 440, xmin: 50, ymax: 510, xmax: 950, label: 'Berita Acara Selisih & Retur', category: 'warning' },
+      { ymin: 620, xmin: 750, ymax: 740, xmax: 930, label: 'Partial Receiving Stamp (Retur)', category: 'stamp' },
+      { ymin: 630, xmin: 100, ymax: 720, xmax: 250, label: 'Driver Signature (Hendra)', category: 'signature' },
+      { ymin: 630, xmin: 440, ymax: 720, xmax: 590, label: 'Checker Signature (Wahyu)', category: 'signature' }
+    ],
+    raw_remarks: 'Selisih 8 Dus Beng Beng diretur langsung ke pabrik karena kemasan basah saat pembongkaran.',
+    execution_time_ms: 520,
+    ai_model_used: 'Gemini 2.0 Flash (Multimodal VLM)'
+  },
+  preset_3: {
+    audit_id: 'AUD-SMU7890',
+    timestamp: new Date().toISOString(),
+    overall_status: 'CRITICAL_REJECTED',
+    confidence_score: 0.940,
+    total_ordered_items: 230,
+    total_received_items: 214,
+    discrepancy_count: 2,
+    total_claim_amount_idr: 2780000,
+    metadata: {
+      document_number: 'SJ-SMU-2026-7890',
+      po_number: 'PO-HYP-2026-3120',
+      date: '25 Agustus 2026',
+      sender_company: 'PT SAYAP MAS UTAMA (WINGS GROUP)',
+      receiver_company: 'HYPERMART SUPERMAL KARAWACI',
+      truck_plate: 'B 9552 WXY',
+      driver_name: 'Dedi Kusnadi (Logisly Express)'
+    },
+    verification: {
+      stamp_detected: false,
+      stamp_text: null,
+      stamp_valid: false,
+      receiver_signature_detected: true,
+      driver_signature_detected: true,
+      all_checks_passed: false,
+      audit_notes: [
+        'CRITICAL: Store receiving rubber stamp is MISSING from the document.',
+        'Major damage reported: 6 Dus SoKlin Liquid broken/leaked (IDR 1,380,000).',
+        'Damaged goods reported: 10 Dus Ale-Ale crushed/rejected (IDR 1,400,000).',
+        'Invoice status: BLOCKED pending formal store stamp and damage claim sign-off.'
+      ]
+    },
+    items: [
+      {
+        item_number: '1',
+        item_name: 'SO KLIN LIQUID DETERGENT 750ML (DUS @12)',
+        ordered_qty: 80,
+        received_qty: 74,
+        unit: 'DUS',
+        variance: -6,
+        status: 'DAMAGED',
+        handwritten_note: '6 DUS BOCOR/HANCUR',
+        unit_price_estimate_idr: 230000,
+        claim_amount_idr: 1380000,
+        bounding_box: { ymin: 225, xmin: 50, ymax: 262, xmax: 950, label: '⚠️ Damaged Goods: 6 Dus SoKlin Bocor', category: 'warning' }
+      },
+      {
+        item_number: '2',
+        item_name: 'NUVO FAMILY SABUN BATANG 110G (DUS @72)',
+        ordered_qty: 50,
+        received_qty: 50,
+        unit: 'DUS',
+        variance: 0,
+        status: 'MATCH',
+        handwritten_note: 'Lengkap',
+        unit_price_estimate_idr: 175000,
+        claim_amount_idr: 0,
+        bounding_box: { ymin: 263, xmin: 50, ymax: 293, xmax: 950, label: 'Item 2: Nuvo Family', category: 'item_row' }
+      },
+      {
+        item_number: '3',
+        item_name: 'ALE-ALE MINUMAN RASA JERUK 200ML (DUS @24)',
+        ordered_qty: 100,
+        received_qty: 90,
+        unit: 'DUS',
+        variance: -10,
+        status: 'DAMAGED',
+        handwritten_note: '10 DUS PENYOK/RETUR',
+        unit_price_estimate_idr: 140000,
+        claim_amount_idr: 1400000,
+        bounding_box: { ymin: 294, xmin: 50, ymax: 331, xmax: 950, label: '⚠️ Crushed Packaging: 10 Dus Ale-Ale', category: 'warning' }
+      }
+    ],
+    bounding_boxes: [
+      { ymin: 38, xmin: 50, ymax: 100, xmax: 950, label: 'Header & Metadata', category: 'header' },
+      { ymin: 225, xmin: 50, ymax: 262, xmax: 950, label: '⚠️ SoKlin Leakage Discrepancy', category: 'warning' },
+      { ymin: 294, xmin: 50, ymax: 331, xmax: 950, label: '⚠️ Ale-Ale Crushed Cartons Discrepancy', category: 'warning' },
+      { ymin: 440, xmin: 50, ymax: 510, xmax: 950, label: 'Berita Acara Kerusakan Barang', category: 'warning' },
+      { ymin: 620, xmin: 750, ymax: 740, xmax: 930, label: '❌ MISSING STORE STAMP', category: 'warning' },
+      { ymin: 630, xmin: 100, ymax: 720, xmax: 250, label: 'Driver Signature (Dedi)', category: 'signature' },
+      { ymin: 630, xmin: 440, ymax: 720, xmax: 590, label: 'Store Receiving Signature (Rahmat)', category: 'signature' }
+    ],
+    raw_remarks: 'Ditemukan 6 Dus SoKlin kemasan pecah bocor dan 10 Dus Ale-Ale penyok parah. Barang rusak tidak diterima.',
+    execution_time_ms: 590,
+    ai_model_used: 'Gemini 2.0 Flash (Multimodal VLM)'
+  }
+};
