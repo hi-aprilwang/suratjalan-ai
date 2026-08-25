@@ -7,6 +7,7 @@ import { DocumentViewer } from '@/components/DocumentViewer';
 import { AuditSummary } from '@/components/AuditSummary';
 import { DiscrepancyTable } from '@/components/DiscrepancyTable';
 import { ExportModal } from '@/components/ExportModal';
+import { HowItWorks } from '@/components/HowItWorks';
 import { CommandBar } from '@/components/ui/command-bar';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -23,7 +24,8 @@ import {
   Zap,
   TrendingUp,
   Clock,
-  Coins
+  Coins,
+  BookOpen
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -135,12 +137,16 @@ export default function AuditWorkstationPage() {
         />
 
         {/* View Switcher Tabs */}
-        <div className="flex items-center justify-between gap-3 pt-2 border-b border-zinc-200 dark:border-zinc-800/80 pb-3">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2 border-b border-zinc-200 dark:border-zinc-800/80 pb-3">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-auto">
             <TabsList className="bg-zinc-100 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800">
               <TabsTrigger value="workstation" className="gap-2 text-sm font-medium">
                 <Layers className="w-4 h-4" />
                 <span>Audit Workstation (Split View)</span>
+              </TabsTrigger>
+              <TabsTrigger value="how-it-works" className="gap-2 text-sm font-medium">
+                <BookOpen className="w-4 h-4" />
+                <span>Cara Kerja & Workflow</span>
               </TabsTrigger>
               <TabsTrigger value="analytics" className="gap-2 text-sm font-medium">
                 <BarChart3 className="w-4 h-4" />
@@ -174,7 +180,7 @@ export default function AuditWorkstationPage() {
         </div>
 
         {/* Tab 1: Workstation Dual-Pane View */}
-        {activeTab === 'workstation' ? (
+        {activeTab === 'workstation' && (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
             
             {/* Left Column: Physical Document & Spatial Canvas (5 cols) */}
@@ -228,8 +234,15 @@ export default function AuditWorkstationPage() {
             </div>
 
           </div>
-        ) : (
-          /* Tab 2: Analytics & Unit Economics Impact View */
+        )}
+
+        {/* Tab 2: How It Works & System Flow */}
+        {activeTab === 'how-it-works' && (
+          <HowItWorks />
+        )}
+
+        {/* Tab 3: Analytics & Unit Economics Impact View */}
+        {activeTab === 'analytics' && (
           <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-6 space-y-6 shadow-xs">
             <div className="border-b border-zinc-200 dark:border-zinc-800/80 pb-4">
               <div className="flex items-center gap-2 mb-1.5">

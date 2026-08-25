@@ -4,7 +4,6 @@ import React from 'react';
 import { Search, Terminal, ArrowUpRight, Activity } from 'lucide-react';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
-import { Separator } from './ui/separator';
 import { ThemeToggle } from './ThemeToggle';
 
 interface NavbarProps {
@@ -26,32 +25,18 @@ export const Navbar: React.FC<NavbarProps> = ({
     <header className="sticky top-0 z-40 w-full border-b border-zinc-200 dark:border-zinc-800 bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md transition-colors duration-200">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
         
-        {/* Left: Brand & Telemetry */}
-        <div className="flex items-center gap-3.5">
-          <div className="flex items-center gap-2.5">
-            <div className="h-9 w-9 rounded-lg bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700/80 flex items-center justify-center text-zinc-900 dark:text-zinc-100 shadow-inner">
-              <Terminal className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-bold text-base tracking-tight text-zinc-900 dark:text-zinc-100">
-                  SURATJALAN<span className="text-blue-600 dark:text-blue-400">.AI</span>
-                </span>
-                <Badge variant="outline" className="text-sm border-zinc-300 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 font-medium">
-                  AIC-v1.0
-                </Badge>
-              </div>
-            </div>
+        {/* Left: Brand */}
+        <div className="flex items-center gap-3">
+          <div className="h-9 w-9 rounded-lg bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700/80 flex items-center justify-center text-zinc-900 dark:text-zinc-100 shadow-inner">
+            <Terminal className="h-5 w-5 text-blue-600 dark:text-blue-400" />
           </div>
-
-          <Separator orientation="vertical" className="h-6 hidden md:block bg-zinc-200 dark:bg-zinc-800" />
-
-          {/* Subtitle / Department */}
-          <div className="hidden lg:flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400">
-            <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-sm text-zinc-600 dark:text-zinc-400 font-medium">
-              AUDIT ENGINE ACTIVE // INDONESIAN SUPPLY CHAINS
+          <div className="flex items-center gap-2">
+            <span className="font-bold text-base tracking-tight text-zinc-900 dark:text-zinc-100">
+              SURATJALAN<span className="text-blue-600 dark:text-blue-400">.AI</span>
             </span>
+            <Badge variant="outline" className="text-sm border-zinc-300 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 font-medium">
+              AIC-v1.0
+            </Badge>
           </div>
         </div>
 
