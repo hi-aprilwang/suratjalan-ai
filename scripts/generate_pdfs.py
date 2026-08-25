@@ -522,6 +522,7 @@ def convert_md_to_pdf(md_path, pdf_path, title="SuratJalan.AI Document"):
         "--disable-gpu",
         "--no-sandbox",
         "--no-pdf-header-footer",
+        "--print-to-pdf-no-header",
         "--run-all-compositor-stages-before-draw",
         "--virtual-time-budget=4000",
         f"--print-to-pdf={pdf_path}",
