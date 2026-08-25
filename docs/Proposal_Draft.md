@@ -13,17 +13,14 @@
 
 ## IDENTITAS KELOMPOK DAN INOVASI
 
-```
-┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
-│ IDENTITAS PROYEK DAN TAUTAN RESMI:                                                               │
-│ • Judul Inovasi       : SuratJalan.AI (ResiVision)                                               │
-│ • Kategori Kompetisi  : AI Innovation Challenge (AIC) — COMPFEST 18                              │
-│ • Asal Institusi      : Universitas Bina Nusantara (BINUS University)                            │
-│ • Repository Publik   : https://github.com/hi-aprilwang/suratjalan-ai                             │
-│ • Interactive Web App : http://localhost:3000 (0-Config Local Docker Ready)                      │
-│ • Backend API Console : http://localhost:8000/docs (FastAPI Swagger UI)                          │
-└──────────────────────────────────────────────────────────────────────────────────────────────────┘
-```
+| Parameter Proyek | Keterangan dan Tautan Resmi |
+| :--- | :--- |
+| **Judul Inovasi** | **SuratJalan.AI (ResiVision)** |
+| **Kategori Kompetisi** | AI Innovation Challenge (AIC) — COMPFEST 18 |
+| **Institusi Pendidikan** | **Universitas Bina Nusantara (BINUS University)** |
+| **Repository Publik** | [https://github.com/hi-aprilwang/suratjalan-ai](https://github.com/hi-aprilwang/suratjalan-ai) |
+| **Interactive Web Workstation** | `http://localhost:3000` (0-Config Local Docker Ready) |
+| **Backend API Console** | `http://localhost:8000/docs` (FastAPI Swagger UI) |
 
 ### Biodata Lengkap Anggota Tim
 
@@ -107,20 +104,13 @@ Dalam tata kelola rantai pasok formal di Indonesia, *Surat Jalan* memegang fungs
 
 ### 1.2 Anatomi Titik Friksi Surat Jalan 3-Ply Carbon Paper
 
-```
-┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
-│ RANTAI MASALAH SURAT JALAN MANUAL:                                                               │
-│                                                                                                  │
-│ [Pemuatan Pabrik]      [Area Bongkar DC]        [Foto Ponsel Buram]      [Audit Manual Admin]    │
-│  Surat Jalan 3-ply ──>  Checker mencoret  ───>   Pengemudi memfoto  ───>  Admin mengetik ulang   │
-│  dicetak komputer       retur & stempel basah    kondisi gelap/miring     5-10 menit/lembar      │
-│                                                                                  │               │
-│                                                                                  ▼               │
-│ [Krisis Likuiditas]    [Sengketa Klaim]         [Penagihan Terkunci]   [Faktur Tertunda 30 Hari] │
-│  Modal kerja UMKM  <──  Selisih hitung    <───   Faktur tidak bisa  <───  Menunggu fisik kertas   │
-│  transporter macet      miliaran rupiah          terbit ke buyer          kembali dari ekspedisi │
-└──────────────────────────────────────────────────────────────────────────────────────────────────┘
-```
+| Tahap Operasional | Aktivitas Lapangan | Titik Friksi & Risiko Bisnis |
+| :--- | :--- | :--- |
+| **1. Pemuatan Pabrik** | Surat jalan 3-ply dicetak komputer dan diserahkan ke pengemudi. | Kertas fisik rentan rusak, sobek, atau hilang selama perjalanan antarpulau. |
+| **2. Area Bongkar DC** | Checker menghitung muatan, mencoret barang retur, dan membubuhkan stempel. | Coretan pulpen buram, stempel miring atau pudar memicu keraguan legalitas. |
+| **3. Foto Ponsel Driver** | Pengemudi memotret dokumen di area muat malam hari dengan pencahayaan minim. | Citra lecek, berbayang (*shadows*), dan miring (*skewed*) menyulitkan audit manual. |
+| **4. Audit Manual Admin** | Staf akuntansi mengetik ulang data lembar demi lembar (5–10 menit per dokumen). | Proses lambat, rawan salah ketik (*human error*), dan antrean faktur menumpuk. |
+| **5. Dampak Finansial** | Faktur tertahan 14–30 hari menunggu audit selesai atau fisik kertas kembali. | Modal kerja jutaan UMKM transporter tercekik; timbul sengketa klaim. |
 
 Di lapangan, proses serah terima barang hampir selalu diwarnai oleh anomali fisik:
 - **Barang Rusak dan Basah (*Damaged/Wet Goods*)**: Kardus biskuit remuk di tumpukan bawah atau kemasan detergen bocor yang langsung dicoret oleh checker gudang dengan pulpen.
@@ -166,17 +156,13 @@ Inovasi ini selaras secara sempurna dengan tema **COMPFEST 18: *"AI for the Back
 
 ## BAB III: SOLUSI DAN ORISINALITAS INOVASI TEKNOLOGI AI
 
-```
-┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
-│ INTI INOVASI SURATJALAN.AI:                                                                      │
-│                                                                                                  │
-│ 1. Multimodal VLM (Gemini 2.0 Flash) ──> Membaca teks, stempel, paraf & coretan dalam 1 pass     │
-│ 2. Spatial Grounding [ymin, xmin, ymax, xmax] ──> Menautkan teks ke koordinat piksel asli        │
-│ 3. Deterministic Reconciliation Engine ──> Menghitung selisih unit & nilai klaim Rupiah          │
-│ 4. 3-Tier Verdict Automation ──> Approved (Hijau), Flagged (Kuning), Critical Rejected (Merah)   │
-│ 5. Multi-ERP Payload Gateway ──> JSON RFC/BAPI SAP S/4HANA, Odoo 17, & Mekari Jurnal.id         │
-└──────────────────────────────────────────────────────────────────────────────────────────────────┘
-```
+| Komponen Inovasi | Mekanisme & Logika Kerja | Nilai Tambah bagi Rantai Pasok |
+| :--- | :--- | :--- |
+| **1. Multimodal VLM (Gemini 2.0 Flash)** | Memproses citra visual dan teks secara simultan dalam 1 pass ($<1,5\text{s}$). | Membaca tulisan tangan, stempel basah, dan tabel tanpa OCR terfragmentasi. |
+| **2. Spatial Coordinate Grounding** | Memetakan seluruh entitas ke koordinat ternormalisasi $[y_{\min}, x_{\min}, y_{\max}, x_{\max}]$. | Menghubungkan baris tabel langsung ke bukti fisik pada foto (*hover sync*). |
+| **3. Deterministic Reconciliation Math** | Menghitung selisih unit $\Delta Q_i$ dan valuasi klaim finansial Rupiah otomatis. | Menjamin nol kesalahan kalkulasi matematis (*zero calculation error*). |
+| **4. 3-Tier Verdict Automation** | Klasifikasi otomatis: *Approved* (Hijau), *Flagged* (Kuning), *Critical Rejected* (Merah). | Mempercepat pengambilan keputusan kliring faktur secara terstandarisasi. |
+| **5. Multi-ERP Payload Gateway** | Menghasilkan payload terstruktur untuk SAP S/4HANA, Odoo 17, dan Mekari Jurnal.id. | Mengintegrasikan gudang fisik langsung ke sistem akuntansi cloud. |
 
 ### 3.1 Multimodal Vision-Language Model (Gemini 2.0 Flash VLM)
 Alih-alih menggunakan OCR bertingkat yang rentan terhadap akumulasi error (*cascading errors*), SuratJalan.AI menggunakan arsitektur Vision-Language Model mutakhir Google Gemini 2.0 Flash yang memproses token citra visual dan token teks secara holistik:
@@ -185,8 +171,10 @@ Alih-alih menggunakan OCR bertingkat yang rentan terhadap akumulasi error (*casc
 
 ### 3.2 Spatial Coordinate Grounding System
 Setiap entitas yang diekstraksi model dipetakan ke dalam koordinat bounding box ternormalisasi $[0, 1000]$:
-$$\text{top}_{\%} = \frac{y_{\min}}{1000} \times 100\%, \quad \text{left}_{\%} = \frac{x_{\min}}{1000} \times 100\%$$
-$$\text{height}_{\%} = \frac{y_{\max} - y_{\min}}{1000} \times 100\%, \quad \text{width}_{\%} = \frac{x_{\max} - x_{\min}}{1000} \times 100\%$$
+
+$$\text{top}_{\%} = \left(\frac{y_{\min}}{1000}\right) \times 100\%, \quad \text{left}_{\%} = \left(\frac{x_{\min}}{1000}\right) \times 100\%$$
+
+$$\text{height}_{\%} = \left(\frac{y_{\max} - y_{\min}}{1000}\right) \times 100\%, \quad \text{width}_{\%} = \left(\frac{x_{\max} - x_{\min}}{1000}\right) \times 100\%$$
 
 Fitur ini memungkinkan antarmuka frontend mengimplementasikan **Bi-Directional Hover Synchronization**: Ketika staf admin mengarahkan kursor ke baris barang di tabel rekonsiliasi, kanvas dokumen fisik secara otomatis menyorot posisi bounding box barang atau coretan tangan terkait dengan highlight warna neon interaktif.
 
@@ -197,12 +185,12 @@ Setelah kuantitas diekstraksi, sistem menjalankan kalkulasi deterministik bebas 
 2. **Nilai Klaim Finansial per Item (IDR)**:
    $$\text{Claim}_i = |\Delta Q_i| \times \text{Price}_{\text{unit}, i}$$
 3. **Total Nilai Klaim Tagihan (IDR)**:
-   $$\text{Total Claim} = \sum_{i=1}^{N} \text{Claim}_i$$
+   $$\text{Total Claim (IDR)} = \sum_{i=1}^{N} \text{Claim}_i$$
 
 ### 3.4 Logika Keputusan Audit Tiga Tingkat (3-Tier Verdict Engine)
-- **APPROVED_FOR_INVOICING (Status Disetujui)**: $\Delta Q_i = 0$ untuk seluruh $i$, stempel basah gudang terverifikasi, tanda tangan checker sah $\rightarrow$ *Faktur langsung diterbitkan 100%*.
-- **DISCREPANCY_FLAGGED (Status Rekonsiliasi Retur)**: Ditemukan $\Delta Q_i < 0$ (retur/barang kurang) dengan catatan checker $\rightarrow$ *Faktur disetujui bersyarat dengan penerbitan otomatis Nota Debet Klaim*.
-- **CRITICAL_REJECTED (Status Ditolak Kritis)**: Stempel toko hilang (*missing stamp security alert*), tanda tangan tidak sah, atau pelanggaran CDOB/suhu kritis $\rightarrow$ *Dokumen diblokir dan dialihkan ke investigasi fisik*.
+- **APPROVED_FOR_INVOICING (Status Disetujui)**: $\Delta Q_i = 0$ untuk seluruh $i$, stempel basah gudang terverifikasi, tanda tangan checker sah → *Faktur langsung diterbitkan 100%*.
+- **DISCREPANCY_FLAGGED (Status Rekonsiliasi Retur)**: Ditemukan $\Delta Q_i < 0$ (retur/barang kurang) dengan catatan checker → *Faktur disetujui bersyarat dengan penerbitan otomatis Nota Debet Klaim*.
+- **CRITICAL_REJECTED (Status Ditolak Kritis)**: Stempel toko hilang (*missing stamp security alert*), tanda tangan tidak sah, atau pelanggaran CDOB/suhu kritis → *Dokumen diblokir dan dialihkan ke investigasi fisik*.
 
 ---
 
@@ -210,33 +198,12 @@ Setelah kuantitas diekstraksi, sistem menjalankan kalkulasi deterministik bebas 
 
 ### 4.1 Arsitektur Sistem Menyeluruh
 
-```
-┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
-│ ARSITEKTUR SISTEM SURATJALAN.AI:                                                                 │
-│                                                                                                  │
-│ [FRONTEND: Next.js 16 + React 19 + TypeScript + Tailwind CSS]                                   │
-│  • Dashboard Audit Interaktif                                                                    │
-│  • Canvas Image Viewer & Bounding Box Engine                                                     │
-│  • Tabel Rekonsiliasi & Kalkulator Klaim Rupiah                                                  │
-│  • Gateway Modal Sinkronisasi ERP                                                                │
-│                                  │                                                               │
-│                                  ▼ POST /api/audit (Image / Preset ID)                           │
-│ [BACKEND: FastAPI + Python 3.11 + Pydantic v2]                                                   │
-│  • Image Preprocessing & Normalization (Pillow)                                                  │
-│  • Schema Enforcement & Deterministic Discrepancy Math                                           │
-│                                  │                                                               │
-│         ┌────────────────────────┴────────────────────────┐                                      │
-│         ▼                                                 ▼                                      │
-│ [LIVE VLM INFERENCE]                            [0-CONFIG OFFLINE ENGINE]                        │
-│  Google Gemini 2.0 Flash Multimodal VLM          Deterministic Indonesian Presets                │
-│                                  │                                                               │
-│                                  ▼ Validated AuditReport JSON                                    │
-│ [ENTERPRISE ERP GATEWAY] ────────────────────────────────────────────────────────┐               │
-│  • SAP S/4HANA (BAPI_GOODSMVT_CREATE)                                             │               │
-│  • Odoo ERP 17 (stock.picking / stock.move)                                       │               │
-│  • Mekari Jurnal.id (Auto Debit Memo / Faktur Pajak)                              ▼               │
-└──────────────────────────────────────────────────────────────────────────────────────────────────┘
-```
+| Lapisan Arsitektur | Komponen & Teknologi | Fungsi & Tanggung Jawab Utama |
+| :--- | :--- | :--- |
+| **Frontend Workstation** | Next.js 16 + React 19 + TypeScript + Tailwind CSS | Dashboard visual interaktif, viewer kanvas dokumen dengan bounding box spasial, bi-directional hover sync, dan kontrol tema. |
+| **Backend API Service** | FastAPI (Python 3.11) + Pydantic v2 + Pillow | Endpoint sinkron `/api/audit` & `/api/export`, normalisasi citra, validasi skema JSON ketat, dan kalkulasi selisih matematis. |
+| **AI Intelligence Layer** | Google Gemini 2.0 Flash VLM + Fallback Presets | Model multimodal vision-language untuk ekstraksi semantik spasial dan engine fallback deterministik offline 0-config. |
+| **Enterprise ERP Gateway** | Connector SAP S/4HANA, Odoo 17, Mekari Jurnal.id | Penerbitan payload RFC/BAPI `BAPI_GOODSMVT_CREATE`, Odoo `stock.picking`, dan nota debet Jurnal.id otomatis. |
 
 ### 4.2 Alur Data dan Pipeline Akuisisi dan Sintesis Dataset
 Untuk melatih dan menguji model secara komprehensif, tim membangun pipeline sintesis dokumen logistik Indonesia (`synthetic_generator/generate_samples.py`):
@@ -273,26 +240,12 @@ SuratJalan.AI tidak hanya berhenti pada antarmuka visual, melainkan menerbitkan 
 ### 5.1 Analisis Komparatif Unit Economics dan Efisiensi Biaya
 Berikut adalah rincian kalkulasi biaya per dokumen antara metode audit manual konvensional dengan SuratJalan.AI berbasis Gemini 2.0 Flash VLM:
 
-```
-┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
-│ KALKULASI UNIT COST PER DOKUMEN:                                                                 │
-│                                                                                                  │
-│ 1. Audit Manual Konvensional:                                                                    │
-│    • Gaji Admin Logistik: Rp 4.500.000 / bulan (160 jam kerja) = Rp 468 / menit                  │
-│    • Waktu Audit per Surat Jalan: 7,5 menit                                                      │
-│    • Biaya Tenaga Kerja: 7,5 menit × Rp 468 = Rp 3.510 / lembar                                  │
-│    • Biaya Koreksi Sengketa & Rekonsiliasi Susulan: ~Rp 1.000 / lembar                           │
-│    👉 TOTAL BIAYA MANUAL: Rp 4.510 per lembar                                                    │
-│                                                                                                  │
-│ 2. SuratJalan.AI (Gemini 2.0 Flash VLM):                                                         │
-│    • Input Token Citra (~258 tokens) + Prompt (~500 tokens) = 758 tokens × $0.10/M = $0.0000758  │
-│    • Output Token JSON (~450 tokens) = 450 tokens × $0.40/M = $0.0000180                         │
-│    • Biaya Komputasi Cloud (FastAPI + Bandwidth) = $0.0000562                                    │
-│    👉 TOTAL BIAYA AI: $0.00015 ≈ Rp 2,40 per lembar                                              │
-│                                                                                                  │
-│ EFISIENSI PENGHEMATAN BIAYA RIIL: 99,94% (Turun dari Rp 4.510 menjadi Rp 2,40 per lembar)       │
-└──────────────────────────────────────────────────────────────────────────────────────────────────┘
-```
+| Komponen Biaya Operasional | Audit Manual Konvensional | SuratJalan.AI (Gemini 2.0 Flash VLM) | Efisiensi & Penghematan |
+| :--- | :--- | :--- | :---: |
+| **Biaya Tenaga Kerja / Token VLM** | Rp3.510 (7,5 menit @ Rp468/menit) | Rp1,48 ($0.0000938 input & output VLM) | **99,96% Penghematan** |
+| **Biaya Komputasi & Server** | - | Rp0,92 ($0.0000562 FastAPI & bandwidth) | Infrastruktur terdistribusi efisien |
+| **Biaya Koreksi Sengketa & Klaim Susulan** | ~Rp1.000 per lembar | Rp0,00 (Koreksi matematis deterministik) | **100% Eliminasi Koreksi Manual** |
+| **TOTAL BIAYA PEMROSESAN PER DOKUMEN** | **Rp4.510 per lembar** | **Rp2,40 per lembar ($0.00015)** | **99,94% TOTAL PENGHEMATAN** |
 
 ### 5.2 Model Monetisasi B2B SaaS
 SuratJalan.AI dirancang dengan model bisnis berjenjang (*tiered B2B subscription*) yang inklusif bagi seluruh lapisan pelaku usaha:

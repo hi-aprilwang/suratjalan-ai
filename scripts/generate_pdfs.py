@@ -14,7 +14,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <meta charset="UTF-8">
 <title>{title}</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
   @page {{
     size: A4;
@@ -177,35 +177,35 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     font-size: 7.2pt;
   }}
 
-  /* Box Diagram for System Architecture */
-  .diagram-box {{
-    background: #f8fafc;
-    border: 1.2px solid #cbd5e1;
-    border-radius: 6px;
-    padding: 10px;
-    margin: 0.8em 0;
-    page-break-inside: avoid;
-    break-inside: avoid;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 7.2pt;
-    line-height: 1.35;
-    color: #0f172a;
-  }}
-
-  /* Math Blocks */
+  /* Math Blocks & Formulas */
   .math-block {{
     background: #f8fafc;
     border: 1px solid #e2e8f0;
-    border-left: 3px solid #1e40af;
-    padding: 5px 10px;
-    margin: 0.5em 0;
+    border-left: 3.5px solid #1e40af;
+    padding: 8px 14px;
+    margin: 0.6em 0;
     border-radius: 4px;
-    font-family: 'Plus Jakarta Sans', serif;
-    font-style: italic;
-    font-size: 8.3pt;
+    font-size: 9.2pt;
+    color: #0f172a;
+    font-weight: 500;
     page-break-inside: avoid;
     break-inside: avoid;
   }}
+
+  .math-block i, p i, li i, td i, span i {{
+    font-family: 'Plus Jakarta Sans', -apple-system, serif;
+    font-style: italic;
+    color: #0f172a;
+  }}
+
+  sub, sup {{
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }}
+  sup {{ top: -0.5em; }}
+  sub {{ bottom: -0.25em; }}
 
   /* Badges & Keyboards */
   kbd {{
@@ -333,18 +333,85 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 </html>
 """
 
-def clean_emojis(text):
+def clean_emojis_and_ascii(text):
     # Regex to remove emojis
     emoji_pattern = re.compile(
         "[\U00010000-\U0010ffff\u2600-\u26ff\u2700-\u27bf\u2300-\u23ff\u2b50\u2b06\u2934\u25b6\u25c0\u2b05\u2190-\u21ff]+",
         flags=re.UNICODE
     )
-    return emoji_pattern.sub('', text)
+    text = emoji_pattern.sub('', text)
+
+    # Clean any leftover raw box-drawing characters
+    box_chars = ['┌', '┐', '└', '┘', '├', '┤', '┬', '┴', '┼', '─', '│', '═', '║', '╔', '╗', '╚', '╝', '╠', '╣', '╦', '╩', '╬']
+    for ch in box_chars:
+        text = text.replace(ch, '')
+
+    return text
+
+def format_math_latex(raw_str):
+    s = raw_str.strip()
+
+    # 1. Clean arrows, circles, and percents in text
+    s = re.sub(r'\\rightarrow', '→', s)
+    s = re.sub(r'\\circ', '°', s)
+    s = re.sub(r'\^°', '°', s)
+    s = re.sub(r'\\quad', ' &nbsp;&nbsp;&nbsp;&nbsp; ', s)
+    s = re.sub(r'\\,', ' ', s)
+
+    # 2. Coordinates formulas
+    s = re.sub(r'\\text\{top\}_\{?\\?%\}?', 'top<sub>%</sub>', s)
+    s = re.sub(r'\\text\{left\}_\{?\\?%\}?', 'left<sub>%</sub>', s)
+    s = re.sub(r'\\text\{height\}_\{?\\?%\}?', 'height<sub>%</sub>', s)
+    s = re.sub(r'\\text\{width\}_\{?\\?%\}?', 'width<sub>%</sub>', s)
+    s = re.sub(r'\\%', '%', s)
+
+    # Clean fraction patterns
+    s = re.sub(r'\\left\(\s*\\frac\{y_\{?\\min\}?\}\{1000\}\s*\\right\)', '(<i>y</i><sub>min</sub> / 1000)', s)
+    s = re.sub(r'\\left\(\s*\\frac\{x_\{?\\min\}?\}\{1000\}\s*\\right\)', '(<i>x</i><sub>min</sub> / 1000)', s)
+    s = re.sub(r'\\left\(\s*\\frac\{y_\{?\\max\}?\s*-\s*y_\{?\\min\}?\}\{1000\}\s*\\right\)', '((<i>y</i><sub>max</sub> − <i>y</i><sub>min</sub>) / 1000)', s)
+    s = re.sub(r'\\left\(\s*\\frac\{x_\{?\\max\}?\s*-\s*x_\{?\\min\}?\}\{1000\}\s*\\right\)', '((<i>x</i><sub>max</sub> − <i>x</i><sub>min</sub>) / 1000)', s)
+    s = re.sub(r'\\frac\{y_\{?\\min\}?\}\{1000\}', '(<i>y</i><sub>min</sub> / 1000)', s)
+    s = re.sub(r'\\frac\{x_\{?\\min\}?\}\{1000\}', '(<i>x</i><sub>min</sub> / 1000)', s)
+    s = re.sub(r'\\frac\{y_\{?\\max\}?\s*-\s*y_\{?\\min\}?\}\{1000\}', '((<i>y</i><sub>max</sub> − <i>y</i><sub>min</sub>) / 1000)', s)
+    s = re.sub(r'\\frac\{x_\{?\\max\}?\s*-\s*x_\{?\\min\}?\}\{1000\}', '((<i>x</i><sub>max</sub> − <i>x</i><sub>min</sub>) / 1000)', s)
+
+    # 3. Discrepancy & Claims
+    s = re.sub(r'\\text\{Claim\}_\{?i\}?', 'Claim<sub><i>i</i></sub>', s)
+    s = re.sub(r'\\text\{Price\}_\{?\\text\{unit\},\s*i\}?', 'Price<sub>unit, <i>i</i></sub>', s)
+    s = re.sub(r'\\text\{Total Claim\s*\(IDR\)\}', 'Total Claim (IDR)', s)
+    s = re.sub(r'\\text\{Total Claim\s*IDR\}', 'Total Claim (IDR)', s)
+    s = re.sub(r'\\text\{Total Claim\}', 'Total Claim', s)
+    s = re.sub(r'\\sum_\{i=1\}\^\{?N\}?', '∑<sub><i>i</i>=1</sub><sup><i>N</i></sup>', s)
+    s = re.sub(r'\\sum', '∑', s)
+    s = re.sub(r'\\Delta\s*Q_\{?i\}?', 'Δ<i>Q</i><sub><i>i</i></sub>', s)
+    s = re.sub(r'\\Delta\s*Q', 'Δ<i>Q</i>', s)
+    s = re.sub(r'Q_\{?\\text\{received\},\s*i\}?', '<i>Q</i><sub>received, <i>i</i></sub>', s)
+    s = re.sub(r'Q_\{?\\text\{ordered\},\s*i\}?', '<i>Q</i><sub>ordered, <i>i</i></sub>', s)
+
+    # 4. Coordinates array [y_min, x_min, ...]
+    s = re.sub(r'y_\{?\\min\}?', '<i>y</i><sub>min</sub>', s)
+    s = re.sub(r'x_\{?\\min\}?', '<i>x</i><sub>min</sub>', s)
+    s = re.sub(r'y_\{?\\max\}?', '<i>y</i><sub>max</sub>', s)
+    s = re.sub(r'x_\{?\\max\}?', '<i>x</i><sub>max</sub>', s)
+
+    # 5. Operators & standard words
+    s = re.sub(r'\\times', '×', s)
+    s = re.sub(r'\\ge\b', '≥', s)
+    s = re.sub(r'\\le\b', '≤', s)
+    s = re.sub(r'\\approx', '≈', s)
+    s = re.sub(r'\\pm', '±', s)
+    s = re.sub(r'\\text\{([^}]+)\}', r'\1', s)
+    s = s.replace('{', '').replace('}', '').replace('\\', '')
+    s = re.sub(r'(?<=\w)\s*-\s*(?=\w)', ' − ', s)
+    s = re.sub(r'\s*-\s*', ' − ', s)
+    s = re.sub(r'\s+', ' ', s).strip()
+    return s
+
 
 def render_math_and_clean(text):
-    text = clean_emojis(text)
+    text = clean_emojis_and_ascii(text)
 
-    # Clean any timestamps or time strings
+    # Clean any timestamps
     text = re.sub(r'2026-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[+\-]\d{2}:\d{2}', '', text)
 
     # Convert GitHub Alert boxes
@@ -367,16 +434,16 @@ def render_math_and_clean(text):
     # Convert LaTeX block formulas $$ ... $$
     def math_block_repl(m):
         raw = m.group(1).strip()
-        cleaned = clean_latex_symbols(raw)
-        return f'<div class="math-block">{cleaned}</div>'
+        formatted = format_math_latex(raw)
+        return f'<div class="math-block">{formatted}</div>'
 
     text = re.sub(r'\$\$(.*?)\$\$', math_block_repl, text, flags=re.DOTALL)
 
     # Convert inline LaTeX $ ... $
     def inline_math_repl(m):
         raw = m.group(1).strip()
-        cleaned = clean_latex_symbols(raw)
-        return f'<i>{cleaned}</i>'
+        formatted = format_math_latex(raw)
+        return f'<span>{formatted}</span>'
 
     text = re.sub(r'(?<!\$)\$(?!\$)(.*?)(?<!\$)\$(?!\$)', inline_math_repl, text)
 
@@ -390,53 +457,7 @@ def render_math_and_clean(text):
 
     text = re.sub(r'## DAFTAR ISI PROPOSAL\s*([\s\S]*?)(?=\n---\n|\n## )', toc_repl, text)
 
-    # Convert Mermaid code blocks to styled visual boxes
-    def mermaid_repl(m):
-        raw = m.group(1).strip()
-        return f'<div class="diagram-box"><strong>Arsitektur Diagram:</strong><br><pre style="background:transparent;color:#0f172a;padding:0;margin:4px 0;">{raw}</pre></div>'
-
-    text = re.sub(r'```mermaid\s*([\s\S]*?)```', mermaid_repl, text)
-
     return text
-
-def clean_latex_symbols(s):
-    replacements = [
-        (r'\\Delta', 'Δ'),
-        (r'\\sum_{i=1}\^{N}', '∑ (i=1..N)'),
-        (r'\\sum', '∑'),
-        (r'\\times', '×'),
-        (r'\\rightarrow', '→'),
-        (r'\\ge', '≥'),
-        (r'\\le', '≤'),
-        (r'\\approx', '≈'),
-        (r'\\pm', '±'),
-        (r'\\circ', '°'),
-        (r'\\text\{top\}', 'top'),
-        (r'\\text\{left\}', 'left'),
-        (r'\\text\{height\}', 'height'),
-        (r'\\text\{width\}', 'width'),
-        (r'\\text\{Claim\}', 'Claim'),
-        (r'\\text\{Total Claim\}', 'Total Claim'),
-        (r'\\text\{Total Claim IDR\}', 'Total Claim IDR'),
-        (r'\\text\{Price\}', 'Price'),
-        (r'\\text\{Received\}', 'Received'),
-        (r'\\text\{Ordered\}', 'Ordered'),
-        (r'\\text\{received\}', 'received'),
-        (r'\\text\{ordered\}', 'ordered'),
-        (r'\\text\{unit\}', 'unit'),
-        (r'\\text\{s\}', 's'),
-        (r'\\text\{C\}', 'C'),
-        (r'\\frac\{([^}]+)\}\{([^}]+)\}', r'(\1 / \2)'),
-        (r'\\quad', ' &nbsp; '),
-        (r'\\,', ' '),
-        (r'\\_', '_'),
-        (r'\{', ''),
-        (r'\}', ''),
-        (r'\\', ''),
-    ]
-    for pattern, repl in replacements:
-        s = re.sub(pattern, repl, s)
-    return s
 
 def convert_md_to_pdf(md_path, pdf_path, title="SuratJalan.AI Document"):
     if not os.path.exists(md_path):
