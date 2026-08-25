@@ -18,13 +18,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
   @page {{
     size: A4;
-    margin: 18mm 14mm 18mm 14mm;
-    @bottom-right {{
-      content: counter(page) " / " counter(pages);
-      font-size: 8pt;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      color: #64748b;
-    }}
+    margin: 16mm 14mm 16mm 14mm;
   }}
 
   *, *::before, *::after {{
@@ -35,7 +29,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     color: #1e293b;
     background-color: #ffffff;
-    font-size: 9.5pt;
+    font-size: 9pt;
     line-height: 1.55;
     margin: 0;
     padding: 0;
@@ -44,47 +38,48 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   h1, h2, h3, h4, h5, h6 {{
     color: #0f172a;
     font-weight: 700;
-    margin-top: 1.4em;
-    margin-bottom: 0.5em;
+    margin-top: 1.3em;
+    margin-bottom: 0.4em;
     page-break-after: avoid;
     break-after: avoid;
   }}
 
   h1 {{
-    font-size: 19pt;
+    font-size: 17pt;
     font-weight: 800;
-    line-height: 1.2;
-    border-bottom: 2.5px solid #2563eb;
-    padding-bottom: 8px;
+    line-height: 1.25;
+    border-bottom: 2.5px solid #1e40af;
+    padding-bottom: 6px;
     margin-top: 0;
     color: #1e3a8a;
   }}
 
   h2 {{
-    font-size: 13.5pt;
+    font-size: 12.5pt;
     font-weight: 700;
-    border-bottom: 1px solid #e2e8f0;
-    padding-bottom: 5px;
-    margin-top: 1.6em;
+    border-bottom: 1.5px solid #cbd5e1;
+    padding-bottom: 4px;
+    margin-top: 1.4em;
     color: #1e40af;
   }}
 
   h3 {{
-    font-size: 11pt;
+    font-size: 10.5pt;
     font-weight: 700;
     color: #334155;
-    margin-top: 1.2em;
+    margin-top: 1.1em;
   }}
 
   h4 {{
-    font-size: 10pt;
+    font-size: 9.5pt;
     font-weight: 600;
     color: #475569;
   }}
 
   p {{
     margin-top: 0;
-    margin-bottom: 0.8em;
+    margin-bottom: 0.7em;
+    text-align: justify;
   }}
 
   a {{
@@ -94,13 +89,13 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   }}
 
   blockquote {{
-    margin: 1em 0;
-    padding: 10px 16px;
+    margin: 0.8em 0;
+    padding: 8px 14px;
     background: #f8fafc;
     border-left: 4px solid #3b82f6;
-    border-radius: 0 8px 8px 0;
+    border-radius: 0 6px 6px 0;
     color: #334155;
-    font-size: 9pt;
+    font-size: 8.5pt;
   }}
 
   blockquote p:last-child {{
@@ -111,28 +106,27 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   table {{
     width: 100%;
     border-collapse: collapse;
-    margin: 1.2em 0;
-    font-size: 8.5pt;
+    margin: 1em 0;
+    font-size: 8pt;
     page-break-inside: avoid;
     break-inside: avoid;
     background: #ffffff;
     border-radius: 6px;
     overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
   }}
 
   th, td {{
-    padding: 7px 10px;
+    padding: 6px 8px;
     text-align: left;
     border: 1px solid #cbd5e1;
-    vertical-align: top;
+    vertical-align: middle;
   }}
 
   th {{
     background-color: #f1f5f9;
     color: #0f172a;
     font-weight: 700;
-    font-size: 8.5pt;
+    font-size: 8pt;
     border-bottom: 2px solid #94a3b8;
   }}
 
@@ -143,10 +137,10 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   /* Code Blocks & Inlines */
   code {{
     font-family: 'JetBrains Mono', Consolas, Monaco, monospace;
-    font-size: 8.5pt;
+    font-size: 8pt;
     background-color: #f1f5f9;
     color: #0f172a;
-    padding: 2px 5px;
+    padding: 1px 4px;
     border-radius: 4px;
     border: 1px solid #e2e8f0;
   }}
@@ -154,12 +148,12 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   pre {{
     background-color: #0f172a;
     color: #f8fafc;
-    padding: 12px 14px;
-    border-radius: 8px;
+    padding: 10px 12px;
+    border-radius: 6px;
     overflow-x: auto;
-    font-size: 8pt;
-    line-height: 1.45;
-    margin: 1em 0;
+    font-size: 7.5pt;
+    line-height: 1.4;
+    margin: 0.8em 0;
     page-break-inside: avoid;
     break-inside: avoid;
   }}
@@ -169,14 +163,43 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     color: inherit;
     padding: 0;
     border: none;
-    font-size: 8pt;
+    font-size: 7.5pt;
+  }}
+
+  /* Box Diagram for System Architecture */
+  .diagram-box {{
+    background: #f8fafc;
+    border: 1.5px solid #94a3b8;
+    border-radius: 8px;
+    padding: 12px;
+    margin: 1em 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.5pt;
+    line-height: 1.4;
+    color: #0f172a;
+  }}
+
+  /* Math Blocks */
+  .math-block {{
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-left: 3px solid #2563eb;
+    padding: 6px 12px;
+    margin: 0.6em 0;
+    border-radius: 4px;
+    font-family: 'Plus Jakarta Sans', serif;
+    font-style: italic;
+    font-size: 8.5pt;
+    page-break-inside: avoid;
   }}
 
   /* Badges & Keyboards */
   kbd {{
     font-family: 'JetBrains Mono', monospace;
     font-size: 7.5pt;
-    padding: 2px 6px;
+    padding: 1px 5px;
     border: 1px solid #94a3b8;
     border-bottom-width: 2px;
     border-radius: 4px;
@@ -187,9 +210,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
   /* Alerts styling */
   .alert {{
-    padding: 10px 14px;
-    border-radius: 8px;
-    margin: 1em 0;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin: 0.8em 0;
     font-size: 8.5pt;
     page-break-inside: avoid;
     break-inside: avoid;
@@ -215,80 +238,140 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
   /* Lists */
   ul, ol {{
-    padding-left: 20px;
-    margin-top: 0.3em;
-    margin-bottom: 0.8em;
+    padding-left: 18px;
+    margin-top: 0.2em;
+    margin-bottom: 0.6em;
   }}
 
   li {{
-    margin-bottom: 0.3em;
-  }}
-
-  li input[type="checkbox"] {{
-    margin-right: 6px;
+    margin-bottom: 0.25em;
   }}
 
   hr {{
     border: none;
     border-top: 1px solid #e2e8f0;
-    margin: 1.5em 0;
+    margin: 1.2em 0;
   }}
 
-  /* Header & Footer Branding */
   .doc-header {{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #e2e8f0;
-    padding-bottom: 8px;
-    margin-bottom: 16px;
+    border-bottom: 1.5px solid #cbd5e1;
+    padding-bottom: 6px;
+    margin-bottom: 14px;
     font-size: 7.5pt;
-    color: #64748b;
+    font-weight: 600;
+    color: #475569;
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }}
 
   .doc-footer {{
-    margin-top: 30px;
-    padding-top: 10px;
-    border-top: 1px solid #e2e8f0;
-    font-size: 7.5pt;
-    color: #94a3b8;
+    margin-top: 24px;
+    padding-top: 8px;
+    border-top: 1px solid #cbd5e1;
+    font-size: 7pt;
+    color: #64748b;
     text-align: center;
+    font-weight: 500;
   }}
 </style>
 </head>
 <body>
   <div class="doc-header">
     <span>COMPFEST 18 AI Innovation Challenge (AIC) • Universitas Indonesia</span>
-    <span>SuratJalan.AI (ResiVision)</span>
+    <span>SuratJalan.AI (ResiVision) • BINUS University</span>
   </div>
   {content}
   <div class="doc-footer">
-    SuratJalan.AI • Smart Logistics & B2B Supply Chain Automation • Fasilkom UI
+    SuratJalan.AI • Smart Logistics & B2B Proof-of-Delivery Audit • Fasilkom Universitas Indonesia
   </div>
 </body>
 </html>
 """
 
-def clean_markdown_for_html(md_text):
+def render_math_and_clean(text):
     # Convert GitHub Alert boxes
-    md_text = re.sub(
+    text = re.sub(
         r'>\s*\[!IMPORTANT\]\s*\n(>.*(?:\n>.*)*)',
         lambda m: '<div class="alert alert-important">' + markdown.markdown(m.group(1).replace('>', '').strip()) + '</div>',
-        md_text
+        text
     )
-    md_text = re.sub(
+    text = re.sub(
         r'>\s*\[!CAUTION\]\s*\n(>.*(?:\n>.*)*)',
         lambda m: '<div class="alert alert-caution">' + markdown.markdown(m.group(1).replace('>', '').strip()) + '</div>',
-        md_text
+        text
     )
-    md_text = re.sub(
+    text = re.sub(
         r'>\s*\[!TIP\]\s*\n(>.*(?:\n>.*)*)',
         lambda m: '<div class="alert alert-tip">' + markdown.markdown(m.group(1).replace('>', '').strip()) + '</div>',
-        md_text
+        text
     )
-    return md_text
+
+    # Convert LaTeX block formulas $$ ... $$
+    def math_block_repl(m):
+        raw = m.group(1).strip()
+        cleaned = clean_latex_symbols(raw)
+        return f'<div class="math-block">{cleaned}</div>'
+
+    text = re.sub(r'\$\$(.*?)\$\$', math_block_repl, text, flags=re.DOTALL)
+
+    # Convert inline LaTeX $ ... $
+    def inline_math_repl(m):
+        raw = m.group(1).strip()
+        cleaned = clean_latex_symbols(raw)
+        return f'<i>{cleaned}</i>'
+
+    text = re.sub(r'(?<!\$)\$(?!\$)(.*?)(?<!\$)\$(?!\$)', inline_math_repl, text)
+
+    # Convert Mermaid code blocks to styled ASCII / visual representation
+    def mermaid_repl(m):
+        raw = m.group(1).strip()
+        return f'<div class="diagram-box"><strong>Arsitektur Diagram:</strong><br><pre style="background:transparent;color:#0f172a;padding:0;margin:4px 0;">{raw}</pre></div>'
+
+    text = re.sub(r'```mermaid\s*([\s\S]*?)```', mermaid_repl, text)
+
+    return text
+
+def clean_latex_symbols(s):
+    replacements = [
+        (r'\\Delta', 'Δ'),
+        (r'\\sum_{i=1}\^{N}', '∑ (i=1..N)'),
+        (r'\\sum', '∑'),
+        (r'\\times', '×'),
+        (r'\\rightarrow', '→'),
+        (r'\\ge', '≥'),
+        (r'\\le', '≤'),
+        (r'\\approx', '≈'),
+        (r'\\pm', '±'),
+        (r'\\circ', '°'),
+        (r'\\text\{top\}', 'top'),
+        (r'\\text\{left\}', 'left'),
+        (r'\\text\{height\}', 'height'),
+        (r'\\text\{width\}', 'width'),
+        (r'\\text\{Claim\}', 'Claim'),
+        (r'\\text\{Total Claim\}', 'Total Claim'),
+        (r'\\text\{Total Claim IDR\}', 'Total Claim IDR'),
+        (r'\\text\{Price\}', 'Price'),
+        (r'\\text\{Received\}', 'Received'),
+        (r'\\text\{Ordered\}', 'Ordered'),
+        (r'\\text\{received\}', 'received'),
+        (r'\\text\{ordered\}', 'ordered'),
+        (r'\\text\{unit\}', 'unit'),
+        (r'\\text\{s\}', 's'),
+        (r'\\text\{C\}', 'C'),
+        (r'\\frac\{([^}]+)\}\{([^}]+)\}', r'(\1 / \2)'),
+        (r'\\quad', ' &nbsp; '),
+        (r'\\,', ' '),
+        (r'\\_', '_'),
+        (r'\{', ''),
+        (r'\}', ''),
+        (r'\\', ''),
+    ]
+    for pattern, repl in replacements:
+        s = re.sub(pattern, repl, s)
+    return s
 
 def convert_md_to_pdf(md_path, pdf_path, title="SuratJalan.AI Document"):
     if not os.path.exists(md_path):
@@ -298,7 +381,7 @@ def convert_md_to_pdf(md_path, pdf_path, title="SuratJalan.AI Document"):
     with open(md_path, "r", encoding="utf-8") as f:
         raw_md = f.read()
 
-    processed_md = clean_markdown_for_html(raw_md)
+    processed_md = render_math_and_clean(raw_md)
     html_body = markdown.markdown(
         processed_md,
         extensions=[
@@ -349,6 +432,11 @@ if __name__ == "__main__":
     
     docs_to_convert = [
         (
+            os.path.join(base_dir, "docs", "PROPOSAL_LENGKAP_COMPFEST_18.md"),
+            os.path.join(base_dir, "docs", "submission", "PROPOSAL_INOVASI.pdf"),
+            "SuratJalan.AI - Proposal Inovasi AIC COMPFEST 18"
+        ),
+        (
             os.path.join(base_dir, "docs", "submission", "VIDEO_PITCH_SCRIPT.md"),
             os.path.join(base_dir, "docs", "submission", "VIDEO_PITCH_SCRIPT.pdf"),
             "SuratJalan.AI - Video Pitch Script & Production Blueprint"
@@ -357,11 +445,6 @@ if __name__ == "__main__":
             os.path.join(base_dir, "docs", "submission", "DELIVERABLES_CHECKLIST.md"),
             os.path.join(base_dir, "docs", "submission", "DELIVERABLES_CHECKLIST.pdf"),
             "SuratJalan.AI - COMPFEST 18 Deliverables Checklist"
-        ),
-        (
-            os.path.join(base_dir, "docs", "PROPOSAL_LENGKAP_COMPFEST_18.md"),
-            os.path.join(base_dir, "docs", "submission", "PROPOSAL_INOVASI.pdf"),
-            "SuratJalan.AI - Proposal Inovasi AIC COMPFEST 18"
         ),
         (
             os.path.join(base_dir, "README.md"),
