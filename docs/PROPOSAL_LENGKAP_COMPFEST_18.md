@@ -111,7 +111,7 @@ Dalam tata kelola rantai pasok formal di Indonesia, *Surat Jalan* memegang fungs
 │  dicetak komputer       retur & stempel basah    kondisi gelap/miring     5-10 menit/lembar      │
 │                                                                                  │               │
 │                                                                                  ▼               │
-│ [Krisis Likuiditas]    [Sengketa Klaim]         [Penagihan Terkucin]   [Faktur Tertunda 30 Hari] │
+│ [Krisis Likuiditas]    [Sengketa Klaim]         [Penagihan Terkunci]   [Faktur Tertunda 30 Hari] │
 │  Modal kerja UMKM  <──  Selisih hitung    <───   Faktur tidak bisa  <───  Menunggu fisik kertas   │
 │  transporter macet      miliaran rupiah          terbit ke buyer          kembali dari ekspedisi │
 └──────────────────────────────────────────────────────────────────────────────────────────────────┘

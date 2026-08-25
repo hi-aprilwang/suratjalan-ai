@@ -359,7 +359,7 @@ if __name__ == "__main__":
             "SuratJalan.AI - COMPFEST 18 Deliverables Checklist"
         ),
         (
-            os.path.join(base_dir, "docs", "Proposal_Draft.md"),
+            os.path.join(base_dir, "docs", "PROPOSAL_LENGKAP_COMPFEST_18.md"),
             os.path.join(base_dir, "docs", "submission", "PROPOSAL_INOVASI.pdf"),
             "SuratJalan.AI - Proposal Inovasi AIC COMPFEST 18"
         ),
