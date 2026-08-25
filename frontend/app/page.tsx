@@ -124,44 +124,46 @@ export default function AuditWorkstationPage() {
         onOpenExport={() => setIsExportModalOpen(true)}
       />
 
-      {/* Main Workspace Container */}
-      <main className="flex-1 max-w-[1600px] w-full mx-auto px-4 sm:px-6 py-5 space-y-5">
+      {/* Main Workspace Container with Generous Breathing Room */}
+      <main className="flex-1 max-w-[1600px] w-full mx-auto px-6 sm:px-8 py-8 sm:py-10 space-y-8">
         
-        {/* Preset & Document Picker Toolbar */}
-        <PresetSelector
-          presets={presets}
-          selectedPresetId={selectedPresetId}
-          onSelectPreset={handleSelectPreset}
-          onFileUpload={handleFileUpload}
-          isAuditing={isAuditing}
-        />
+        {/* Preset & Document Picker Section */}
+        <section className="bg-white/60 dark:bg-zinc-950/60 rounded-2xl p-6 sm:p-7 border border-zinc-200/80 dark:border-zinc-800/80 shadow-xs backdrop-blur-sm">
+          <PresetSelector
+            presets={presets}
+            selectedPresetId={selectedPresetId}
+            onSelectPreset={handleSelectPreset}
+            onFileUpload={handleFileUpload}
+            isAuditing={isAuditing}
+          />
+        </section>
 
         {/* View Switcher Tabs */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2 border-b border-zinc-200 dark:border-zinc-800/80 pb-3">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2 border-b border-zinc-200 dark:border-zinc-800 pb-4">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-auto">
-            <TabsList className="bg-zinc-100 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800">
-              <TabsTrigger value="workstation" className="gap-2 text-sm font-medium">
+            <TabsList className="bg-zinc-100 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 p-1 rounded-xl">
+              <TabsTrigger value="workstation" className="gap-2 text-sm font-medium px-4 py-2 rounded-lg">
                 <Layers className="w-4 h-4" />
-                <span>Audit Workstation (Split View)</span>
+                <span>Audit Workstation</span>
               </TabsTrigger>
-              <TabsTrigger value="how-it-works" className="gap-2 text-sm font-medium">
+              <TabsTrigger value="how-it-works" className="gap-2 text-sm font-medium px-4 py-2 rounded-lg">
                 <BookOpen className="w-4 h-4" />
                 <span>Cara Kerja & Workflow</span>
               </TabsTrigger>
-              <TabsTrigger value="analytics" className="gap-2 text-sm font-medium">
+              <TabsTrigger value="analytics" className="gap-2 text-sm font-medium px-4 py-2 rounded-lg">
                 <BarChart3 className="w-4 h-4" />
-                <span>Analisis Dampak & Unit Economics</span>
+                <span>Analisis Dampak & ROI</span>
               </TabsTrigger>
             </TabsList>
           </Tabs>
 
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-3">
             <Button
               variant="outline"
               size="sm"
               onClick={() => handleSelectPreset(selectedPresetId || 'preset_1')}
               disabled={isAuditing}
-              className="gap-2 font-medium text-sm border-zinc-300 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-800 dark:text-zinc-300 h-9"
+              className="gap-2 font-medium text-sm border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-800 dark:text-zinc-300 h-10 px-4 rounded-xl shadow-xs"
             >
               <RefreshCw className={`w-4 h-4 ${isAuditing ? 'animate-spin' : ''}`} />
               <span>Ulangi Audit</span>
@@ -171,7 +173,7 @@ export default function AuditWorkstationPage() {
               variant="tactical"
               size="sm"
               onClick={() => setIsExportModalOpen(true)}
-              className="gap-2 font-semibold text-sm bg-blue-600 hover:bg-blue-500 text-white h-9"
+              className="gap-2 font-semibold text-sm bg-blue-600 hover:bg-blue-500 text-white h-10 px-4 rounded-xl shadow-xs"
             >
               <Share2 className="w-4 h-4" />
               <span>ERP Sync / Export</span>
@@ -181,7 +183,7 @@ export default function AuditWorkstationPage() {
 
         {/* Tab 1: Workstation Dual-Pane View */}
         {activeTab === 'workstation' && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
             {/* Left Column: Physical Document & Spatial Canvas (5 cols) */}
             <div className="lg:col-span-5 h-full">
@@ -195,7 +197,7 @@ export default function AuditWorkstationPage() {
             </div>
 
             {/* Right Column: AI Audit Verdict & Discrepancy Reconciliation (7 cols) */}
-            <div className="lg:col-span-7 space-y-4">
+            <div className="lg:col-span-7 space-y-6">
               
               {/* Verdict & Metrics Summary */}
               <AuditSummary report={report} />
@@ -208,23 +210,23 @@ export default function AuditWorkstationPage() {
               />
 
               {/* Bottom Telemetry Footer */}
-              <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 flex flex-wrap items-center justify-between gap-3 text-sm shadow-xs">
-                <div className="flex items-center gap-2.5 text-zinc-700 dark:text-zinc-300 text-sm">
-                  <div className="h-7 w-7 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 flex items-center justify-center text-blue-600 dark:text-blue-400">
+              <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-5 flex flex-wrap items-center justify-between gap-4 text-sm shadow-xs">
+                <div className="flex items-center gap-3 text-zinc-700 dark:text-zinc-300 text-sm">
+                  <div className="h-8 w-8 rounded-lg bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-blue-600 dark:text-blue-400">
                     <Cpu className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="font-semibold text-zinc-900 dark:text-zinc-200">
+                    <span className="font-bold text-zinc-900 dark:text-zinc-100 block">
                       AI INFERENCE: {report.ai_model_used}
                     </span>
-                    <span className="text-zinc-500 dark:text-zinc-400 block text-sm">
+                    <span className="text-zinc-500 dark:text-zinc-400 text-sm">
                       Pydantic v2 Schema Enforcement • Zero Hallucination Guard
                     </span>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <Badge variant="outline" className="text-sm text-zinc-600 dark:text-zinc-400 border-zinc-300 dark:border-zinc-800 font-medium">
+                  <Badge variant="outline" className="text-sm text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-800 font-medium py-1 px-3">
                     <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400 mr-1.5" />
                     COMPFEST 18 AIC VALIDATED
                   </Badge>
@@ -243,26 +245,26 @@ export default function AuditWorkstationPage() {
 
         {/* Tab 3: Analytics & Unit Economics Impact View */}
         {activeTab === 'analytics' && (
-          <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-6 space-y-6 shadow-xs">
-            <div className="border-b border-zinc-200 dark:border-zinc-800/80 pb-4">
-              <div className="flex items-center gap-2 mb-1.5">
-                <TrendingUp className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
-                <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-tight">
-                  ANALISIS ROI & DAMPAK EKONOMI // SMART LOGISTICS INDONESIA
+          <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-8 space-y-8 shadow-xs">
+            <div className="border-b border-zinc-200 dark:border-zinc-800/80 pb-6">
+              <div className="flex items-center gap-2.5 mb-2">
+                <TrendingUp className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+                <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-tight">
+                  Analisis ROI & Dampak Ekonomi // Smart Logistics Indonesia
                 </h3>
               </div>
-              <p className="text-sm text-zinc-600 dark:text-zinc-400">
+              <p className="text-sm text-zinc-500 dark:text-zinc-400">
                 Kalkulasi efisiensi biaya operasional dan percepatan perputaran modal kerja distributor & 3PL Indonesia
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/40 p-5 space-y-2.5">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/60 dark:bg-zinc-900/40 p-6 space-y-3">
                 <div className="flex items-center justify-between text-zinc-500 dark:text-zinc-400 text-sm uppercase font-semibold">
                   <span>Audit Speed Velocity</span>
                   <Clock className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                 </div>
-                <span className="text-2xl font-bold text-emerald-600 dark:text-emerald-400 block">
+                <span className="text-3xl font-bold text-emerald-600 dark:text-emerald-400 block">
                   400x Lebih Cepat
                 </span>
                 <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
@@ -270,12 +272,12 @@ export default function AuditWorkstationPage() {
                 </p>
               </div>
 
-              <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/40 p-5 space-y-2.5">
+              <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/60 dark:bg-zinc-900/40 p-6 space-y-3">
                 <div className="flex items-center justify-between text-zinc-500 dark:text-zinc-400 text-sm uppercase font-semibold">
                   <span>Cost Efficiency</span>
                   <Coins className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                 </div>
-                <span className="text-2xl font-bold text-blue-600 dark:text-blue-400 block">
+                <span className="text-3xl font-bold text-blue-600 dark:text-blue-400 block">
                   &gt; 99.9% Savings
                 </span>
                 <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
@@ -283,12 +285,12 @@ export default function AuditWorkstationPage() {
                 </p>
               </div>
 
-              <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/40 p-5 space-y-2.5">
+              <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/60 dark:bg-zinc-900/40 p-6 space-y-3">
                 <div className="flex items-center justify-between text-zinc-500 dark:text-zinc-400 text-sm uppercase font-semibold">
                   <span>Cash Flow Acceleration</span>
                   <Zap className="w-4 h-4 text-amber-600 dark:text-amber-400" />
                 </div>
-                <span className="text-2xl font-bold text-amber-600 dark:text-amber-400 block">
+                <span className="text-3xl font-bold text-amber-600 dark:text-amber-400 block">
                   Same-Day Clearance
                 </span>
                 <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
@@ -319,7 +321,7 @@ export default function AuditWorkstationPage() {
       />
 
       {/* Footer */}
-      <footer className="mt-auto border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 py-4 text-center text-sm text-zinc-500 font-medium transition-colors">
+      <footer className="mt-auto border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 py-6 text-center text-sm text-zinc-400 font-medium transition-colors">
         <p>
           SURATJALAN.AI // COMPFEST 18 AI INNOVATION CHALLENGE (AIC) // UNIVERSITAS INDONESIA
         </p>

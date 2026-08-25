@@ -13,9 +13,9 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 function getInitialTheme(): Theme {
-  if (typeof window === 'undefined') return 'dark';
+  if (typeof window === 'undefined') return 'light';
   const saved = localStorage.getItem('theme') as Theme | null;
-  return saved || 'dark';
+  return saved || 'light';
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
@@ -23,7 +23,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   const resolvedTheme = React.useMemo<'dark' | 'light'>(() => {
     if (theme === 'system') {
-      if (typeof window === 'undefined') return 'dark';
+      if (typeof window === 'undefined') return 'light';
       return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
     return theme;

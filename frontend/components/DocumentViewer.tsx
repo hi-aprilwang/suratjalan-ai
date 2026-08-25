@@ -87,32 +87,32 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
   const visibleBoxes = filterBoxes(boundingBoxes);
 
   return (
-    <Card className="flex flex-col h-full overflow-hidden border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950">
+    <Card className="flex flex-col h-full overflow-hidden border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 rounded-xl shadow-xs">
       {/* Header Toolbar */}
-      <div className="px-4 py-3 border-b border-zinc-200 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-900/60 flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2">
-          <Crosshair className="w-5 h-5 text-zinc-500 dark:text-zinc-400" />
-          <span className="text-sm font-bold text-zinc-900 dark:text-zinc-200 tracking-tight">
-            SPATIAL GROUNDING CANVAS
+      <div className="px-5 py-4 border-b border-zinc-100 dark:border-zinc-800/80 bg-zinc-50/70 dark:bg-zinc-900/60 flex items-center justify-between gap-4">
+        <div className="flex items-center gap-2.5">
+          <Crosshair className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+          <span className="text-base font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">
+            Spatial Grounding Canvas
           </span>
-          <Badge variant="outline" className="text-sm font-semibold border-zinc-300 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">
-            {visibleBoxes.length} ANCHORS
+          <Badge variant="outline" className="text-sm font-medium border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">
+            {visibleBoxes.length} Anchors
           </Badge>
         </div>
 
         {/* View Controls */}
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-2">
           <Button
             variant="outline"
             size="icon"
             onClick={() => setZoom((z) => Math.max(0.6, z - 0.15))}
-            className="h-8 w-8 border-zinc-300 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300"
+            className="h-9 w-9 rounded-lg border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300"
             title="Zoom Out"
           >
             <ZoomOut className="w-4 h-4" />
           </Button>
 
-          <span className="text-sm font-semibold px-1 text-zinc-700 dark:text-zinc-300 min-w-10 text-center">
+          <span className="text-sm font-semibold px-1 text-zinc-700 dark:text-zinc-300 min-w-11 text-center">
             {Math.round(zoom * 100)}%
           </span>
 
@@ -120,7 +120,7 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
             variant="outline"
             size="icon"
             onClick={() => setZoom((z) => Math.min(2.2, z + 0.15))}
-            className="h-8 w-8 border-zinc-300 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300"
+            className="h-9 w-9 rounded-lg border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300"
             title="Zoom In"
           >
             <ZoomIn className="w-4 h-4" />
@@ -130,7 +130,7 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
             variant="outline"
             size="icon"
             onClick={() => setZoom(1)}
-            className="h-8 w-8 border-zinc-300 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 ml-0.5"
+            className="h-9 w-9 rounded-lg border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 ml-0.5"
             title="Reset Zoom"
           >
             <RotateCcw className="w-4 h-4" />
@@ -140,33 +140,33 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
             variant={showCoordinates ? 'secondary' : 'outline'}
             size="sm"
             onClick={() => setShowCoordinates(!showCoordinates)}
-            className="h-8 text-sm font-medium gap-1.5 border-zinc-300 dark:border-zinc-800 ml-1"
+            className="h-9 px-3 text-sm font-medium gap-1.5 rounded-lg border-zinc-200 dark:border-zinc-800 ml-1"
           >
-            {showCoordinates ? <Eye className="w-4 h-4 text-blue-600 dark:text-blue-400" /> : <EyeOff className="w-4 h-4 text-zinc-500" />}
+            {showCoordinates ? <Eye className="w-4 h-4 text-blue-600 dark:text-blue-400" /> : <EyeOff className="w-4 h-4 text-zinc-400" />}
             <span className="hidden sm:inline">Overlay</span>
           </Button>
         </div>
       </div>
 
       {/* Layer Filter Toolbar */}
-      <div className="px-4 py-2 border-b border-zinc-200 dark:border-zinc-800/60 bg-zinc-100 dark:bg-zinc-950 flex items-center gap-2 overflow-x-auto text-sm">
-        <span className="text-zinc-500 mr-1 text-sm uppercase font-semibold">Layers:</span>
+      <div className="px-5 py-2.5 border-b border-zinc-100 dark:border-zinc-800/60 bg-zinc-50/40 dark:bg-zinc-950 flex items-center gap-2 overflow-x-auto text-sm">
+        <span className="text-zinc-400 mr-1 text-sm font-medium">Filter Layer:</span>
         {(
           [
-            { id: 'all', label: 'All Anchors' },
+            { id: 'all', label: 'Semua Objek' },
             { id: 'items', label: 'Line Items' },
-            { id: 'stamps', label: 'Stamps' },
-            { id: 'signatures', label: 'Signatures' },
-            { id: 'warnings', label: 'Discrepancies' }
+            { id: 'stamps', label: 'Stempel' },
+            { id: 'signatures', label: 'Tanda Tangan' },
+            { id: 'warnings', label: 'Selisih Retur' }
           ] as const
         ).map((layer) => (
           <button
             key={layer.id}
             onClick={() => setActiveLayer(layer.id)}
-            className={`px-2.5 py-1 rounded text-sm transition-colors ${
+            className={`px-3 py-1.5 rounded-lg text-sm transition-all ${
               activeLayer === layer.id
-                ? 'bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-bold border border-zinc-300 dark:border-zinc-700 shadow-xs'
-                : 'text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300 hover:bg-zinc-200/60 dark:hover:bg-zinc-900 font-medium'
+                ? 'bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-bold border border-zinc-200 dark:border-zinc-700 shadow-2xs'
+                : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-900 font-medium'
             }`}
           >
             {layer.label}
@@ -177,24 +177,24 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
       {/* Viewport */}
       <div
         ref={containerRef}
-        className="flex-1 relative overflow-auto p-4 flex items-center justify-center min-h-[500px] max-h-[720px] bg-zinc-100/60 dark:bg-zinc-950 select-none"
+        className="flex-1 relative overflow-auto p-6 flex items-center justify-center min-h-[520px] max-h-[740px] bg-zinc-50/60 dark:bg-zinc-950 select-none"
       >
         {/* Inference Loading State */}
         {isAuditing && (
-          <div className="absolute inset-0 z-40 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-sm flex flex-col items-center justify-center gap-3">
-            <div className="h-14 w-14 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 flex items-center justify-center shadow-lg">
-              <ScanLine className="w-7 h-7 text-blue-600 dark:text-blue-400 animate-spin" />
+          <div className="absolute inset-0 z-40 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-sm flex flex-col items-center justify-center gap-3.5">
+            <div className="h-16 w-16 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center shadow-xl">
+              <ScanLine className="w-8 h-8 text-blue-600 dark:text-blue-400 animate-spin" />
             </div>
             <div className="text-center text-sm">
-              <p className="font-bold text-zinc-900 dark:text-zinc-100 uppercase">MULTIMODAL VLM AUDITING...</p>
-              <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-0.5">Gemini 2.0 Flash Spatial Extraction</p>
+              <p className="font-bold text-zinc-900 dark:text-zinc-100 text-base uppercase">MEMPROSES AUDIT VLM...</p>
+              <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-1">Ekstraksi Spasial Dokumen & Rekonsiliasi Otomatis</p>
             </div>
           </div>
         )}
 
         {/* Document Render Container */}
         <div
-          className="relative inline-block transition-transform duration-150 origin-top rounded-lg border border-zinc-300 dark:border-zinc-800 shadow-xl overflow-hidden bg-white"
+          className="relative inline-block transition-transform duration-150 origin-top rounded-xl border border-zinc-200 dark:border-zinc-800 shadow-xl overflow-hidden bg-white"
           style={{ transform: `scale(${zoom})` }}
         >
           {/* Laser Reticle Bar */}
@@ -245,28 +245,28 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
       </div>
 
       {/* Legend Footer */}
-      <div className="px-4 py-2.5 border-t border-zinc-200 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-900/40 flex flex-wrap items-center justify-between gap-3 text-sm text-zinc-600 dark:text-zinc-400">
-        <div className="flex flex-wrap items-center gap-3.5 font-medium">
+      <div className="px-5 py-3 border-t border-zinc-100 dark:border-zinc-800/80 bg-zinc-50/70 dark:bg-zinc-900/40 flex flex-wrap items-center justify-between gap-4 text-sm text-zinc-500 dark:text-zinc-400">
+        <div className="flex flex-wrap items-center gap-4 font-medium">
           <span className="flex items-center gap-1.5">
             <span className="w-2.5 h-2.5 rounded-xs bg-emerald-500" />
-            <span className="text-zinc-700 dark:text-zinc-300">Verified Item</span>
+            <span className="text-zinc-700 dark:text-zinc-300">Barang Cocok</span>
           </span>
           <span className="flex items-center gap-1.5">
             <span className="w-2.5 h-2.5 rounded-xs bg-rose-500" />
-            <span className="text-rose-600 dark:text-rose-300">Discrepancy / Retur</span>
+            <span className="text-rose-600 dark:text-rose-300">Selisih / Retur</span>
           </span>
           <span className="flex items-center gap-1.5">
             <span className="w-2.5 h-2.5 rounded-xs bg-cyan-500 dark:bg-cyan-400" />
-            <span className="text-cyan-700 dark:text-cyan-300">DC Stamp</span>
+            <span className="text-cyan-700 dark:text-cyan-300">Stempel DC</span>
           </span>
           <span className="flex items-center gap-1.5">
             <span className="w-2.5 h-2.5 rounded-xs bg-purple-500 dark:bg-purple-400" />
-            <span className="text-purple-700 dark:text-purple-300">Signature</span>
+            <span className="text-purple-700 dark:text-purple-300">Tanda Tangan</span>
           </span>
         </div>
 
-        <span className="text-sm text-zinc-500 font-medium">
-          COORDINATES: NORMALIZED [0..1000]
+        <span className="text-sm text-zinc-400 font-medium">
+          Koordinat Normalisasi [0..1000]
         </span>
       </div>
     </Card>
